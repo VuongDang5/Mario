@@ -29,7 +29,6 @@ LPTEXTURE texMisc = NULL;
 GameLoop::GameLoop(HWND hWnd)
 {
 	CGame* game = CGame::GetInstance();
-	game->Init(hWnd);
 
 	texBrick = game->LoadTexture(TEXTURE_PATH_BRICK);
 	texMario = game->LoadTexture(TEXTURE_PATH_MARIO);
