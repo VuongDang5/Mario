@@ -6,6 +6,9 @@
 #include "Game.h"
 #include "GameObject.h"
 
+#include "Mario.h"
+#include "Textures.h"
+
 class GameLoop
 {
 public:

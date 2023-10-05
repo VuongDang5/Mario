@@ -16,6 +16,12 @@
     <Filter Include="Source Files\GameComponent">
       <UniqueIdentifier>{c455e2f2-889c-4d00-8dc9-baac49820fab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Character">
+      <UniqueIdentifier>{036f4fcf-191c-4bf5-ad91-97cdccd9d256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character\Mario">
+      <UniqueIdentifier>{9092f6d5-002b-4c11-b45d-9902c49b6c91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -31,6 +37,24 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
     <ClCompile Include="GameLoop.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Mario.cpp">
+      <Filter>Source Files\Character\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,6 +75,27 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="GameLoop.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Mario.h">
+      <Filter>Source Files\Character\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationFrame.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
   </ItemGroup>
