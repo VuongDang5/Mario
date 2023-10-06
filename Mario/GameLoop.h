@@ -5,9 +5,17 @@
 
 #include "Game.h"
 #include "GameObject.h"
+#include "Textures.h"
+
+#include "Animation.h"
+#include "Animations.h"
+#include "Sprite.h"
+#include "Sprites.h"
 
 #include "Mario.h"
-#include "Textures.h"
+#include "Brick.h"
+
+#include "SampleKeyHandler.h"
 
 class GameLoop
 {

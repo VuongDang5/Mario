@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Character\Mario">
       <UniqueIdentifier>{9092f6d5-002b-4c11-b45d-9902c49b6c91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Character\Brick">
+      <UniqueIdentifier>{acaf1e74-6b30-4ab4-a33d-18420d3c6fce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="Textures.cpp">
       <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleKeyHandler.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Source Files\Character\Brick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="Textures.h">
       <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleKeyHandler.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Source Files\Character\Brick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -101,7 +101,11 @@ int WINAPI WinMain(
 {
 	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
 	CGame* game = CGame::GetInstance();
-	game->Init(hWnd);
+	game->Init(hWnd, hInstance);
+	
+	CSampleKeyHandler* keyHandler;
+	keyHandler = new CSampleKeyHandler();
+	game->InitKeyboard(keyHandler);
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 

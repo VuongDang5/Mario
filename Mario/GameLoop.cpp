@@ -1,29 +1,28 @@
 #include "GameLoop.h"
 
-CMario* mario;
-#define MARIO_START_X 10.0f
-#define MARIO_START_Y 100.0f
-#define MARIO_START_VX 0.1f
-#define MARIO_START_VY 0.1f
-
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 
-CBrick* brick;
-#define BRICK_X 10.0f
-#define BRICK_Y 120.0f
+#define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)
 
-LPTEXTURE texMario = NULL;
-LPTEXTURE texBrick = NULL;
-LPTEXTURE texMisc = NULL;
+#define ID_SPRITE_BRICK 20001
 
-#define BACKGROUND_COLOR D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.0f)
+#define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
+#define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario.png"
+#define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc.png"
 
-#define TEXTURE_PATH_BRICK L"C:\\Code\\Mario\\Mario\\Resource\\brick.png"
-#define TEXTURE_PATH_MARIO L"C:\\Code\\Mario\\Mario\\Resource\\mario.png"
+#define MARIO_START_X 200.0f
+#define MARIO_START_Y 10.0f
 
-#define TEXTURE_PATH_MISC L"C:\\Code\\Mario\\Mario\\Resource\\misc.png"
+#define BRICK_X 0.0f
+#define BRICK_Y GROUND_Y + 20.0f
+#define NUM_BRICKS 50
+
+CMario* mario = NULL;
+
+vector<LPGAMEOBJECT> objects;
+
 
 /*
 	Constructor load all game resources. Then create game loop
@@ -34,59 +33,131 @@ GameLoop::GameLoop(HWND hWnd)
 	CTextures* textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MARIO, TEXTURE_PATH_MARIO);
-	//textures->Add(ID_ENEMY_TEXTURE, TEXTURE_PATH_ENEMIES, D3DCOLOR_XRGB(156, 219, 239));
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 
-
 	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
 
 	LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
 
-	// readline => id, left, top, right 
+	sprites->Add(10001, 246, 154, 260, 181, texMario);
 
-	sprites->Add(10001, 246, 154, 259, 181, texMario);
 	sprites->Add(10002, 275, 154, 290, 181, texMario);
 	sprites->Add(10003, 304, 154, 321, 181, texMario);
 
 	sprites->Add(10011, 186, 154, 200, 181, texMario);
-	sprites->Add(10012, 155, 154, 171, 181, texMario);
-	sprites->Add(10013, 125, 154, 141, 181, texMario);
 
-	CAnimations* animations = CAnimations::GetInstance();
+	sprites->Add(10012, 155, 154, 170, 181, texMario);
+	sprites->Add(10013, 125, 154, 140, 181, texMario);
+
+	// RUNNING RIGHT 
+	sprites->Add(10021, 335, 154, 335 + 18, 154 + 26, texMario);
+	sprites->Add(10022, 363, 154, 363 + 18, 154 + 26, texMario);
+	sprites->Add(10023, 393, 154, 393 + 18, 154 + 26, texMario);
+
+	// RUNNING LEFT
+	sprites->Add(10031, 92, 154, 92 + 18, 154 + 26, texMario);
+	sprites->Add(10032, 66, 154, 66 + 18, 154 + 26, texMario);
+	sprites->Add(10033, 35, 154, 35 + 18, 154 + 26, texMario);
+
+	// JUMP WALK RIGHT & LEFT 
+	sprites->Add(10041, 395, 275, 395 + 16, 275 + 25, texMario);
+	sprites->Add(10042, 35, 275, 35 + 16, 275 + 25, texMario);
+
+	// JUMP RUN RIGHT & LEFT 
+	sprites->Add(10043, 395, 195, 395 + 18, 195 + 25, texMario);
+	sprites->Add(10044, 33, 195, 33 + 18, 195 + 25, texMario);
+
+	// SIT RIGHT/LEFT
+	sprites->Add(10051, 426, 239, 426 + 14, 239 + 17, texMario);
+	sprites->Add(10052, 5, 239, 5 + 14, 239 + 17, texMario);
+
+	// BRACING RIGHT/LEFT
+	sprites->Add(10061, 425, 154, 425 + 15, 154 + 27, texMario);
+	sprites->Add(10062, 5, 154, 5 + 15, 154 + 27, texMario);
+
 	LPANIMATION ani;
+
+	ani = new CAnimation(100);
+	ani->Add(10001);
+	animations->Add(ID_ANI_MARIO_IDLE_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10011);
+	animations->Add(ID_ANI_MARIO_IDLE_LEFT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(10001);
 	ani->Add(10002);
 	ani->Add(10003);
-	animations->Add(500, ani);
-
-
+	animations->Add(ID_ANI_MARIO_WALKING_RIGHT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(10011);
 	ani->Add(10012);
 	ani->Add(10013);
-	animations->Add(501, ani);
-
-
-
-	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(20001, 300, 117, 317, 133, texMisc);
-	sprites->Add(20002, 318, 117, 335, 133, texMisc);
-	sprites->Add(20003, 336, 117, 353, 133, texMisc);
-	sprites->Add(20004, 354, 117, 371, 133, texMisc);
+	animations->Add(ID_ANI_MARIO_WALKING_LEFT, ani);
 
 	ani = new CAnimation(100);
-	ani->Add(20001, 1000);
-	ani->Add(20002);
-	ani->Add(20003);
-	ani->Add(20004);
-	animations->Add(510, ani);
+	ani->Add(10021);
+	ani->Add(10022);
+	ani->Add(10023);
+	animations->Add(ID_ANI_MARIO_RUNNING_RIGHT, ani);
 
+	ani = new CAnimation(50);	// Mario runs faster hence animation speed should be faster
+	ani->Add(10031);
+	ani->Add(10032);
+	ani->Add(10033);
+	animations->Add(ID_ANI_MARIO_RUNNING_LEFT, ani);
 
-	mario = new CMario(MARIO_START_X, MARIO_START_Y, MARIO_START_VX);
-	brick = new CBrick(100.0f, 100.0f);
+	ani = new CAnimation(100);
+	ani->Add(10041);
+	animations->Add(ID_ANI_MARIO_JUMP_WALK_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10042);
+	animations->Add(ID_ANI_MARIO_JUMP_WALK_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10043);
+	animations->Add(ID_ANI_MARIO_JUMP_RUN_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10044);
+	animations->Add(ID_ANI_MARIO_JUMP_RUN_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10051);
+	animations->Add(ID_ANI_MARIO_SIT_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10052);
+	animations->Add(ID_ANI_MARIO_SIT_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10061);
+	animations->Add(ID_ANI_MARIO_BRACE_RIGHT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(10062);
+	animations->Add(ID_ANI_MARIO_BRACE_LEFT, ani);
+
+	mario = new CMario(MARIO_START_X, MARIO_START_Y);
+	objects.push_back(mario);
+
+	// Brick objects 
+	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+	sprites->Add(ID_SPRITE_BRICK, 372, 153, 372 + 15, 153 + 15, texMisc);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK);
+	animations->Add(ID_ANI_BRICK, ani);
+
+	for (int i = 0; i < NUM_BRICKS; i++)
+	{
+		CBrick* b = new CBrick(BRICK_X + i * BRICK_WIDTH, BRICK_Y);
+		objects.push_back(b);
+	}
 
 	InitLoop();
 
@@ -103,8 +174,10 @@ GameLoop::~GameLoop()
 */
 void GameLoop::Update(DWORD dt)
 {
-	mario->Update(dt);
-	brick->Update(dt);
+	for (int i = 0; i < (int)objects.size(); i++)
+	{
+		objects[i]->Update(dt);
+	}
 }
 
 /*
@@ -119,27 +192,20 @@ void GameLoop::Render()
 	ID3D10RenderTargetView* pRenderTargetView = g->GetRenderTargetView();
 	ID3DX10Sprite* spriteHandler = g->GetSpriteHandler();
 
-	if (pD3DDevice != NULL)
+	pD3DDevice->ClearRenderTargetView(pRenderTargetView, BACKGROUND_COLOR);
+
+	spriteHandler->Begin(D3DX10_SPRITE_SORT_TEXTURE);
+
+	FLOAT NewBlendFactor[4] = { 0,0,0,0 };
+	pD3DDevice->OMSetBlendState(g->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
+
+	for (int i = 0; i < (int)objects.size(); i++)
 	{
-		// clear the background 
-		pD3DDevice->ClearRenderTargetView(pRenderTargetView, BACKGROUND_COLOR);
-
-		spriteHandler->Begin(D3DX10_SPRITE_SORT_TEXTURE);
-
-		// Use Alpha blending for transparent sprites
-		FLOAT NewBlendFactor[4] = { 0,0,0,0 };
-		pD3DDevice->OMSetBlendState(g->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
-
-		brick->Render();
-		mario->Render();
-
-		// Uncomment this line to see how to draw a porttion of a texture  
-		//g->Draw(10, 10, texMisc, 300, 117, 317, 134);
-		//g->Draw(10, 10, texMario, 215, 120, 234, 137);
-
-		spriteHandler->End();
-		pSwapChain->Present(0, 0);
+		objects[i]->Render();
 	}
+
+	spriteHandler->End();
+	pSwapChain->Present(0, 0);
 }
 
 void GameLoop::InitLoop()
@@ -169,6 +235,7 @@ void GameLoop::InitLoop()
 		{
 			frameStart = now;
 			Update((DWORD)dt);
+			CGame::GetInstance()->ProcessKeyboard();
 			Render();
 		}
 		else
