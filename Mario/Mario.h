@@ -6,6 +6,15 @@
 
 #include "debug.h"
 
+#include "Textures.h"
+
+#define ID_TEX_MARIO 0
+#define ID_TEX_MISC 20
+
+#define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
+#define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario.png"
+#define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc.png"
+
 #define MARIO_WALKING_SPEED		0.1f
 #define MARIO_RUNNING_SPEED		0.2f
 
@@ -78,4 +87,5 @@ public:
 	void Update(DWORD dt);
 	void Render();
 	void SetState(int state);
+	void LoadResource();
 };
