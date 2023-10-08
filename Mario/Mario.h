@@ -114,10 +114,6 @@ class CMario : public CGameObject
 	BOOLEAN isOnPlatform;
 	int coin;
 
-	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
-	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
-	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
-
 	int GetAniIdBig();
 	int GetAniIdSmall();
 
@@ -147,7 +143,6 @@ public:
 	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
 
 	void OnNoCollision(DWORD dt);
-	void OnCollisionWith(LPCOLLISIONEVENT e);
 
 	void SetLevel(int l);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }

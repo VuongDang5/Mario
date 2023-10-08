@@ -98,8 +98,10 @@ int WINAPI WinMain(
 	_In_ LPSTR lpCmdLine,
 	_In_ int nCmdShow
 )
-{
+{	
 	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
+	SetDebugWindow(hWnd);
+
 	CGame* game = CGame::GetInstance();
 	game->Init(hWnd, hInstance);
 	

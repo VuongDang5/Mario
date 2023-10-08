@@ -53,6 +53,7 @@ CSampleKeyHandler* keyHandler;
 
 GameLoop::GameLoop(HWND hWnd)
 {
+	game = CGame::GetInstance();
 	CTextures* textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_MARIO, TEXTURE_PATH_MARIO);
@@ -289,6 +290,9 @@ GameLoop::GameLoop(HWND hWnd)
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
 		objects.push_back(b);
 	}
+
+	mario = new CMario(MARIO_START_X, MARIO_START_Y);
+	objects.push_back(mario);
 
 	InitLoop();
 

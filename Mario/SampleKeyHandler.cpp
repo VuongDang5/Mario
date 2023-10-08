@@ -6,7 +6,6 @@
 #include "Mario.h"
 
 extern CMario* mario;
-extern void Reload();
 
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
@@ -24,9 +23,6 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		break;
 	case DIK_2:
 		mario->SetLevel(MARIO_LEVEL_BIG);
-		break;
-	case DIK_R: // reset
-		Reload();
 		break;
 	}
 }

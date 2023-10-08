@@ -31,12 +31,6 @@ void CMario::OnNoCollision(DWORD dt)
 	y += vy * dt;
 }
 
-void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
-{
-	e->obj->Delete();
-	coin++;
-}
-
 //
 // Get animation ID for small Mario
 //
