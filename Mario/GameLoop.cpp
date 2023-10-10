@@ -267,6 +267,7 @@ GameLoop::GameLoop(HWND hWnd)
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK + 1, 372, 153, 372 + 15, 153 + 15, texMisc);
 
+	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
 	animations->Add(ID_ANI_BRICK, ani);
 
