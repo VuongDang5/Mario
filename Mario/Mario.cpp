@@ -173,6 +173,20 @@ void CMario::Render()
 	DebugOutTitle(L"Coins: %d", coin);
 }
 
+void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (e->ny != 0 && e->obj->IsBlocking())
+	{
+		vy = 0;
+		if (e->ny < 0) isOnPlatform = true;
+	}
+	else
+		if (e->nx != 0 && e->obj->IsBlocking())
+		{
+			vx = 0;
+		}
+}
+
 void CMario::SetState(int state)
 {
 	// DIE is the end state, cannot be changed! 
