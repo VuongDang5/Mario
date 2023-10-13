@@ -292,6 +292,24 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
+	for (int i = 4; i < 6; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f*2);
+		objects.push_back(b);
+	}
+
+	for (int i = 7; i < 9; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 3);
+		objects.push_back(b);
+	}
+
+	for (int i = 10; i < 12; i++)
+	{
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 4);
+		objects.push_back(b);
+	}
+
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
@@ -342,11 +360,10 @@ void GameLoop::Update(DWORD dt)
 	mario->GetPosition(cx, cy);
 
 	cx -= SCREEN_WIDTH / 2;
-	cy = 0;
-	//cy -= SCREEN_HEIGHT / 2;
+	cy -= SCREEN_HEIGHT / 2;
 
 	if (cx < 0) cx = 0;
-
+	if (cy > 0) cy = 0;
 	CGame::GetInstance()->SetCamPos(cx, cy);
 }
 
