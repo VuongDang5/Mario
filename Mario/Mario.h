@@ -4,7 +4,14 @@
 #include "Animation.h"
 #include "Animations.h"
 
+#include "Texture.h"
+#include "Textures.h"
+
+#include "AssetIDs.h"
 #include "debug.h"
+
+#define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
+#define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario_transparent.png"
 
 #define MARIO_WALKING_SPEED		0.1f
 #define MARIO_RUNNING_SPEED		0.2f
@@ -118,23 +125,10 @@ class CMario : public CGameObject
 	int GetAniIdSmall();
 
 public:
-	CMario(float x, float y) : CGameObject(x, y)
-	{
-		isSitting = false;
-		maxVx = 0.0f;
-		ax = 0.0f;
-		ay = MARIO_GRAVITY;
-
-		level = MARIO_LEVEL_BIG;
-		untouchable = 0;
-		untouchable_start = -1;
-		isOnPlatform = false;
-		coin = 0;
-	}
+	CMario(float x, float y);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
 	void SetState(int state);
-
 	int IsCollidable()
 	{
 		return (state != MARIO_STATE_DIE);
