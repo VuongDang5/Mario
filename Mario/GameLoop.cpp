@@ -23,7 +23,7 @@
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
 
-#define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -37,11 +37,7 @@
 #define MARIO_START_Y 10.0f
 
 #define BRICK_X 0.0f
-#define GOOMBA_X 200.0f
-#define COIN_X 100.0f
-
-#define BRICK_Y GROUND_Y + 20.0f
-#define NUM_BRICKS 70
+#define BRICK_Y GROUND_Y + 30.0f
 
 CGame* game;
 CMario* mario;
