@@ -29,7 +29,7 @@
 #define SCREEN_HEIGHT 240
 
 #define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
-#define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
+#define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
@@ -60,7 +60,7 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 1, 138, 1, 138 + 14, 1 + 15, texMisc);
 
 	LPANIMATION ani;
 

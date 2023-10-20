@@ -1,18 +1,3 @@
-/* =============================================================
-	INTRODUCTION TO GAME PROGRAMMING SE102
-
-	SAMPLE 01 - SKELETON CODE
-
-	This sample illustrates how to:
-
-	1/ Re-organize introductory code to an initial skeleton for better scalability
-	2/ CGame is a singleton, playing a role of an "engine".
-	3/ CGameObject is an abstract class for all game objects
-	4/ CTexture is a wrapper class for ID3D10TEXTURE
-
-	NOTE: to create transparent background, download GIMP, then use Color to Alpha feature
-================================================================ */
-
 #include <windows.h>
 
 #include "debug.h"
