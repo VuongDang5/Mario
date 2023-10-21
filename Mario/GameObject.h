@@ -32,6 +32,7 @@ protected:
 
 	bool isDeleted;
 
+	int obj_ID;
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
@@ -46,6 +47,7 @@ public:
 
 	CGameObject();
 	CGameObject(float x, float y) :CGameObject() { this->x = x; this->y = y; }
+	CGameObject(float x, float y, int obj_ID) :CGameObject() { this->x = x; this->y = y; this->obj_ID = obj_ID; }
 
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;

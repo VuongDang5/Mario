@@ -29,7 +29,7 @@
 #define SCREEN_HEIGHT 240
 
 #define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
-#define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles_transparent.png"
+#define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
@@ -37,7 +37,7 @@
 #define MARIO_START_Y 10.0f
 
 #define BRICK_X 0.0f
-#define BRICK_Y GROUND_Y + 30.0f
+#define BRICK_Y GROUND_Y + 36.0f
 
 CGame* game;
 CMario* mario;
@@ -60,13 +60,18 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(ID_SPRITE_BRICK + 1, 138, 1, 138 + 14, 1 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);
 
 	LPANIMATION ani;
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
-	animations->Add(ID_ANI_BRICK, ani);
+	animations->Add(ID_ANI_BRICK + 1, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 2);
+	animations->Add(ID_ANI_BRICK + 2, ani);
 
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -76,34 +81,45 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.clear();
 
 	// Main ground
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 50; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 40; i++)
+	{
+		CBrick* b = new CBrick((i+50)* BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 40; i++)
+	{
+		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
 
 	// Short, low platform
 	for (int i = 1; i < 3; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
 	for (int i = 4; i < 6; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f*2);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f*2, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
 	for (int i = 7; i < 9; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 3);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 3, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
 	for (int i = 10; i < 12; i++)
 	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 4);
+		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 4, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
