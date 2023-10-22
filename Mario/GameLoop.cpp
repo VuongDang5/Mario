@@ -89,12 +89,12 @@ GameLoop::GameLoop(HWND hWnd)
 
 	for (int i = 0; i < 40; i++)
 	{
-		CBrick* b = new CBrick((i+50)* BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 1);
+		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
 	for (int i = 0; i < 40; i++)
 	{
-		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
+		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
