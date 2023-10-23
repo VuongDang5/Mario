@@ -107,23 +107,21 @@ void CCollision::SweptAABB(
 
 	t = t_entry;
 
-	if (tx_entry > ty_entry && bt != bb && dy > 0)
+	if (tx_entry > ty_entry)
 	{
 		ny = 0.0f;
 		dx > 0 ? nx = -1.0f : nx = 1.0f;
 	}
 	else
 	{
-		if (tx_entry > ty_entry)
-		{
-			ny = 0.0f;
-			dx > 0 ? nx = -1.0f : nx = 1.0f;
-		}
-		else
-		{
-			nx = 0.0f;
-			dy > 0 ? ny = -1.0f : ny = 1.0f;
-		}
+		nx = 0.0f;
+		dy > 0 ? ny = -1.0f : ny = 1.0f;
+	}
+
+	if (st == sb && dy < 0)
+	{
+		nx = 0.0f;
+		ny = 0.0f;
 	}
 }
 
