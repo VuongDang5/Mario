@@ -51,6 +51,13 @@ void CCollision::SweptAABB(
 
 
 	if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
+	if (sl == sr && st == sb) return;	// backgroud object > no collision
+	if (st == sb && dy < 0)				// special case
+	{
+		nx = 0.0f;
+		ny = 0.0f;
+		return;
+	}
 
 	if (dx > 0)
 	{
@@ -118,11 +125,6 @@ void CCollision::SweptAABB(
 		dy > 0 ? ny = -1.0f : ny = 1.0f;
 	}
 
-	if (st == sb && dy < 0)
-	{
-		nx = 0.0f;
-		ny = 0.0f;
-	}
 }
 
 /*
