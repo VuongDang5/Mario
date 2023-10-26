@@ -98,6 +98,29 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
+	for (int i = 0; i < 24; i++)
+	{
+		CBrick* b = new CBrick((i + 93) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		CBrick* b = new CBrick((i + 119) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 35; i++)
+	{
+		CBrick* b = new CBrick((i + 126) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 40; i++)
+	{
+		CBrick* b = new CBrick((i + 162) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		objects.push_back(b);
+	}
 	// Short, low platform
 	for (int i = 1; i < 3; i++)
 	{
