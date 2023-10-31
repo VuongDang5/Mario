@@ -30,6 +30,7 @@
 
 #define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
+#define TEXTURE_PATH_1_MISC TEXTURES_DIR "\\tiles_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
@@ -57,13 +58,17 @@ GameLoop::GameLoop(HWND hWnd)
 
 	textures->Add(ID_TEX_ENEMY, TEXTURE_PATH_ENEMY);
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
+	textures->Add(ID_TEX_MISC_1, TEXTURE_PATH_1_MISC);
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);
 
+	textures->Get(ID_TEX_MISC_1);
+
 	LPANIMATION ani;
+	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
@@ -73,6 +78,9 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 2);
 	animations->Add(ID_ANI_BRICK + 2, ani);
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 3);
+	animations->Add(ID_ANI_BG + 1, ani);
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
 	{
@@ -121,30 +129,9 @@ GameLoop::GameLoop(HWND hWnd)
 		CBrick* b = new CBrick((i + 162) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
-	// Short, low platform
-	for (int i = 1; i < 3; i++)
-	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f, ID_ANI_BRICK + 1);
-		objects.push_back(b);
-	}
 
-	for (int i = 4; i < 6; i++)
-	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f*2, ID_ANI_BRICK + 1);
-		objects.push_back(b);
-	}
-
-	for (int i = 7; i < 9; i++)
-	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 3, ID_ANI_BRICK + 1);
-		objects.push_back(b);
-	}
-
-	for (int i = 10; i < 12; i++)
-	{
-		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y - 44.0f * 4, ID_ANI_BRICK + 1);
-		objects.push_back(b);
-	}
+	CBrick* b = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 1);
+	objects.push_back(b);
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);

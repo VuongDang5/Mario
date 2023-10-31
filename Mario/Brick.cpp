@@ -20,6 +20,7 @@ void CBrick::GetBoundingBox(float& l, float& t, float& r, float& b)
 		t = y;
 		r = x;
 		b = y;
+		break;
 	default:
 		l = x - BRICK_BBOX_WIDTH / 2;
 		t = y - BRICK_BBOX_HEIGHT / 2;
