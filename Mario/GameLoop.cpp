@@ -62,25 +62,36 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
-	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);
-	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
+	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);	//Ground
 
-	textures->Get(ID_TEX_MISC_1);
+	texMisc = textures->Get(ID_TEX_MISC_1);
 
 	LPANIMATION ani;
-	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
+	sprites->Add(ID_SPRITE_BRICK + 4, 138, 1, 138 + 15, 1 + 15, texMisc);		//Bush 2
+	sprites->Add(ID_SPRITE_BRICK + 5, 137, 52, 137 + 15, 52 + 15, texMisc);		//Bush 3
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
-	animations->Add(ID_ANI_BRICK + 1, ani);
+	animations->Add(ID_ANI_BRICK + 1, ani);		//Floor
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 2);
-	animations->Add(ID_ANI_BRICK + 2, ani);
+	animations->Add(ID_ANI_BRICK + 2, ani);		//Ground
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 3);
-	animations->Add(ID_ANI_BG + 1, ani);
+	animations->Add(ID_ANI_BG + 1, ani);		//Bush 1
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 4);
+	animations->Add(ID_ANI_BG + 2, ani);		//Bush 2
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 5);
+	animations->Add(ID_ANI_BG + 3, ani);		//Bush 3
+
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
 	{
@@ -88,7 +99,7 @@ GameLoop::GameLoop(HWND hWnd)
 	}
 	objects.clear();
 
-	// Main ground
+	// Main floor
 	for (int i = 0; i < 50; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
@@ -130,8 +141,18 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
-	CBrick* b = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 1);
-	objects.push_back(b);
+	//Bush
+	CBrick* bush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 1);
+	objects.push_back(bush);
+
+	bush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f*2, ID_ANI_BG + 1);
+	objects.push_back(bush);
+
+	bush = new CBrick(2 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(bush);
+
+	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(bush);
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
