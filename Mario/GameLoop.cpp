@@ -71,6 +71,9 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
 	sprites->Add(ID_SPRITE_BRICK + 4, 138, 1, 138 + 15, 1 + 15, texMisc);		//Bush 2
 	sprites->Add(ID_SPRITE_BRICK + 5, 137, 52, 137 + 15, 52 + 15, texMisc);		//Bush 3
+	sprites->Add(ID_SPRITE_BRICK + 6, 154, 35, 154 + 15, 35 + 15, texMisc);		//Bush 4
+	sprites->Add(ID_SPRITE_BRICK + 7, 137, 35, 137 + 15, 35 + 15, texMisc);		//Bush 5
+
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
@@ -92,6 +95,13 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 5);
 	animations->Add(ID_ANI_BG + 3, ani);		//Bush 3
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 6);
+	animations->Add(ID_ANI_BG + 4, ani);		//Bush 4
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 7);
+	animations->Add(ID_ANI_BG + 5, ani);		//Bush 5
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
 	{
@@ -152,6 +162,21 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.push_back(bush);
 
 	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(bush);
+
+	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(bush);
+
+	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 5);
+	objects.push_back(bush);
+
+	bush = new CBrick(3 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 2);
+	objects.push_back(bush);
+
+	bush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(bush);
+
+	bush = new CBrick(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
 	objects.push_back(bush);
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
