@@ -52,7 +52,7 @@ void CCollision::SweptAABB(
 
 	if (dx == 0 && dy == 0) return;		// moving object is not moving > obvious no collision
 	if (sl == sr && st == sb) return;	// backgroud object > no collision
-	if (st == sb && dy < 0)	return;		// special case
+	if (st == sb && dy < 0)	return;		// jump up object
 
 	if (dx > 0)
 	{
