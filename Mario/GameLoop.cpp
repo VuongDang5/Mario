@@ -65,9 +65,32 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
 	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);	//Ground
 
+	sprites->Add(ID_SPRITE_BRICK + 11, 1, 52, 1 + 15, 52 + 15, texMisc);	//PinkBlock
+	sprites->Add(ID_SPRITE_BRICK + 12, 1, 69, 1 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 13, 1, 86, 1 + 15, 86 + 15, texMisc);	
+
+	sprites->Add(ID_SPRITE_BRICK + 14, 18, 52, 18 + 15, 52 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 15, 18, 69, 18 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 16, 18, 86, 18 + 15, 86 + 15, texMisc);	
+
+	sprites->Add(ID_SPRITE_BRICK + 17, 35, 52, 35 + 15, 52 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 18, 35, 69, 35 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 19, 35, 86, 35 + 15, 86 + 15, texMisc);	
+
+	sprites->Add(ID_SPRITE_BRICK + 20, 52, 52, 52 + 15, 52 + 15, texMisc);	//BlueBlock
+	sprites->Add(ID_SPRITE_BRICK + 21, 52, 69, 52 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 22, 52, 86, 52 + 15, 86 + 15, texMisc);	
+
+	sprites->Add(ID_SPRITE_BRICK + 23, 69, 52, 69 + 15, 52 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 24, 69, 69, 69 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 25, 69, 86, 69 + 15, 86 + 15, texMisc);	
+
+	sprites->Add(ID_SPRITE_BRICK + 26, 86, 52, 86 + 15, 52 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 27, 86, 69, 86 + 15, 69 + 15, texMisc);	
+	sprites->Add(ID_SPRITE_BRICK + 28, 86, 86, 86 + 15, 86 + 15, texMisc);	
+
 	texMisc = textures->Get(ID_TEX_MISC_1);
 
-	LPANIMATION ani;
 	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
 	sprites->Add(ID_SPRITE_BRICK + 4, 138, 1, 138 + 15, 1 + 15, texMisc);		//Bush 2
 	sprites->Add(ID_SPRITE_BRICK + 5, 137, 52, 137 + 15, 52 + 15, texMisc);		//Bush 3
@@ -77,10 +100,19 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 9, 154, 1, 154 + 15, 1 + 15, texMisc);		//Bush 7
 	sprites->Add(ID_SPRITE_BRICK + 10, 222, 205, 222 + 15, 205 + 15, texMisc);	//Grass
 
+	sprites->Add(ID_SPRITE_BRICK + 29, 69, 103, 69 + 15, 103 + 15, texMisc);		//Shadow
+	sprites->Add(ID_SPRITE_BRICK + 30, 86, 103, 86 + 15, 103 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 31, 103, 103, 103 + 15, 103 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 32, 103, 86, 103 + 15, 86 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 33, 103, 69, 103 + 15, 69 + 15, texMisc);
+
+
+	//-----------------------------------------------
+	LPANIMATION ani;
+
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
 	animations->Add(ID_ANI_BRICK + 1, ani);		//Floor
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 2);
 	animations->Add(ID_ANI_BRICK + 2, ani);		//Ground
@@ -88,27 +120,21 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 3);
 	animations->Add(ID_ANI_BG + 1, ani);		//Bush 1
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 4);
 	animations->Add(ID_ANI_BG + 2, ani);		//Bush 2
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 5);
 	animations->Add(ID_ANI_BG + 3, ani);		//Bush 3
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 6);
 	animations->Add(ID_ANI_BG + 4, ani);		//Bush 4
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 7);
 	animations->Add(ID_ANI_BG + 5, ani);		//Bush 5
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 8);
 	animations->Add(ID_ANI_BG + 6, ani);		//Bush 6
-
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 9);
 	animations->Add(ID_ANI_BG + 7, ani);		//Bush 7
@@ -117,6 +143,77 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 10);
 	animations->Add(ID_ANI_BG + 8, ani);		//Grass
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 11);
+	animations->Add(ID_ANI_TOP_BRICK + 1, ani);		//Pink 1
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 12);
+	animations->Add(ID_ANI_BG + 9, ani);			//Pink 2
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 13);
+	animations->Add(ID_ANI_BG + 10, ani);			//Pink 3
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 14);
+	animations->Add(ID_ANI_TOP_BRICK + 2, ani);		//Pink 4
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 15);
+	animations->Add(ID_ANI_BG + 11, ani);			//Pink 5
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 16);
+	animations->Add(ID_ANI_BG + 12, ani);			//Pink 6
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 17);
+	animations->Add(ID_ANI_TOP_BRICK + 3, ani);		//Pink 7
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 18);
+	animations->Add(ID_ANI_BG + 13, ani);			//Pink 8
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 19);
+	animations->Add(ID_ANI_BG + 14, ani);			//Pink 9
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 20);
+	animations->Add(ID_ANI_TOP_BRICK + 4, ani);		//Pink 1
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 21);
+	animations->Add(ID_ANI_BG + 15, ani);			//Pink 2
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 22);
+	animations->Add(ID_ANI_BG + 16, ani);			//Pink 3
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 23);
+	animations->Add(ID_ANI_TOP_BRICK + 5, ani);		//Pink 4
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 24);
+	animations->Add(ID_ANI_BG + 17, ani);			//Pink 5
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 25);
+	animations->Add(ID_ANI_BG + 18, ani);			//Pink 6
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 26);
+	animations->Add(ID_ANI_TOP_BRICK + 6, ani);		//Pink 7
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 27);
+	animations->Add(ID_ANI_BG + 19, ani);			//Pink 8
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 28);
+	animations->Add(ID_ANI_BG + 20, ani);			//Pink 9
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 29);
+	animations->Add(ID_ANI_BG + 21, ani);			//Shadow 1
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 30);
+	animations->Add(ID_ANI_BG + 22, ani);			//Shadow 2
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 31);
+	animations->Add(ID_ANI_BG + 23, ani);			//Shadow 3
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 32);
+	animations->Add(ID_ANI_BG + 24, ani);			//Shadow 4
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 33);
+	animations->Add(ID_ANI_BG + 25, ani);			//Shadow 5
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
 	{
@@ -241,7 +338,8 @@ GameLoop::GameLoop(HWND hWnd)
 
 	bush = new CBrick(9 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 7);
 	objects.push_back(bush);
-
+	
+	//Grass
 	bush = new CBrick(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
 	objects.push_back(bush);
 	bush = new CBrick(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
@@ -249,7 +347,80 @@ GameLoop::GameLoop(HWND hWnd)
 	bush = new CBrick(14 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
 	objects.push_back(bush);
 
-	//Grass
+	//Pink block
+	
+	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(bush);
+	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 9);
+	objects.push_back(bush);
+	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 10);
+	objects.push_back(bush);
+
+	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(bush);
+	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(bush);
+
+	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(bush);
+	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 13);
+	objects.push_back(bush);
+	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 14);
+	objects.push_back(bush);
+
+	//Blue block
+
+	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 4);
+	objects.push_back(bush);
+	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 15);
+	objects.push_back(bush);
+
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 17);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 17);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 17);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 18);
+	objects.push_back(bush);
+
+	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 6);
+	objects.push_back(bush);
+	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 19);
+	objects.push_back(bush);
+	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 19);
+	objects.push_back(bush);
+	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 19);
+	objects.push_back(bush);
+	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 20);
+	objects.push_back(bush);
+
+	//Shadow for pink block
+
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 25);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(bush);
+	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(bush);
+
+	//Shadow for blue block
+
+	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 25);
+	objects.push_back(bush);
+	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
+	objects.push_back(bush);
+	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(bush);
+	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(bush);
+	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(bush);
+
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
