@@ -89,6 +89,18 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 27, 86, 69, 86 + 15, 69 + 15, texMisc);	
 	sprites->Add(ID_SPRITE_BRICK + 28, 86, 86, 86 + 15, 86 + 15, texMisc);	
 
+	sprites->Add(ID_SPRITE_BRICK + 38, 52, 1, 52 + 15, 1 + 15, texMisc);	//GreenBlock
+	sprites->Add(ID_SPRITE_BRICK + 39, 52, 18, 52 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 40, 52, 35, 52 + 15, 35 + 15, texMisc);
+
+	sprites->Add(ID_SPRITE_BRICK + 41, 69, 1, 69 + 15, 1 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 42, 69, 18, 69 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 43, 69, 35, 69 + 15, 35 + 15, texMisc);
+
+	sprites->Add(ID_SPRITE_BRICK + 44, 86, 1, 86 + 15, 1 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 45, 86, 18, 86 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 46, 86, 35, 86 + 15, 35 + 15, texMisc);
+
 	texMisc = textures->Get(ID_TEX_MISC_1);
 
 	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
