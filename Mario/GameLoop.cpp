@@ -101,6 +101,18 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 45, 86, 18, 86 + 15, 18 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 46, 86, 35, 86 + 15, 35 + 15, texMisc);
 
+	sprites->Add(ID_SPRITE_BRICK + 47, 1, 1, 1 + 15, 1 + 15, texMisc);	//WhiteBlock
+	sprites->Add(ID_SPRITE_BRICK + 48, 1, 18, 1 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 49, 1, 35, 1 + 15, 35 + 15, texMisc);
+
+	sprites->Add(ID_SPRITE_BRICK + 50, 18, 1, 18 + 15, 1 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 51, 18, 18, 18 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 52, 18, 35, 18 + 15, 35 + 15, texMisc);
+
+	sprites->Add(ID_SPRITE_BRICK + 53, 35, 1, 35 + 15, 1 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 54, 35, 18, 35 + 15, 18 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 55, 35, 35, 35 + 15, 35 + 15, texMisc);
+
 	texMisc = textures->Get(ID_TEX_MISC_1);
 
 	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
