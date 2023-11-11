@@ -254,6 +254,35 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 37);
 	animations->Add(ID_ANI_BRICK + 6, ani);			//Sewer 4
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 38);
+	animations->Add(ID_ANI_TOP_BRICK + 7, ani);		//Green 1
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 39);
+	animations->Add(ID_ANI_BG + 21, ani);			//Green 2
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 40);
+	animations->Add(ID_ANI_BG + 22, ani);			//Green 3
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 41);
+	animations->Add(ID_ANI_TOP_BRICK + 8, ani);		//Green 4
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 42);
+	animations->Add(ID_ANI_BG + 23, ani);			//Green 5
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 43);
+	animations->Add(ID_ANI_BG + 24, ani);			//Green 6
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 44);
+	animations->Add(ID_ANI_TOP_BRICK + 9, ani);		//Green 7
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 45);
+	animations->Add(ID_ANI_BG + 25, ani);			//Green 8
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 46);
+	animations->Add(ID_ANI_BG + 26, ani);			//Green 9
+
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
