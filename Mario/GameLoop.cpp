@@ -200,31 +200,31 @@ GameLoop::GameLoop(HWND hWnd)
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 20);
-	animations->Add(ID_ANI_TOP_BRICK + 4, ani);		//Pink 1
+	animations->Add(ID_ANI_TOP_BRICK + 4, ani);		//Blue 1
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 21);
-	animations->Add(ID_ANI_BG + 15, ani);			//Pink 2
+	animations->Add(ID_ANI_BG + 15, ani);			//Blue 2
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 22);
-	animations->Add(ID_ANI_BG + 16, ani);			//Pink 3
+	animations->Add(ID_ANI_BG + 16, ani);			//Blue 3
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 23);
-	animations->Add(ID_ANI_TOP_BRICK + 5, ani);		//Pink 4
+	animations->Add(ID_ANI_TOP_BRICK + 5, ani);		//Blue 4
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 24);
-	animations->Add(ID_ANI_BG + 17, ani);			//Pink 5
+	animations->Add(ID_ANI_BG + 17, ani);			//Blue 5
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 25);
-	animations->Add(ID_ANI_BG + 18, ani);			//Pink 6
+	animations->Add(ID_ANI_BG + 18, ani);			//Blue 6
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 26);
-	animations->Add(ID_ANI_TOP_BRICK + 6, ani);		//Pink 7
+	animations->Add(ID_ANI_TOP_BRICK + 6, ani);		//Blue 7
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 27);
-	animations->Add(ID_ANI_BG + 19, ani);			//Pink 8
+	animations->Add(ID_ANI_BG + 19, ani);			//Blue 8
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 28);
-	animations->Add(ID_ANI_BG + 20, ani);			//Pink 9
+	animations->Add(ID_ANI_BG + 20, ani);			//Blue 9
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 29);
@@ -283,6 +283,33 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 46);
 	animations->Add(ID_ANI_BG + 26, ani);			//Green 9
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 47);
+	animations->Add(ID_ANI_TOP_BRICK + 10, ani);		//White 1
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 48);
+	animations->Add(ID_ANI_BG + 27, ani);			//White 2
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 49);
+	animations->Add(ID_ANI_BG + 28, ani);			//White 3
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 50);
+	animations->Add(ID_ANI_TOP_BRICK + 11, ani);		//White 4
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 51);
+	animations->Add(ID_ANI_BG + 29, ani);			//White 5
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 52);
+	animations->Add(ID_ANI_BG + 30, ani);			//White 6
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 53);
+	animations->Add(ID_ANI_TOP_BRICK + 12, ani);		//White 7
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 54);
+	animations->Add(ID_ANI_BG + 31, ani);			//White 8
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 55);
+	animations->Add(ID_ANI_BG + 32, ani);			//White 9
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
