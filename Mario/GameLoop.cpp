@@ -260,56 +260,56 @@ GameLoop::GameLoop(HWND hWnd)
 	animations->Add(ID_ANI_TOP_BRICK + 7, ani);		//Green 1
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 39);
-	animations->Add(ID_ANI_BG + 21, ani);			//Green 2
+	animations->Add(ID_ANI_BG + 26, ani);			//Green 2
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 40);
-	animations->Add(ID_ANI_BG + 22, ani);			//Green 3
+	animations->Add(ID_ANI_BG + 27, ani);			//Green 3
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 41);
 	animations->Add(ID_ANI_TOP_BRICK + 8, ani);		//Green 4
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 42);
-	animations->Add(ID_ANI_BG + 23, ani);			//Green 5
+	animations->Add(ID_ANI_BG + 28, ani);			//Green 5
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 43);
-	animations->Add(ID_ANI_BG + 24, ani);			//Green 6
+	animations->Add(ID_ANI_BG + 29, ani);			//Green 6
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 44);
 	animations->Add(ID_ANI_TOP_BRICK + 9, ani);		//Green 7
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 45);
-	animations->Add(ID_ANI_BG + 25, ani);			//Green 8
+	animations->Add(ID_ANI_BG + 30, ani);			//Green 8
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 46);
-	animations->Add(ID_ANI_BG + 26, ani);			//Green 9
+	animations->Add(ID_ANI_BG + 31, ani);			//Green 9
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 47);
 	animations->Add(ID_ANI_TOP_BRICK + 10, ani);		//White 1
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 48);
-	animations->Add(ID_ANI_BG + 27, ani);			//White 2
+	animations->Add(ID_ANI_BG + 32, ani);			//White 2
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 49);
-	animations->Add(ID_ANI_BG + 28, ani);			//White 3
+	animations->Add(ID_ANI_BG + 33, ani);			//White 3
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 50);
 	animations->Add(ID_ANI_TOP_BRICK + 11, ani);		//White 4
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 51);
-	animations->Add(ID_ANI_BG + 29, ani);			//White 5
+	animations->Add(ID_ANI_BG + 34, ani);			//White 5
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 52);
-	animations->Add(ID_ANI_BG + 30, ani);			//White 6
+	animations->Add(ID_ANI_BG + 35, ani);			//White 6
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 53);
 	animations->Add(ID_ANI_TOP_BRICK + 12, ani);		//White 7
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 54);
-	animations->Add(ID_ANI_BG + 31, ani);			//White 8
+	animations->Add(ID_ANI_BG + 36, ani);			//White 8
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 55);
-	animations->Add(ID_ANI_BG + 32, ani);			//White 9
+	animations->Add(ID_ANI_BG + 37, ani);			//White 9
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -531,6 +531,114 @@ GameLoop::GameLoop(HWND hWnd)
 	bush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 6);
 	objects.push_back(bush);
 	bush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 6);
+	objects.push_back(bush);
+
+	//Green block
+
+	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 7);
+	objects.push_back(bush);
+	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 26);
+	objects.push_back(bush);
+	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
+	objects.push_back(bush);
+
+	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
+	objects.push_back(bush);
+	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
+	objects.push_back(bush);
+	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 9);
+	objects.push_back(bush);
+	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 30);
+	objects.push_back(bush);
+	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
+	objects.push_back(bush);
+
+	//Pink block
+
+	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(bush);
+	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
+	objects.push_back(bush);
+
+	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(bush);
+	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(bush);
+
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(bush);
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
+	objects.push_back(bush);
+
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(bush);
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(bush);
+	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(bush);
+
+	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(bush);
+	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 13);
+	objects.push_back(bush);
+	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 13);
+	objects.push_back(bush);
+
+	//Green block
+
+	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 7);
+	objects.push_back(bush);
+	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
+	objects.push_back(bush);
+
+	bush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(bush);
+	bush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(bush);
+
+	bush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 9);
+	objects.push_back(bush);
+	bush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
 	objects.push_back(bush);
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
