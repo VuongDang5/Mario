@@ -319,26 +319,26 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.clear();
 
 	// Main floor
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 45; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 32; i++)
 	{
-		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
+		CBrick* b = new CBrick((i + 45) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 32; i++)
 	{
-		CBrick* b = new CBrick((i + 50) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
+		CBrick* b = new CBrick((i + 45) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 24; i++)
+	for (int i = 0; i < 26; i++)
 	{
-		CBrick* b = new CBrick((i + 93) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
+		CBrick* b = new CBrick((i + 81) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
@@ -360,287 +360,647 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
-	//Bush
-	CBrick* bush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 1);
-	objects.push_back(bush);
+	//Draw map 1-1
+	CBrick* brush;
 
-	bush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f*2, ID_ANI_BG + 1);
-	objects.push_back(bush);
+	//Bush 1
+	brush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(2 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f*2, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(2 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
 
-	bush = new CBrick(2 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
-	objects.push_back(bush);
+	brush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(3 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 2);
+	objects.push_back(brush);
 
-	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
-	objects.push_back(bush);
+	brush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 7);
+	objects.push_back(brush);
 
-	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 4);
-	objects.push_back(bush);
+	brush = new CBrick(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(5 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
 
-	bush = new CBrick(3 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 5);
-	objects.push_back(bush);
+	brush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 7);
+	objects.push_back(brush);
 
-	bush = new CBrick(3 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 2);
-	objects.push_back(bush);
+	brush = new CBrick(7 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(7 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(7 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
 
-	bush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
-	objects.push_back(bush);
+	brush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 7);
+	objects.push_back(brush);
 
-	bush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 5);
-	objects.push_back(bush);
-
-	bush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 6);
-	objects.push_back(bush);
-
-	bush = new CBrick(4 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 7);
-	objects.push_back(bush);
-
-	bush = new CBrick(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
-	objects.push_back(bush);
-
-	bush = new CBrick(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 3);
-	objects.push_back(bush);
-
-	bush = new CBrick(5 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
-	objects.push_back(bush);
-
-	bush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 4);
-	objects.push_back(bush);
-
-	bush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 6);
-	objects.push_back(bush);
-
-	bush = new CBrick(6 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 7);
-	objects.push_back(bush);
-
-	bush = new CBrick(7 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 5);
-	objects.push_back(bush);
-
-	bush = new CBrick(7 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 1);
-	objects.push_back(bush);
-
-	bush = new CBrick(7 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 2);
-	objects.push_back(bush);
-
-	bush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 3);
-	objects.push_back(bush);
-
-	bush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 4);
-	objects.push_back(bush);
-
-	bush = new CBrick(8 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 7);
-	objects.push_back(bush);
-
-	bush = new CBrick(9 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 6);
-	objects.push_back(bush);
-
-	bush = new CBrick(9 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 7);
-	objects.push_back(bush);
+	brush = new CBrick(9 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(9 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 7);
+	objects.push_back(brush);
 	
-	//Grass
-	bush = new CBrick(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
-	objects.push_back(bush);
-	bush = new CBrick(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
-	objects.push_back(bush);
-	bush = new CBrick(14 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
-	objects.push_back(bush);
+	//Grass 1
+	brush = new CBrick(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(14 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
 
 	//Pink block
 	
-	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 1);
-	objects.push_back(bush);
-	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 9);
-	objects.push_back(bush);
-	bush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 10);
-	objects.push_back(bush);
+	brush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(brush);
+	brush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 9);
+	objects.push_back(brush);
+	brush = new CBrick(17 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 10);
+	objects.push_back(brush);
 
-	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 2);
-	objects.push_back(bush);
-	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
-	objects.push_back(bush);
+	brush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(18 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(brush);
 
-	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 3);
-	objects.push_back(bush);
-	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 13);
-	objects.push_back(bush);
-	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 14);
-	objects.push_back(bush);
+	brush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 13);
+	objects.push_back(brush);
+	brush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 14);
+	objects.push_back(brush);
 
 	//Blue block
 
-	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 4);
-	objects.push_back(bush);
-	bush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 15);
-	objects.push_back(bush);
+	brush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(19 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 15);
+	objects.push_back(brush);
 
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 5);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 17);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 17);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 17);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 18);
-	objects.push_back(bush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 18);
+	objects.push_back(brush);
 
-	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 6);
-	objects.push_back(bush);
-	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 19);
-	objects.push_back(bush);
-	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 19);
-	objects.push_back(bush);
-	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 19);
-	objects.push_back(bush);
-	bush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 20);
-	objects.push_back(bush);
+	brush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(21 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 20);
+	objects.push_back(brush);
 
-	//Shadow for pink block
+	//Shadow block 1
 
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 25);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
-	objects.push_back(bush);
-	bush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
-	objects.push_back(bush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(20 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
 
-	//Shadow for blue block
-
-	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 25);
-	objects.push_back(bush);
-	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
-	objects.push_back(bush);
-	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
-	objects.push_back(bush);
-	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
-	objects.push_back(bush);
-	bush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
-	objects.push_back(bush);
+	brush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(22 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
 
 	//Sewer
 
-	bush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 3);
-	objects.push_back(bush);
-	bush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 5);
-	objects.push_back(bush);
-	bush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 5);
-	objects.push_back(bush);
-	bush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 4);
-	objects.push_back(bush);
-	bush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 6);
-	objects.push_back(bush);
-	bush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 6);
-	objects.push_back(bush);
+	brush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(25 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(26 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
 
 	//Green block
 
-	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 7);
-	objects.push_back(bush);
-	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 26);
-	objects.push_back(bush);
-	bush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
-	objects.push_back(bush);
+	brush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 26);
+	objects.push_back(brush);
+	brush = new CBrick(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
+	objects.push_back(brush);
 
-	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
-	objects.push_back(bush);
-	bush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
+	objects.push_back(brush);
+	brush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
-	objects.push_back(bush);
-	bush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 28);
+	objects.push_back(brush);
+	brush = new CBrick(31 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 9);
-	objects.push_back(bush);
-	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 30);
-	objects.push_back(bush);
-	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
-	objects.push_back(bush);
+	brush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 9);
+	objects.push_back(brush);
+	brush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 30);
+	objects.push_back(brush);
+	brush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
+	objects.push_back(brush);
 
 	//Pink block
 
-	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
-	objects.push_back(bush);
-	bush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
-	objects.push_back(bush);
+	brush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(brush);
+	brush = new CBrick(32 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
+	objects.push_back(brush);
 
-	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
-	objects.push_back(bush);
-	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
-	objects.push_back(bush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(brush);
 
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
-	objects.push_back(bush);
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
-	objects.push_back(bush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(brush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 9);
+	objects.push_back(brush);
 
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
-	objects.push_back(bush);
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
-	objects.push_back(bush);
-	bush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
-	objects.push_back(bush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(34 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(brush);
 
-	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 3);
-	objects.push_back(bush);
-	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 13);
-	objects.push_back(bush);
-	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 13);
-	objects.push_back(bush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 13);
+	objects.push_back(brush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 13);
+	objects.push_back(brush);
 
 	//Green block
 
-	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 7);
-	objects.push_back(bush);
-	bush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
-	objects.push_back(bush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
+	objects.push_back(brush);
 
-	bush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
-	objects.push_back(bush);
-	bush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
-	objects.push_back(bush);
+	brush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(40 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
 
-	bush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 9);
-	objects.push_back(bush);
-	bush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
-	objects.push_back(bush);
+	brush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 9);
+	objects.push_back(brush);
+	brush = new CBrick(41 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
+	objects.push_back(brush);
 
+	//White block
+
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_TOP_BRICK + 10);
+	objects.push_back(brush);
+	brush = new CBrick(35 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 32);
+	objects.push_back(brush);
+
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_TOP_BRICK + 11);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 34);
+	objects.push_back(brush);
+
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_TOP_BRICK + 11);
+	objects.push_back(brush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 34);
+	objects.push_back(brush);
+	brush = new CBrick(37 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 34);
+	objects.push_back(brush);
+
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_TOP_BRICK + 12);
+	objects.push_back(brush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 36);
+	objects.push_back(brush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 36);
+	objects.push_back(brush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 36);
+	objects.push_back(brush);
+	brush = new CBrick(38 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 36);
+	objects.push_back(brush);
+
+	//Shadow block 2
+
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(33 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(36 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(39 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	brush = new CBrick(42 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(42 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	//Grass 2
+	brush = new CBrick(49 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(50 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(52 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(53 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(54 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+
+	//Bush 2
+	
+	brush = new CBrick(58 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(58 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(58 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(59 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(59 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(59 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(59 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y -12.0f - 16.0f * 4, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(60 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(60 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(60 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(60 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 4, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	brush = new CBrick(61 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(61 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(61 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(62 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(62 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(62 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	brush = new CBrick(63 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(63 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(63 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(64 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(64 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(64 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 3, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	brush = new CBrick(65 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(65 * BRICK_WIDTH * 1.0f, BRICK_Y -12.0f - 16.0f * 2, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	brush = new CBrick(66 * BRICK_WIDTH * 1.0f + 1.0f , BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(67 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 5);
+	objects.push_back(brush);
+	brush = new CBrick(67 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 2, ID_ANI_BG + 1);
+	objects.push_back(brush);
+	brush = new CBrick(67 * BRICK_WIDTH * 1.0f + 1.0f, BRICK_Y - 12.0f - 16.0f * 3, ID_ANI_BG + 2);
+	objects.push_back(brush);
+
+	brush = new CBrick(68 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 3);
+	objects.push_back(brush);
+	brush = new CBrick(68 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 2, ID_ANI_BG + 4);
+	objects.push_back(brush);
+	brush = new CBrick(68 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 3, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	brush = new CBrick(69 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 6);
+	objects.push_back(brush);
+	brush = new CBrick(69 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 2, ID_ANI_BG + 7);
+	objects.push_back(brush);
+
+	//Grass 3
+
+	brush = new CBrick(73 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(74 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+
+	//Grass 4
+
+	brush = new CBrick(83 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(84 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+	brush = new CBrick(85 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 8);
+	objects.push_back(brush);
+
+	//Green block
+
+	brush = new CBrick(88 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(88 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 27);
+	objects.push_back(brush);
+
+	brush = new CBrick(89 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(89 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
+
+	brush = new CBrick(90 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(90 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
+
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
+
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
+
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 8);
+	objects.push_back(brush);
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 29);
+	objects.push_back(brush);
+
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_TOP_BRICK + 9);
+	objects.push_back(brush);
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 31);
+	objects.push_back(brush);
+
+	//Pink block
+
+	brush = new CBrick(90 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(brush);
+	brush = new CBrick(90 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 9);
+	objects.push_back(brush);
+
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f , ID_ANI_BG + 12);
+	objects.push_back(brush);
+
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 11);
+	objects.push_back(brush);
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 12);
+	objects.push_back(brush);
+
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 13);
+	objects.push_back(brush);
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 13);
+	objects.push_back(brush);
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 14);
+	objects.push_back(brush);
+
+	//Blue block
+
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 15);
+	objects.push_back(brush);
+
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(96 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(97 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 18);
+	objects.push_back(brush);
+
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 17);
+	objects.push_back(brush);
+	brush = new CBrick(99 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 18);
+	objects.push_back(brush);
+
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_TOP_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 19);
+	objects.push_back(brush);
+	brush = new CBrick(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 20);
+	objects.push_back(brush);
+
+	//Shadow block 2
+
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 24);
+	objects.push_back(brush);
+
+	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
