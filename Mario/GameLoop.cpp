@@ -137,6 +137,10 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 36, 324, 69, 324 + 15, 69 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 37, 341, 69, 341 + 15, 69 + 15, texMisc);
 
+	sprites->Add(ID_SPRITE_BRICK + 58, 222, 188, 222 + 15, 188 + 15, texMisc);		//Cloud
+
+	sprites->Add(ID_SPRITE_BRICK + 59, 103, 52, 103 + 15, 52 + 15, texMisc);		//Black bg
+	sprites->Add(ID_SPRITE_BRICK + 60, 120, 52, 120 + 15, 52 + 15, texMisc);
 	//-----------------------------------------------
 	LPANIMATION ani;
 
@@ -322,6 +326,17 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 57);
 	animations->Add(ID_ANI_BRICK + 8, ani);			//Brick 2
 
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 58);
+	animations->Add(ID_ANI_BRICK + 9, ani);			//Cloud
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 59);
+	animations->Add(ID_ANI_BG + 38, ani);			//Black BG
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 60);
+	animations->Add(ID_ANI_BG + 39, ani);			//Black BG
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -366,7 +381,7 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		CBrick* b = new CBrick((i + 159) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
@@ -1386,6 +1401,79 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.push_back(brush);
 	brush = new CBrick(173 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 7);
 	objects.push_back(brush);
+
+	//Airial obljects
+	//Pink block
+
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_TOP_BRICK + 1);
+	objects.push_back(brush);
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BG + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BG + 12);
+	objects.push_back(brush);
+
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_TOP_BRICK + 2);
+	objects.push_back(brush);
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BG + 12);
+	objects.push_back(brush);
+
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_TOP_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BG + 14);
+	objects.push_back(brush);
+
+	//Shadow 
+	brush = new CBrick(91 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BG + 21);
+	objects.push_back(brush);
+
+	brush = new CBrick(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BG + 22);
+	objects.push_back(brush);
+
+	brush = new CBrick(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BG + 22);
+	objects.push_back(brush);
+
+	brush = new CBrick(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BG + 22);
+	objects.push_back(brush);
+
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_BG + 25);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BG + 24);
+	objects.push_back(brush);
+	brush = new CBrick(95 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BG + 23);
+	objects.push_back(brush);
+
+	//Cloud
+	for (int i = 0; i < 4; i++)
+	{
+		CBrick* b = new CBrick((i+97) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 14, ID_ANI_BRICK + 9);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		CBrick* b = new CBrick((i + 102) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BRICK + 9);
+		objects.push_back(b);
+	}
+
+	// Black BG
+	
+	for (int i = 1; i < 40; i++)
+	{
+		CBrick* b = new CBrick(175 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * i, ID_ANI_BG + 38);
+		objects.push_back(b);
+	}
+
+	for (int i = 1; i < 40; i++)
+	{
+		for (int j = 0; j < 50; j++)
+		{
+			CBrick* b = new CBrick((176+j) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * i, ID_ANI_BG + 39);
+			objects.push_back(b);
+		}
+	}
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
