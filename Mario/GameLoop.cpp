@@ -14,6 +14,7 @@
 
 #include "Mario.h"
 #include "Brick.h"
+#include "Coin.h"
 
 #include "SampleKeyHandler.h"
 
@@ -32,6 +33,7 @@
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
 #define TEXTURE_PATH_1_MISC TEXTURES_DIR "\\tiles_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
+#define TEXTURE_PATH_2_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
 #define MARIO_START_X 20.0f
@@ -59,6 +61,7 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_ENEMY, TEXTURE_PATH_ENEMY);
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 	textures->Add(ID_TEX_MISC_1, TEXTURE_PATH_1_MISC);
+	textures->Add(ID_TEX_MISC_2, TEXTURE_PATH_2_MISC);
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
@@ -115,6 +118,7 @@ GameLoop::GameLoop(HWND hWnd)
 
 	sprites->Add(ID_SPRITE_BRICK + 56, 324, 171, 324 + 15, 171 + 15, texMisc);		//Brick 1
 	sprites->Add(ID_SPRITE_BRICK + 57, 273, 154, 273 + 15, 154 + 15, texMisc);		//Brick 2
+
 	texMisc = textures->Get(ID_TEX_MISC_1);
 
 	sprites->Add(ID_SPRITE_BRICK + 3, 137, 18, 137 + 15, 18 + 15, texMisc);		//Bush 1
@@ -152,7 +156,14 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 67, 154, 86, 154 + 15, 86 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 68, 154, 103, 154 + 15, 103 + 15, texMisc);
 
-	sprites->Add(ID_SPRITE_BRICK + 69, 460, 256, 460 + 15, 256 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 69, 460, 256, 460 + 15, 256 + 15, texMisc);		//Blocker
+
+	texMisc = textures->Get(ID_TEX_MISC_2);
+
+	sprites->Add(ID_SPRITE_BRICK + 70, 303, 99, 303 + 10, 99 + 15, texMisc);		//Coin
+	sprites->Add(ID_SPRITE_BRICK + 71, 321, 99, 321 + 10, 99 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 72, 339, 99, 339 + 10, 99 + 15, texMisc);
+
 	//-----------------------------------------------
 	LPANIMATION ani;
 	ani = new CAnimation(100);
@@ -383,7 +394,15 @@ GameLoop::GameLoop(HWND hWnd)
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 68);
-	animations->Add(ID_ANI_BG + 47, ani);			
+	animations->Add(ID_ANI_BG + 47, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 70);
+	animations->Add(ID_ANI_COIN, ani);
+	ani->Add(ID_SPRITE_BRICK + 71);
+	animations->Add(ID_ANI_COIN, ani);
+	ani->Add(ID_SPRITE_BRICK + 72);
+	animations->Add(ID_ANI_COIN, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -1601,6 +1620,10 @@ GameLoop::GameLoop(HWND hWnd)
 	brush = new CBrick(195 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 43);
 	objects.push_back(brush);
 
+	//Coins
+	CCoin* coin;
+	coin = new CCoin(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(coin);
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);

@@ -69,6 +69,9 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files\GameComponent</Filter>
     </ClCompile>
+    <ClCompile Include="Coin.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -126,7 +129,7 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

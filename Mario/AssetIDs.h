@@ -8,6 +8,7 @@
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
 #define ID_TEX_MISC_1 21
+#define ID_TEX_MISC_2 22
 
 #pragma region MARIO 
 
