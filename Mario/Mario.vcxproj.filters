@@ -125,5 +125,8 @@
     <ClInclude Include="AssetIDs.h">
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
+    <ClInclude Include="Coin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
