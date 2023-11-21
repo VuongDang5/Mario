@@ -164,6 +164,10 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 71, 321, 99, 321 + 10, 99 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 72, 339, 99, 339 + 10, 99 + 15, texMisc);
 
+	sprites->Add(ID_SPRITE_BRICK + 73, 300, 117, 300 + 15, 117 + 15, texMisc);		//Box
+	sprites->Add(ID_SPRITE_BRICK + 74, 318, 117, 318 + 15, 117 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 75, 336, 117, 336 + 15, 117 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 76, 354, 117, 354 + 15, 117 + 15, texMisc);
 	//-----------------------------------------------
 	LPANIMATION ani;
 	ani = new CAnimation(100);
@@ -396,13 +400,25 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 68);
 	animations->Add(ID_ANI_BG + 47, ani);
 
-	ani = new CAnimation(100);
+	ani = new CAnimation(100);						//Coin
 	ani->Add(ID_SPRITE_BRICK + 70);
 	animations->Add(ID_ANI_COIN, ani);
 	ani->Add(ID_SPRITE_BRICK + 71);
 	animations->Add(ID_ANI_COIN, ani);
 	ani->Add(ID_SPRITE_BRICK + 72);
 	animations->Add(ID_ANI_COIN, ani);
+
+	ani = new CAnimation(100);						//Box
+	ani->Add(ID_SPRITE_BRICK + 73);
+	animations->Add(ID_ANI_BRICK + 10, ani);
+	ani->Add(ID_SPRITE_BRICK + 74);
+	animations->Add(ID_ANI_BRICK + 10, ani);
+	ani->Add(ID_SPRITE_BRICK + 75);
+	animations->Add(ID_ANI_BRICK + 10, ani);
+	ani->Add(ID_SPRITE_BRICK + 76);
+	animations->Add(ID_ANI_BRICK + 10, ani);
+	ani->Add(ID_SPRITE_BRICK + 73);
+	animations->Add(ID_ANI_BRICK + 10, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -441,7 +457,7 @@ GameLoop::GameLoop(HWND hWnd)
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < 27; i++)
 	{
 		CBrick* b = new CBrick((i + 81) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
@@ -1106,6 +1122,12 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.push_back(brush);
 	
 	//Brick 1
+	brush = new CBrick(108 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(109 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+
+	//Brick 1
 	brush = new CBrick(113 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 7);
 	objects.push_back(brush);
 
@@ -1622,8 +1644,86 @@ GameLoop::GameLoop(HWND hWnd)
 
 	//Coins
 	CCoin* coin;
-	coin = new CCoin(5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	coin = new CCoin(76 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6);
 	objects.push_back(coin);
+	coin = new CCoin(78 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 8);
+	objects.push_back(coin);
+	coin = new CCoin(80 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 10);
+	objects.push_back(coin);
+	coin = new CCoin(82 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12);
+	objects.push_back(coin);
+	coin = new CCoin(84 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 14);
+	objects.push_back(coin);
+
+	coin = new CCoin(92 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 22);
+	objects.push_back(coin);
+	coin = new CCoin(93 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 22);
+	objects.push_back(coin);
+	coin = new CCoin(94 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 22);
+	objects.push_back(coin);
+
+	coin = new CCoin(100 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+	coin = new CCoin(101 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+
+	coin = new CCoin(104 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(coin);
+	coin = new CCoin(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(coin);
+	coin = new CCoin(106 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(coin);
+	coin = new CCoin(107 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(coin);
+
+	coin = new CCoin(109 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+	coin = new CCoin(110 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+	coin = new CCoin(111 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+	coin = new CCoin(112 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+
+	coin = new CCoin(114 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 18);
+	objects.push_back(coin);
+
+	coin = new CCoin(116 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+
+	coin = new CCoin(118 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(coin);
+
+	coin = new CCoin(121 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 21);
+	objects.push_back(coin);
+
+	coin = new CCoin(123 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 20);
+	objects.push_back(coin);
+
+	//Box
+	brush = new CBrick(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+	brush = new CBrick(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(15 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+	brush = new CBrick(16 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(48 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+	brush = new CBrick(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 3, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
+
+	brush = new CBrick(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 10);
+	objects.push_back(brush);
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
