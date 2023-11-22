@@ -6,6 +6,7 @@
 
 #include "Collision.h"
 #include "Coin.h"
+#include "Box.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -188,12 +189,19 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		}
 
 	if (dynamic_cast<CCoin*>(e->obj)) OnCollisionWithCoin(e);
+	if (dynamic_cast<CBox*>(e->obj)) OnCollisionWithBox(e);
 }
 
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
 	e->obj->Delete();
 	coin+=100;
+}
+
+void CMario::OnCollisionWithBox(LPCOLLISIONEVENT e)
+{
+	e->obj->SetState(2);
+	coin += 100;
 }
 
 void CMario::SetState(int state)

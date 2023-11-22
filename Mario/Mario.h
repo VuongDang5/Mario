@@ -145,4 +145,6 @@ public:
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
+	void OnCollisionWithBox(LPCOLLISIONEVENT e);
+
 };

@@ -15,6 +15,7 @@
 #include "Mario.h"
 #include "Brick.h"
 #include "Coin.h"
+#include "Box.h"
 
 #include "SampleKeyHandler.h"
 
@@ -410,15 +411,15 @@ GameLoop::GameLoop(HWND hWnd)
 
 	ani = new CAnimation(100);						//Box
 	ani->Add(ID_SPRITE_BRICK + 73);
-	animations->Add(ID_ANI_BRICK + 10, ani);
+	animations->Add(ID_ANI_BOX, ani);
 	ani->Add(ID_SPRITE_BRICK + 74);
-	animations->Add(ID_ANI_BRICK + 10, ani);
+	animations->Add(ID_ANI_BOX, ani);
 	ani->Add(ID_SPRITE_BRICK + 75);
-	animations->Add(ID_ANI_BRICK + 10, ani);
+	animations->Add(ID_ANI_BOX, ani);
 	ani->Add(ID_SPRITE_BRICK + 76);
-	animations->Add(ID_ANI_BRICK + 10, ani);
+	animations->Add(ID_ANI_BOX, ani);
 	ani->Add(ID_SPRITE_BRICK + 73);
-	animations->Add(ID_ANI_BRICK + 10, ani);
+	animations->Add(ID_ANI_BOX, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -1701,29 +1702,30 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.push_back(coin);
 
 	//Box
-	brush = new CBrick(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
-	brush = new CBrick(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	CBox* box;
+	box = new CBox(12 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
+	objects.push_back(box);
+	box = new CBox(13 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
+	objects.push_back(box);
 
-	brush = new CBrick(15 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
-	brush = new CBrick(16 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	box = new CBox(15 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
+	objects.push_back(box);
+	box = new CBox(16 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
+	objects.push_back(box);
 
-	brush = new CBrick(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	box = new CBox(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6);
+	objects.push_back(box);
 
-	brush = new CBrick(48 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
-	brush = new CBrick(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 3, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	box = new CBox(48 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f);
+	objects.push_back(box);
+	box = new CBox(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 3);
+	objects.push_back(box);
 
-	brush = new CBrick(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	box = new CBox(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	objects.push_back(box);
 
-	brush = new CBrick(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 10);
-	objects.push_back(brush);
+	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
+	objects.push_back(box);
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);

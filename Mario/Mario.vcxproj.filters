@@ -72,6 +72,9 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -129,6 +132,9 @@
       <Filter>Source Files\GameComponent</Filter>
     </ClInclude>
     <ClInclude Include="Coin.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>
