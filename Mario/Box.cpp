@@ -8,6 +8,11 @@ void CBox::Render()
 	RenderBoundingBox();
 }
 
+void CBox::OnNoCollision(DWORD dt)
+{
+	y += vy * dt;
+};
+
 void CBox::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = x - BOX_BBOX_WIDTH / 2;
@@ -26,7 +31,23 @@ void CBox::SetState(int state)
 		vy = 0;
 		break;
 	case 2:
-		y = y-0.5f;
+		vy = -0.2f;
+		break;
+	case 3:
+		vy = 0.2f;
 		break;
 	}
+}
+
+void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	if (oy > y) {
+		y = oy;
+		vy = 0;
+	}
+	if (oy != y) {
+		this->SetState(3);
+	}
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
