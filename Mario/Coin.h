@@ -12,9 +12,16 @@
 
 class CCoin : public CGameObject {
 public:
-	CCoin(float x, float y) : CGameObject(x, y) {}
+	float oy;
+	CCoin(float x, float y) : CGameObject(x, y) { 
+		oy = y;
+		this->SetState(1); 
+	}
 	void Render();
-	void Update(DWORD dt) {}
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	int IsBlocking() { return 0; }
+
+	virtual void OnNoCollision(DWORD dt);
+	virtual void SetState(int state);
 };

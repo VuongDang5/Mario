@@ -1,4 +1,7 @@
 #include "Box.h"
+#include "Coin.h"
+#include "Brick.h"
+#include "GameLoop.h"
 
 void CBox::Render()
 {
@@ -41,12 +44,19 @@ void CBox::SetState(int state)
 
 void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (oy > y) {
+	if (oy < y) {
 		y = oy;
 		vy = 0;
+		this->Delete();
+		LPGAMEOBJECT brick;
+		brick = new CBrick(x, y, ID_ANI_BRICK + 10);
+		GameLoop::UpdateObj(brick);
 	}
-	if (oy != y) {
+	if (oy - y > 16.0f) {
 		this->SetState(3);
+		LPGAMEOBJECT coin = new CCoin(x, y);
+		coin->SetState(2);
+		GameLoop::UpdateObj(coin);
 	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);

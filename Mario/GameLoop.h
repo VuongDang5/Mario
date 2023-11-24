@@ -23,6 +23,7 @@ public:
     GameLoop(HWND hWnd);
     ~GameLoop();
 
+    static void UpdateObj(LPGAMEOBJECT& o);
 protected:
     void InitLoop();
 

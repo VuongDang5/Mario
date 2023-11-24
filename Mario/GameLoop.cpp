@@ -50,7 +50,6 @@ list<LPGAMEOBJECT> objects;
 
 CSampleKeyHandler* keyHandler;
 
-
 GameLoop::GameLoop(HWND hWnd)
 {
 	game = CGame::GetInstance();
@@ -169,6 +168,9 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 74, 318, 117, 318 + 15, 117 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 75, 336, 117, 336 + 15, 117 + 15, texMisc);
 	sprites->Add(ID_SPRITE_BRICK + 76, 354, 117, 354 + 15, 117 + 15, texMisc);
+
+	sprites->Add(ID_SPRITE_BRICK + 77, 372, 117, 372 + 15, 117 + 15, texMisc);
+
 	//-----------------------------------------------
 	LPANIMATION ani;
 	ani = new CAnimation(100);
@@ -420,6 +422,10 @@ GameLoop::GameLoop(HWND hWnd)
 	animations->Add(ID_ANI_BOX, ani);
 	ani->Add(ID_SPRITE_BRICK + 73);
 	animations->Add(ID_ANI_BOX, ani);
+
+	ani = new CAnimation(100);						//Normal Box
+	ani->Add(ID_SPRITE_BRICK + 77);
+	animations->Add(ID_ANI_BRICK + 10, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -1744,6 +1750,12 @@ GameLoop::~GameLoop()
 	dt: time period between beginning of last frame and beginning of this frame
 */
 bool IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
+
+void GameLoop::UpdateObj(LPGAMEOBJECT& o)
+{
+	objects.push_back(o);
+}
+
 void GameLoop::Update(DWORD dt)
 {
 	vector<LPGAMEOBJECT> coObjects;

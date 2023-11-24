@@ -15,3 +15,32 @@ void CCoin::GetBoundingBox(float& l, float& t, float& r, float& b)
 	r = l + COIN_BBOX_WIDTH;
 	b = t + COIN_BBOX_HEIGHT;
 }
+
+void CCoin::SetState(int state)
+{
+	CGameObject::SetState(state);
+	switch (state)
+	{
+	case 1:
+		vx = 0;
+		vy = 0;
+		break;
+	case 2:
+		vy = -0.05f;
+		break;
+	}
+}
+
+void CCoin::OnNoCollision(DWORD dt)
+{
+	y += vy * dt;
+};
+
+void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+{
+	if (oy - y > 16.0f) {
+		this->Delete();
+	}
+	CGameObject::Update(dt, coObjects);
+	CCollision::GetInstance()->Process(this, dt, coObjects);
+}
