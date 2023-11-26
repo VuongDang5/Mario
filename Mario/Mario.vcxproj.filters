@@ -25,6 +25,9 @@
     <Filter Include="Source Files\GameObject\Brick">
       <UniqueIdentifier>{acaf1e74-6b30-4ab4-a33d-18420d3c6fce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Map">
+      <UniqueIdentifier>{367d061a-9f45-420f-a57c-3b062dc53de4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Source Files\GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
