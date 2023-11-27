@@ -142,7 +142,8 @@
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Map1.cpp" />
+    <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="SampleKeyHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -167,6 +168,8 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Map1.h" />
+    <ClInclude Include="Map2.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="SampleKeyHandler.h" />
     <ClInclude Include="Sprite.h" />

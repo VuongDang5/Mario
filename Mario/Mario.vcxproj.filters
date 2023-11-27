@@ -78,7 +78,10 @@
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="Map1.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map2.cpp">
       <Filter>Source Files\GameObject\Map</Filter>
     </ClCompile>
   </ItemGroup>
@@ -144,6 +147,12 @@
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map1.h">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map2.h">
       <Filter>Source Files\GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>

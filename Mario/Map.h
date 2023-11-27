@@ -7,5 +7,5 @@
 class CMap {
 public:
 	list<LPGAMEOBJECT> objects;
-	CMap(float x, float y);
+	CMap(float x, float y) {};
 };
