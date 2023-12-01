@@ -28,6 +28,9 @@
     <Filter Include="Source Files\GameObject\Map">
       <UniqueIdentifier>{367d061a-9f45-420f-a57c-3b062dc53de4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject\Enemies">
+      <UniqueIdentifier>{ee142e24-5de3-4c10-86b2-4fd5a34f6544}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="Map2.cpp">
       <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>Source Files\GameObject\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Map2.h">
       <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>Source Files\GameObject\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
