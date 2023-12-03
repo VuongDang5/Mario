@@ -16,6 +16,7 @@
 #include "Brick.h"
 #include "Coin.h"
 #include "Box.h"
+#include "Goomba.h"
 
 #include "SampleKeyHandler.h"
 
@@ -44,12 +45,39 @@
 #define MARIO_START_X 20.0f
 #define MARIO_START_Y 10.0f
 
+#define GOOMBA_X 200.0f
+
+
 CGame* game;
 CMario* mario;
 
 list<LPGAMEOBJECT> objects;
 
 CSampleKeyHandler* keyHandler;
+
+void LoadAssetsGoomba()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);
+
+	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GOOMBA_WALK + 1);
+	ani->Add(ID_SPRITE_GOOMBA_WALK + 2);
+	animations->Add(ID_ANI_GOOMBA_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GOOMBA_DIE + 1);
+	animations->Add(ID_ANI_GOOMBA_DIE, ani);
+
+}
 
 GameLoop::GameLoop(HWND hWnd)
 {
@@ -436,6 +464,11 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.clear();
 	CMap* map = new CMap1(1,1);
 	objects = map->objects;
+	//------------------------------------
+	LoadAssetsGoomba();
+
+	CGoomba* goomba = new CGoomba(MARIO_START_X, MARIO_START_Y*2);
+	objects.push_back(goomba);
 
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
