@@ -7,6 +7,7 @@
 #include "Collision.h"
 #include "Coin.h"
 #include "Box.h"
+#include "Goomba.h"
 
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -190,6 +191,40 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 
 	if (dynamic_cast<CCoin*>(e->obj)) OnCollisionWithCoin(e);
 	if (dynamic_cast<CBox*>(e->obj) && e->ny > 0) OnCollisionWithBox(e);
+	if (dynamic_cast<CGoomba*>(e->obj)) OnCollisionWithGoomba(e);
+}
+
+void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
+{
+	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->ny < 0)
+	{
+		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		{
+			goomba->SetState(GOOMBA_STATE_DIE);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (goomba->GetState() != GOOMBA_STATE_DIE)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
 }
 
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
