@@ -17,6 +17,7 @@
 #include "Coin.h"
 #include "Box.h"
 #include "Goomba.h"
+#include "Turtle.h"
 
 #include "SampleKeyHandler.h"
 
@@ -77,6 +78,29 @@ void LoadAssetsGoomba()
 	ani->Add(ID_SPRITE_GOOMBA_DIE + 1);
 	animations->Add(ID_ANI_GOOMBA_DIE, ani);
 
+}
+
+void LoadAssetsTurtle()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+
+	sprites->Add(ID_SPRITE_TURTLE_WALK + 1, 6, 129, 6 + 16, 129 + 27, texEnemy);
+	sprites->Add(ID_SPRITE_TURTLE_WALK + 2, 28, 129, 28 + 16, 129 + 27, texEnemy);
+
+	sprites->Add(ID_SPRITE_TURTLE_DIE + 1, 71, 139, 71 + 18, 139 + 16, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_TURTLE_WALK + 1);
+	ani->Add(ID_SPRITE_TURTLE_WALK + 2);
+	animations->Add(ID_ANI_TURTLE_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_TURTLE_DIE + 1);
+	animations->Add(ID_ANI_TURTLE_DIE, ani);
 }
 
 GameLoop::GameLoop(HWND hWnd)
@@ -466,9 +490,13 @@ GameLoop::GameLoop(HWND hWnd)
 	objects = map->objects;
 	//------------------------------------
 	LoadAssetsGoomba();
+	LoadAssetsTurtle();
 
-	CGoomba* goomba = new CGoomba(MARIO_START_X, MARIO_START_Y*2);
-	objects.push_back(goomba);
+
+	//------------------------------------
+
+	CTurtle * turtle = new CTurtle(300.0f, 10.0f * 2);
+	objects.push_back(turtle);
 
 	//------------------------------------
 	mario = new CMario(MARIO_START_X, MARIO_START_Y);
