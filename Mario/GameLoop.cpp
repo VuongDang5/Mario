@@ -31,7 +31,8 @@
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
 
-#define BACKGROUND_COLOR D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR1 D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(0.0f/255, 0.0f/255, 0.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -171,6 +172,8 @@ GameLoop::GameLoop(HWND hWnd)
 
 	sprites->Add(ID_SPRITE_BRICK + 56, 324, 171, 324 + 15, 171 + 15, texMisc);		//Brick 1
 	sprites->Add(ID_SPRITE_BRICK + 57, 273, 154, 273 + 15, 154 + 15, texMisc);		//Brick 2
+
+	sprites->Add(ID_SPRITE_BRICK + 78, 290, 188, 290 + 15, 188 + 15, texMisc);		//Blue Brick
 
 	texMisc = textures->Get(ID_TEX_MISC_1);
 
@@ -479,6 +482,10 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);						//Normal Box
 	ani->Add(ID_SPRITE_BRICK + 77);
 	animations->Add(ID_ANI_BRICK + 10, ani);
+
+	ani = new CAnimation(100);						//Blue Brick
+	ani->Add(ID_SPRITE_BRICK + 78);
+	animations->Add(ID_ANI_BRICK + 11, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -486,7 +493,8 @@ GameLoop::GameLoop(HWND hWnd)
 		delete (*it);
 	}
 	objects.clear();
-	CMap* map = new CMap1(1,1);
+
+	CMap* map = new CMap2(1,1);
 	objects = map->objects;
 	//------------------------------------
 	LoadAssetsGoomba();
@@ -494,12 +502,7 @@ GameLoop::GameLoop(HWND hWnd)
 
 
 	//------------------------------------
-
-	CTurtle * turtle = new CTurtle(300.0f, 10.0f * 2);
-	objects.push_back(turtle);
-
-	//------------------------------------
-	mario = new CMario(MARIO_START_X, MARIO_START_Y);
+	mario = new CMario(MARIO_START_X + 16.0f, MARIO_START_Y);
 	objects.push_back(mario);
 
 	InitLoop();
