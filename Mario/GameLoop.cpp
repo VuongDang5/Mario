@@ -31,8 +31,8 @@
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
 
-#define BACKGROUND_COLOR1 D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
-#define BACKGROUND_COLOR D3DXCOLOR(0.0f/255, 0.0f/255, 0.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR1 D3DXCOLOR(0.0f/255, 0.0f/255, 0.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -494,13 +494,14 @@ GameLoop::GameLoop(HWND hWnd)
 	}
 	objects.clear();
 
-	CMap* map = new CMap2(1,1);
+	CMap* map = new CMap1(1,1);
 	objects = map->objects;
 	//------------------------------------
 	LoadAssetsGoomba();
 	LoadAssetsTurtle();
 
-
+	CTurtle* turtle = new CTurtle(300.0f, 10.0f * 2);
+	objects.push_back(turtle);
 	//------------------------------------
 	mario = new CMario(MARIO_START_X + 16.0f, MARIO_START_Y);
 	objects.push_back(mario);

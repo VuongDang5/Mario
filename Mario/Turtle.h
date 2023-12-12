@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
-#define TURTLE_GRAVITY 0.002f
+#define TURTLE_GRAVITY 0.000f
 #define TURTLE_WALKING_SPEED 0.05f
 
 
@@ -22,6 +22,7 @@ class CTurtle : public CGameObject
 protected:
 	float ax;
 	float ay;
+	float time;
 
 	ULONGLONG die_start;
 

@@ -1,4 +1,5 @@
 #include "Turtle.h"
+#include "Math.h"
 
 CTurtle::CTurtle(float x, float y) :CGameObject(x, y)
 {
@@ -49,7 +50,7 @@ void CTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	vy += ay * dt;
+	vy += 0.002 * sin(dt);
 	vx += ax * dt;
 
 	if ((state == TURTLE_STATE_DIE) && (GetTickCount64() - die_start > TURTLE_DIE_TIMEOUT))
