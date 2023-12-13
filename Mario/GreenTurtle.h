@@ -1,23 +1,23 @@
 #pragma once
 #include "GameObject.h"
 
-#define TURTLE_GRAVITY 0.002f
-#define TURTLE_WALKING_SPEED 0.05f
+#define GTURTLE_GRAVITY 0.002f
+#define GTURTLE_WALKING_SPEED 0.05f
 
 
-#define TURTLE_BBOX_WIDTH 16
-#define TURTLE_BBOX_HEIGHT 27
-#define TURTLE_BBOX_HEIGHT_DIE 16
+#define GTURTLE_BBOX_WIDTH 16
+#define GTURTLE_BBOX_HEIGHT 27
+#define GTURTLE_BBOX_HEIGHT_DIE 16
 
-#define TURTLE_DIE_TIMEOUT 500
+#define GTURTLE_DIE_TIMEOUT 500
 
-#define TURTLE_STATE_WALKING 100
-#define TURTLE_STATE_DIE 200
+#define GTURTLE_STATE_WALKING 100
+#define GTURTLE_STATE_DIE 200
 
-#define ID_ANI_TURTLE_WALKING 6000
-#define ID_ANI_TURTLE_DIE 6001
+#define ID_ANI_GTURTLE_WALKING 7000
+#define ID_ANI_GTURTLE_DIE 7001
 
-class CTurtle : public CGameObject
+class CGTurtle : public CGameObject
 {
 protected:
 	float ax;
@@ -37,6 +37,6 @@ protected:
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public:
-	CTurtle(float x, float y);
+	CGTurtle(float x, float y);
 	virtual void SetState(int state);
 };

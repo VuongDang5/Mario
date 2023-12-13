@@ -50,7 +50,7 @@ void CTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	vy += 0.002 * sin(dt);
+	vy += ay * dt;
 	vx += ax * dt;
 
 	if ((state == TURTLE_STATE_DIE) && (GetTickCount64() - die_start > TURTLE_DIE_TIMEOUT))
