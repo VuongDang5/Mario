@@ -149,6 +149,7 @@
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="SampleKeyHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Map2.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="Piranha.h" />
     <ClInclude Include="SampleKeyHandler.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
