@@ -105,6 +105,9 @@
     <ClCompile Include="Piranha.cpp">
       <Filter>Source Files\GameObject\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Piranha.h">
       <Filter>Source Files\GameObject\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

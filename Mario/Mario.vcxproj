@@ -153,6 +153,7 @@
     <ClCompile Include="SampleKeyHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="Star.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Turtle.cpp" />
   </ItemGroup>
@@ -185,6 +186,7 @@
     <ClInclude Include="SampleKeyHandler.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
+    <ClInclude Include="Star.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Turtle.h" />
