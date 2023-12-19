@@ -2,8 +2,10 @@
 
 CEater::CEater(float x, float y) :CGameObject(x, y)
 {
-	this->ax = 0;
-	this->ay = EATER_GRAVITY;
+	this->ox = x;
+	this->oy = y;
+	this->vx = 0;
+	this->vy = 0.02f;
 	die_start = -1;
 	SetState(EATER_STATE_WALKING);
 }
@@ -26,12 +28,6 @@ void CEater::GetBoundingBox(float& left, float& top, float& right, float& bottom
 	}
 }
 
-void CEater::OnNoCollision(DWORD dt)
-{
-	x += vx * dt;
-	y += vy * dt;
-};
-
 void CEater::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
@@ -49,9 +45,8 @@ void CEater::OnCollisionWith(LPCOLLISIONEVENT e)
 
 void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	vy += ay * dt;
-	vx += ax * dt;
-
+	y += vy * dt;
+	
 	if ((state == EATER_STATE_DIE) && (GetTickCount64() - die_start > EATER_DIE_TIMEOUT))
 	{
 		isDeleted = true;

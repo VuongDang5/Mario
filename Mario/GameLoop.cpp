@@ -18,6 +18,7 @@
 #include "Box.h"
 #include "Goomba.h"
 #include "Turtle.h"
+#include "Eater.h"
 
 #include "SampleKeyHandler.h"
 
@@ -31,7 +32,7 @@
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
 
-#define BACKGROUND_COLOR D3DXCOLOR(145.0f/255, 255.0f/255, 255.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(64.0f/255, 144.0f/255, 192.0f/255, 0.0f)
 #define BACKGROUND_COLOR1 D3DXCOLOR(0.0f/255, 0.0f/255, 0.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
@@ -41,6 +42,7 @@
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
 #define TEXTURE_PATH_1_MISC TEXTURES_DIR "\\tiles_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
+#define TEXTURE_PATH_ENEMY_0 TEXTURES_DIR "\\enemies_0.png"
 #define TEXTURE_PATH_2_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
@@ -56,6 +58,30 @@ CMario* mario;
 list<LPGAMEOBJECT> objects;
 
 CSampleKeyHandler* keyHandler;
+
+void LoadAssetsEater()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
+
+	sprites->Add(ID_SPRITE_EATER_WALK + 1, 128, 177, 128+15, 177+24, texEnemy);
+	sprites->Add(ID_SPRITE_EATER_WALK + 2, 144, 177, 144+15, 177 +24, texEnemy);
+
+	sprites->Add(ID_SPRITE_EATER_DIE + 1, 44, 19, 62, 30, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_EATER_WALK + 1);
+	ani->Add(ID_SPRITE_EATER_WALK + 2);
+	animations->Add(ID_ANI_EATER_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_EATER_DIE + 1);
+	animations->Add(ID_ANI_EATER_DIE, ani);
+
+}
 
 void LoadAssetsGoomba()
 {
@@ -113,6 +139,7 @@ GameLoop::GameLoop(HWND hWnd)
 	CAnimations* animations = CAnimations::GetInstance();
 
 	textures->Add(ID_TEX_ENEMY, TEXTURE_PATH_ENEMY);
+	textures->Add(ID_TEX_ENEMY_0, TEXTURE_PATH_ENEMY_0);
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 	textures->Add(ID_TEX_MISC_1, TEXTURE_PATH_1_MISC);
 	textures->Add(ID_TEX_MISC_2, TEXTURE_PATH_2_MISC);
@@ -494,15 +521,15 @@ GameLoop::GameLoop(HWND hWnd)
 	}
 	objects.clear();
 
-	CMap* map = new CMap1(1,1);
-	objects = map->objects;
 	//------------------------------------
 	LoadAssetsGoomba();
 	LoadAssetsTurtle();
+	LoadAssetsEater();
 
-	CTurtle* turtle = new CTurtle(300.0f, 10.0f * 2);
-	objects.push_back(turtle);
 	//------------------------------------
+	CMap* map = new CMap1(1, 1);
+	objects = map->objects;
+
 	mario = new CMario(MARIO_START_X + 16.0f, MARIO_START_Y);
 	objects.push_back(mario);
 

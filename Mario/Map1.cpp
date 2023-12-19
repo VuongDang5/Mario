@@ -4,6 +4,7 @@
 #include "Brick.h"
 #include "Coin.h"
 #include "Box.h"
+#include "Eater.h"
 
 #include "AssetIDs.h"
 
@@ -12,6 +13,9 @@
 
 void CMap1::LoadMap(float x, float y)
 {
+	CEater* eater = new CEater(25.5f * 16, 16.0f * 5);
+	objects.push_back(eater);
+
 	//Blocker
 	for (int i = 0; i < 25; i++)
 	{

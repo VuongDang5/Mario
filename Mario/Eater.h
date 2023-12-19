@@ -22,6 +22,8 @@ class CEater : public CGameObject
 protected:
 	float ax;
 	float ay;
+	float ox;
+	float oy;
 
 	ULONGLONG die_start;
 
@@ -31,7 +33,6 @@ protected:
 
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
-	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
