@@ -13,7 +13,7 @@
 
 void CMap1::LoadMap(float x, float y)
 {
-	CEater* eater = new CEater(25.5f * 16, 16.0f * 5);
+	CEater* eater = new CEater(25.5f * 16, BRICK_Y - 16.0f * 1);
 	objects.push_back(eater);
 
 	//Blocker

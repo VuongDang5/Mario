@@ -5,7 +5,7 @@ CEater::CEater(float x, float y) :CGameObject(x, y)
 	this->ox = x;
 	this->oy = y;
 	this->vx = 0;
-	this->vy = 0.02f;
+	this->vy = -0.02f;
 	die_start = -1;
 	SetState(EATER_STATE_WALKING);
 }
@@ -30,21 +30,13 @@ void CEater::GetBoundingBox(float& left, float& top, float& right, float& bottom
 
 void CEater::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->obj->IsBlocking()) return;
-	if (dynamic_cast<CEater*>(e->obj)) return;
 
-	if (e->ny != 0)
-	{
-		vy = 0;
-	}
-	else if (e->nx != 0)
-	{
-		vx = -vx;
-	}
 }
 
 void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	if (y = 196.0f - 16.0f * 4.2) {
+		vy = 0; }
 	y += vy * dt;
 	
 	if ((state == EATER_STATE_DIE) && (GetTickCount64() - die_start > EATER_DIE_TIMEOUT))
@@ -54,7 +46,6 @@ void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	CGameObject::Update(dt, coObjects);
-	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
 
