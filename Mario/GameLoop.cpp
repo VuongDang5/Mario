@@ -67,14 +67,19 @@ void LoadAssetsEater()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
 
-	sprites->Add(ID_SPRITE_EATER_WALK + 1, 128, 177, 128+15, 177+24, texEnemy);
-	sprites->Add(ID_SPRITE_EATER_WALK + 2, 144, 177, 144+15, 177 +24, texEnemy);
+	sprites->Add(ID_SPRITE_EATER_WALK + 1, 96, 145, 96 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER_WALK + 2, 112, 145, 112 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER_WALK + 3, 128, 145, 128 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER_WALK + 4, 144, 145, 144 + 15, 145 + 30, texEnemy);
 
 	sprites->Add(ID_SPRITE_EATER_DIE + 1, 44, 19, 62, 30, texEnemy);
 
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_EATER_WALK + 1);
 	ani->Add(ID_SPRITE_EATER_WALK + 2);
+	ani->Add(ID_SPRITE_EATER_WALK + 3);
+	ani->Add(ID_SPRITE_EATER_WALK + 4, 2000);
+
 	animations->Add(ID_ANI_EATER_WALKING, ani);
 
 	ani = new CAnimation(100);
