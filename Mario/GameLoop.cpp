@@ -77,14 +77,12 @@ void LoadAssetsEater()
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_EATER_WALK + 1);
 	ani->Add(ID_SPRITE_EATER_WALK + 2);
-	ani->Add(ID_SPRITE_EATER_WALK + 3);
-	ani->Add(ID_SPRITE_EATER_WALK + 4, 2000);
-
 	animations->Add(ID_ANI_EATER_WALKING, ani);
-
+	
 	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_EATER_DIE + 1);
-	animations->Add(ID_ANI_EATER_DIE, ani);
+	ani->Add(ID_SPRITE_EATER_WALK + 3);
+	ani->Add(ID_SPRITE_EATER_WALK + 4,5000);
+	animations->Add(ID_ANI_EATER_SHOOT, ani);
 
 }
 
