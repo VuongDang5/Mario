@@ -67,22 +67,27 @@ void LoadAssetsEater()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
 
-	sprites->Add(ID_SPRITE_EATER_WALK + 1, 96, 145, 96 + 15, 145 + 30, texEnemy);
-	sprites->Add(ID_SPRITE_EATER_WALK + 2, 112, 145, 112 + 15, 145 + 30, texEnemy);
-	sprites->Add(ID_SPRITE_EATER_WALK + 3, 128, 145, 128 + 15, 145 + 30, texEnemy);
-	sprites->Add(ID_SPRITE_EATER_WALK + 4, 144, 145, 144 + 15, 145 + 30, texEnemy);
-
-	sprites->Add(ID_SPRITE_EATER_DIE + 1, 44, 19, 62, 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 1, 96, 145, 96 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 2, 112, 145, 112 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 3, 128, 145, 128 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 4, 144, 145, 144 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 5, 160, 145, 160 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_EATER + 6, 176, 145, 176 + 15, 145 + 30, texEnemy);
 
 	LPANIMATION ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_EATER_WALK + 1);
-	ani->Add(ID_SPRITE_EATER_WALK + 2);
+	ani->Add(ID_SPRITE_EATER + 1);
+	ani->Add(ID_SPRITE_EATER + 2);
 	animations->Add(ID_ANI_EATER_WALKING, ani);
 	
 	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_EATER_WALK + 3);
-	ani->Add(ID_SPRITE_EATER_WALK + 4,5000);
+	ani->Add(ID_SPRITE_EATER + 3);
+	ani->Add(ID_SPRITE_EATER + 4,5000);
 	animations->Add(ID_ANI_EATER_SHOOT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_EATER + 5);
+	ani->Add(ID_SPRITE_EATER + 6, 5000);
+	animations->Add(ID_ANI_EATER_SHOOT_UP, ani);
 
 }
 
@@ -533,7 +538,7 @@ GameLoop::GameLoop(HWND hWnd)
 	CMap* map = new CMap1(1, 1);
 	objects = map->objects;
 
-	mario = new CMario(MARIO_START_X + 16.0f, MARIO_START_Y);
+	mario = new CMario(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
 	InitLoop();

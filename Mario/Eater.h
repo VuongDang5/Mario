@@ -12,6 +12,7 @@
 
 #define ID_ANI_EATER_WALKING 8000
 #define ID_ANI_EATER_SHOOT 8001
+#define ID_ANI_EATER_SHOOT_UP 8002
 
 class CEater : public CGameObject
 {

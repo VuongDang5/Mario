@@ -1,4 +1,5 @@
 #include "Eater.h"
+#include "Mario.h"
 
 CEater::CEater(float x, float y) :CGameObject(x, y)
 {
