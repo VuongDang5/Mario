@@ -124,7 +124,10 @@ class CMario : public CGameObject
 	int GetAniIdBig();
 	int GetAniIdSmall();
 
+	static CMario* __instance;
 public:
+	static CMario* GetInstance(float x, float y);
+
 	CMario(float x, float y);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
@@ -134,8 +137,11 @@ public:
 		return (state != MARIO_STATE_DIE);
 	}
 
-	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
+	int getX() { return x; }
+	int getY() { return y; }
 
+	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
+	
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 

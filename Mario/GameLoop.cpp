@@ -82,7 +82,7 @@ void LoadAssetsEater()
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_EATER + 3);
 	ani->Add(ID_SPRITE_EATER + 4,5000);
-	animations->Add(ID_ANI_EATER_SHOOT, ani);
+	animations->Add(ID_ANI_EATER_SHOOT_DOWN, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_EATER + 5);
@@ -538,7 +538,7 @@ GameLoop::GameLoop(HWND hWnd)
 	CMap* map = new CMap1(1, 1);
 	objects = map->objects;
 
-	mario = new CMario(MARIO_START_X, MARIO_START_Y);
+	mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
 	objects.push_back(mario);
 
 	InitLoop();

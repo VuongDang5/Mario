@@ -9,6 +9,13 @@
 #include "Box.h"
 #include "Goomba.h"
 
+CMario* CMario::__instance = NULL;
+CMario* CMario::GetInstance(float x, float y)
+{
+	if (__instance == NULL) __instance = new CMario(x, y);
+	return __instance;
+}
+
 void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
