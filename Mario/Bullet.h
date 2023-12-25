@@ -4,7 +4,6 @@
 #define BULLET_BBOX_WIDTH 8
 #define BULLET_BBOX_HEIGHT 8
 
-#define ID_SPRITE_EATER 
 #define ID_ANI_BULLET 11001
 
 class CBullet : public CGameObject

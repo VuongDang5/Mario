@@ -19,6 +19,7 @@
 #include "Goomba.h"
 #include "Turtle.h"
 #include "Eater.h"
+#include "GreenEater.h"
 #include "Bullet.h"
 
 #include "SampleKeyHandler.h"
@@ -82,6 +83,38 @@ void LoadAssetsBullet()
 	animations->Add(ID_ANI_BULLET, ani);
 }
 
+void LoadAssetsGreenEater()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
+
+	sprites->Add(ID_SPRITE_GREEN_EATER + 1, 0, 145, 0 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_GREEN_EATER + 2, 16, 145, 16 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_GREEN_EATER + 3, 32, 145, 32 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_GREEN_EATER + 4, 48, 145, 48 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_GREEN_EATER + 5, 64, 145, 64 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_GREEN_EATER + 6, 80, 145, 80 + 15, 145 + 30, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GREEN_EATER + 1);
+	ani->Add(ID_SPRITE_GREEN_EATER + 2);
+	animations->Add(ID_ANI_GEATER_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GREEN_EATER + 3);
+	ani->Add(ID_SPRITE_GREEN_EATER + 4, 5000);
+	animations->Add(ID_ANI_GEATER_SHOOT_DOWN, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GREEN_EATER + 5);
+	ani->Add(ID_SPRITE_GREEN_EATER + 6, 5000);
+	animations->Add(ID_ANI_GEATER_SHOOT_UP, ani);
+}
+
+
 void LoadAssetsEater()
 {
 	CTextures* textures = CTextures::GetInstance();
@@ -111,7 +144,6 @@ void LoadAssetsEater()
 	ani->Add(ID_SPRITE_EATER + 5);
 	ani->Add(ID_SPRITE_EATER + 6, 5000);
 	animations->Add(ID_ANI_EATER_SHOOT_UP, ani);
-
 }
 
 void LoadAssetsGoomba()
@@ -556,6 +588,7 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsGoomba();
 	LoadAssetsTurtle();
 	LoadAssetsEater();
+	LoadAssetsGreenEater();
 	LoadAssetsBullet();
 
 	//------------------------------------

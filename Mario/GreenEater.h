@@ -1,39 +1,33 @@
 #pragma once
 #include "GameObject.h"
 
-#define GEATER_GRAVITY 0.002f
-#define GEATER_WALKING_SPEED 0.05f
-
-
 #define GEATER_BBOX_WIDTH 16
-#define GEATER_BBOX_HEIGHT 14
-#define GEATER_BBOX_HEIGHT_DIE 7
-
-#define GEATER_DIE_TIMEOUT 500
+#define GEATER_BBOX_HEIGHT 30
 
 #define GEATER_STATE_WALKING 100
-#define GEATER_STATE_DIE 200
+#define GEATER_STATE_SHOOT_UP 200
+#define GEATER_STATE_SHOOT_DOWN 201
+#define GEATER_STATE_DOWN 300
 
 #define ID_ANI_GEATER_WALKING 9000
-#define ID_ANI_GEATER_DIE 9001
+#define ID_ANI_GEATER_SHOOT_UP 9001
+#define ID_ANI_GEATER_SHOOT_DOWN 9002
 
 class CGEater : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
+	float ox;
+	float oy;
 
-	ULONGLONG die_start;
+	ULONGLONG time_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
 
 	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 0; }
-	virtual void OnNoCollision(DWORD dt);
-
-	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public:
 	CGEater(float x, float y);
