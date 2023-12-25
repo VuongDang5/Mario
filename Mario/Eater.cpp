@@ -1,5 +1,7 @@
 #include "Eater.h"
 #include "Mario.h"
+#include "Bullet.h"
+#include "GameLoop.h"
 
 CEater::CEater(float x, float y) :CGameObject(x, y)
 {
@@ -30,6 +32,9 @@ void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				this->isFlipped = -1;
 			}
 			this->SetState(EATER_STATE_SHOOT_UP);
+			LPGAMEOBJECT b = new CBullet(x, y - 8.0f);
+			b->SetSpeed(-0.03*isFlipped, -0.03);
+			GameLoop::UpdateObj(b);
 		}
 		else
 		{
@@ -38,6 +43,9 @@ void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				this->isFlipped = -1;
 			}
 			this->SetState(EATER_STATE_SHOOT_DOWN);
+			LPGAMEOBJECT b = new CBullet(x, y - 8.0f);
+			b->SetSpeed(-0.03 * isFlipped, 0.03);
+			GameLoop::UpdateObj(b);
 		}
 	}
 	if ((state == EATER_STATE_DOWN) && (y > oy)) {

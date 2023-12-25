@@ -19,6 +19,7 @@
 #include "Goomba.h"
 #include "Turtle.h"
 #include "Eater.h"
+#include "Bullet.h"
 
 #include "SampleKeyHandler.h"
 
@@ -58,6 +59,28 @@ CMario* mario;
 list<LPGAMEOBJECT> objects;
 
 CSampleKeyHandler* keyHandler;
+
+void LoadAssetsBullet()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
+
+	sprites->Add(ID_SPRITE_BULLET + 1, 164, 180, 164 + 7, 180 + 7, texEnemy);
+	sprites->Add(ID_SPRITE_BULLET + 2, 180, 180, 180 + 7, 180 + 7, texEnemy);
+	sprites->Add(ID_SPRITE_BULLET + 3, 164, 197, 164 + 7, 197 + 7, texEnemy);
+	sprites->Add(ID_SPRITE_BULLET + 4, 180, 196, 180 + 7, 196 + 7, texEnemy);
+
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BULLET + 1);
+	ani->Add(ID_SPRITE_BULLET + 2);
+	ani->Add(ID_SPRITE_BULLET + 3);
+	ani->Add(ID_SPRITE_BULLET + 4);
+	animations->Add(ID_ANI_BULLET, ani);
+}
 
 void LoadAssetsEater()
 {
@@ -533,6 +556,7 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsGoomba();
 	LoadAssetsTurtle();
 	LoadAssetsEater();
+	LoadAssetsBullet();
 
 	//------------------------------------
 	CMap* map = new CMap1(1, 1);
