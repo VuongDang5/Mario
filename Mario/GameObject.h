@@ -33,6 +33,7 @@ protected:
 	bool isDeleted;
 
 	int obj_ID=0;
+	int isFlipped = 1;
 public:
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }

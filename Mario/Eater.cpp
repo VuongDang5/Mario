@@ -25,10 +25,18 @@ void CEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		y = oy - 16.0f * 3.4;
 		CMario* mario = mario->GetInstance(0, 0);
 		if (mario->getY() < this->y) {
+			CMario* mario = mario->GetInstance(0, 0);
+			if (mario->getX() > this->x) {
+				this->isFlipped = -1;
+			}
 			this->SetState(EATER_STATE_SHOOT_UP);
 		}
 		else
 		{
+			CMario* mario = mario->GetInstance(0, 0);
+			if (mario->getX() > this->x) {
+				this->isFlipped = -1;
+			}
 			this->SetState(EATER_STATE_SHOOT_DOWN);
 		}
 	}
@@ -59,6 +67,7 @@ void CEater::Render()
 	if (state == EATER_STATE_SHOOT_UP) { aniId = ID_ANI_EATER_SHOOT_UP; }
 	if (state == EATER_STATE_SHOOT_DOWN) { aniId = ID_ANI_EATER_SHOOT_DOWN; }
 
+	CAnimations::GetInstance()->Get(aniId)->setFlip(this->isFlipped);
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
@@ -69,6 +78,7 @@ void CEater::SetState(int state)
 	switch (state)
 	{
 	case EATER_STATE_WALKING:
+		isFlipped = 1;
 		vy = -0.02f;
 		break;
 	case EATER_STATE_SHOOT_UP:
@@ -80,6 +90,7 @@ void CEater::SetState(int state)
 		vy = 0.0f;
 		break;
 	case EATER_STATE_DOWN:
+		isFlipped = 1;
 		time_start = GetTickCount64();
 		vy = 0.02f;
 		break;

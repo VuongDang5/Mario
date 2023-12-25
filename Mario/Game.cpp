@@ -145,6 +145,13 @@ void CGame::Init(HWND hWnd, HINSTANCE hInstance)
 
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
 
+	//Cull Off
+	D3D10_RASTERIZER_DESC wfdesc;
+	ZeroMemory(&wfdesc, sizeof(D3D10_RASTERIZER_DESC));
+	wfdesc.FillMode = D3D10_FILL_SOLID;
+	wfdesc.CullMode = D3D10_CULL_NONE;
+	hr = pD3DDevice->CreateRasterizerState(&wfdesc, &WireFrame);
+	pD3DDevice->RSSetState(WireFrame);
 	return;
 }
 

@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "d3dx9core.h"
 
 CSprite::CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex)
 {
@@ -23,11 +24,9 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex
 
 	sprite.TexSize.x = spriteWidth / texWidth;
 	sprite.TexSize.y = spriteHeight / texHeight;
-
+	
 	sprite.ColorModulate = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 	sprite.TextureIndex = 0;
-
-	D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth * 1.0f, (FLOAT)spriteHeight * 1.0f, 1.0f);
 }
 
 void CSprite::Draw(float x, float y)
@@ -46,8 +45,17 @@ void CSprite::Draw(float x, float y)
 
 	D3DXMatrixTranslation(&matTranslation, x - cx, g->GetBackBufferHeight() - y + cy, 0.1f);
 
+	int spriteWidth = (this->right - this->left + 1);
+	int spriteHeight = (this->bottom - this->top + 1);
+	D3DXMatrixScaling(&this->matScaling, (FLOAT)spriteWidth * this->flip, (FLOAT)spriteHeight, 0.1f);
+
 	this->sprite.matWorld = (this->matScaling * matTranslation);
 
 	g->GetSpriteHandler()->DrawSpritesImmediate(&sprite, 1, 0, 0);
+}
+
+void CSprite::isFlipped(int isFlipped)
+{
+	this->flip = isFlipped;
 }
 

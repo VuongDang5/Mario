@@ -31,6 +31,7 @@ void CAnimation::Render(float x, float y)
 
 	}
 
+	frames[currentFrame]->GetSprite()->isFlipped(this->isFlipped);
 	frames[currentFrame]->GetSprite()->Draw(x, y);
 }
 

@@ -45,6 +45,7 @@ class CGame
 	HINSTANCE hInstance;
 
 	ID3D10SamplerState* pPointSamplerState;
+	ID3D10RasterizerState* WireFrame;
 
 public:
 	// Init DirectX, Sprite Handler
