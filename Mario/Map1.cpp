@@ -4,6 +4,7 @@
 #include "Brick.h"
 #include "Coin.h"
 #include "Box.h"
+#include "Goomba.h"
 #include "Eater.h"
 #include "GreenEater.h"
 #include "AssetIDs.h"
@@ -1315,6 +1316,10 @@ void CMap1::LoadMap(float x, float y)
 
 	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
 	objects.push_back(box);
+
+	//Goomba
+	CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(goomba);
 }
 
 

@@ -45,6 +45,7 @@
 #define TEXTURE_PATH_1_MISC TEXTURES_DIR "\\tiles_transparent.png"
 #define TEXTURE_PATH_ENEMY TEXTURES_DIR "\\enemies_transparent.png"
 #define TEXTURE_PATH_ENEMY_0 TEXTURES_DIR "\\enemies_0.png"
+#define TEXTURE_PATH_ENEMY_1 TEXTURES_DIR "\\enemies_1.png"
 #define TEXTURE_PATH_2_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
@@ -154,13 +155,13 @@ void LoadAssetsGoomba()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 4, 13, 22, 30, texEnemy);
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 24, 13, 42, 30, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 5, 14, 5 + 15, 14 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 25, 14, 25 + 15, 14 + 15, texEnemy);
 
-	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 44, 19, 62, 30, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 45, 21, 45 + 15, 21 + 8, texEnemy);
 
 	LPANIMATION ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_GOOMBA_WALK + 1);
+	ani->Add(ID_SPRITE_GOOMBA_WALK + 1, 200);
 	ani->Add(ID_SPRITE_GOOMBA_WALK + 2);
 	animations->Add(ID_ANI_GOOMBA_WALKING, ani);
 
@@ -203,6 +204,7 @@ GameLoop::GameLoop(HWND hWnd)
 
 	textures->Add(ID_TEX_ENEMY, TEXTURE_PATH_ENEMY);
 	textures->Add(ID_TEX_ENEMY_0, TEXTURE_PATH_ENEMY_0);
+	textures->Add(ID_TEX_ENEMY_1, TEXTURE_PATH_ENEMY_1);
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 	textures->Add(ID_TEX_MISC_1, TEXTURE_PATH_1_MISC);
 	textures->Add(ID_TEX_MISC_2, TEXTURE_PATH_2_MISC);
