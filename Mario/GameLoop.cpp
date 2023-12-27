@@ -20,6 +20,7 @@
 #include "Turtle.h"
 #include "Eater.h"
 #include "GreenEater.h"
+#include "Piranha.h"
 #include "Bullet.h"
 
 #include "SampleKeyHandler.h"
@@ -82,6 +83,23 @@ void LoadAssetsBullet()
 	ani->Add(ID_SPRITE_BULLET + 3);
 	ani->Add(ID_SPRITE_BULLET + 4);
 	animations->Add(ID_ANI_BULLET, ani);
+}
+
+void LoadAssetsPiranha()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
+
+	sprites->Add(ID_SPRITE_PIRANHA + 1, 0, 145, 0 + 15, 145 + 30, texEnemy);
+	sprites->Add(ID_SPRITE_PIRANHA + 2, 16, 145, 16 + 15, 145 + 30, texEnemy);
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_PIRANHA + 1);
+	ani->Add(ID_SPRITE_PIRANHA + 2);
+	animations->Add(ID_ANI_PIRANHA_WALKING, ani);
 }
 
 void LoadAssetsGreenEater()
@@ -592,7 +610,7 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsEater();
 	LoadAssetsGreenEater();
 	LoadAssetsBullet();
-
+	LoadAssetsPiranha();
 	//------------------------------------
 	CMap* map = new CMap1(1, 1);
 	objects = map->objects;

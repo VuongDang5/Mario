@@ -7,6 +7,7 @@
 #include "Goomba.h"
 #include "Eater.h"
 #include "GreenEater.h"
+#include "Piranha.h"
 #include "AssetIDs.h"
 
 #define BRICK_X 0.0f
@@ -14,8 +15,11 @@
 
 void CMap1::LoadMap(float x, float y)
 {
-	CGEater* eater = new CGEater(25.5f * 16, BRICK_Y - 16.0f * 1);
-	objects.push_back(eater);
+	CPiranha* pi = new CPiranha(25.5f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(pi);
+
+	/*CGEater* eater = new CGEater(25.5f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(eater);*/
 
 	//Blocker
 	for (int i = 0; i < 25; i++)
