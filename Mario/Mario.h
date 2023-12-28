@@ -153,4 +153,5 @@ public:
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
 	void OnCollisionWithBox(LPCOLLISIONEVENT e);
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithGTurtle(LPCOLLISIONEVENT e);
 };

@@ -7,6 +7,7 @@
 #include "Goomba.h"
 #include "Eater.h"
 #include "GreenEater.h"
+#include "GreenTurtle.h"
 #include "Piranha.h"
 #include "AssetIDs.h"
 
@@ -15,8 +16,8 @@
 
 void CMap1::LoadMap(float x, float y)
 {
-	CPiranha* pi = new CPiranha(25.5f * 16, BRICK_Y - 16.0f * 1);
-	objects.push_back(pi);
+	/*CPiranha* pi = new CPiranha(25.5f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(pi);*/
 
 	/*CGEater* eater = new CGEater(25.5f * 16, BRICK_Y - 16.0f * 1);
 	objects.push_back(eater);*/
@@ -1322,8 +1323,11 @@ void CMap1::LoadMap(float x, float y)
 	objects.push_back(box);
 
 	//Goomba
-	CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 1);
-	objects.push_back(goomba);
+	/*CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(goomba)*/;
+
+	CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 1);
+	objects.push_back(gTurtle);
 }
 
 

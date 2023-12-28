@@ -3,19 +3,22 @@
 CGTurtle::CGTurtle(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
-	this->ay = GTURTLE_GRAVITY;
+	this->ay = 0.02f;
+	this->ox = x;
+	this->oy = y;
+
 	die_start = -1;
 	SetState(GTURTLE_STATE_WALKING);
 }
 
 void CGTurtle::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == GTURTLE_STATE_DIE)
+	if (state == GTURTLE_STATE_SHELL)
 	{
 		left = x - GTURTLE_BBOX_WIDTH / 2;
-		top = y - GTURTLE_BBOX_HEIGHT_DIE / 2;
+		top = y - GTURTLE_BBOX_HEIGHT_SHELL / 2;
 		right = left + GTURTLE_BBOX_WIDTH;
-		bottom = top + GTURTLE_BBOX_HEIGHT_DIE;
+		bottom = top + GTURTLE_BBOX_HEIGHT_SHELL;
 	}
 	else
 	{
@@ -44,6 +47,7 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 	else if (e->nx != 0)
 	{
 		vx = -vx;
+		isFlipped = -isFlipped;
 	}
 }
 
@@ -65,12 +69,22 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CGTurtle::Render()
 {
-	int aniId = ID_ANI_GTURTLE_WALKING;
-	if (state == GTURTLE_STATE_DIE)
+	int aniId = ID_ANI_GTURTLE_FLYING;
+	if (state == GTURTLE_STATE_WALKING)
+	{
+		aniId = ID_ANI_GTURTLE_WALKING;
+	}
+	if (state == GTURTLE_STATE_SHELL)
+	{
+		aniId = ID_ANI_GTURTLE_SHELL;
+	}
+	
+	if (state == ID_ANI_GTURTLE_DIE)
 	{
 		aniId = ID_ANI_GTURTLE_DIE;
 	}
 
+	CAnimations::GetInstance()->Get(aniId)->setFlip(this->isFlipped);
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
@@ -80,12 +94,13 @@ void CGTurtle::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
-	case GTURTLE_STATE_DIE:
+	case GTURTLE_STATE_SHELL:
 		die_start = GetTickCount64();
-		y += (GTURTLE_BBOX_HEIGHT - GTURTLE_BBOX_HEIGHT_DIE) / 2;
+		y += (GTURTLE_BBOX_HEIGHT - GTURTLE_BBOX_HEIGHT_SHELL) / 2;
 		vx = 0;
 		vy = 0;
 		ay = 0;
+		ax = 0;
 		break;
 	case GTURTLE_STATE_WALKING:
 		vx = -GTURTLE_WALKING_SPEED;

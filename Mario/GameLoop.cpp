@@ -20,6 +20,7 @@
 #include "Turtle.h"
 #include "Eater.h"
 #include "GreenEater.h"
+#include "GreenTurtle.h"
 #include "Piranha.h"
 #include "Bullet.h"
 
@@ -62,6 +63,36 @@ CMario* mario;
 list<LPGAMEOBJECT> objects;
 
 CSampleKeyHandler* keyHandler;
+
+void LoadAssetsGreenTurtle()
+{
+	CTextures* textures = CTextures::GetInstance();
+	CSprites* sprites = CSprites::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
+
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
+
+	sprites->Add(ID_SPRITE_GTURTLE + 1, 96, 51, 96 + 15, 51 + 25, texEnemy);
+	sprites->Add(ID_SPRITE_GTURTLE + 2, 112, 51, 112 + 15, 51 + 25, texEnemy);
+
+	sprites->Add(ID_SPRITE_GTURTLE + 3, 128, 48, 128 + 15, 48 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GTURTLE + 4, 144, 48, 144 + 15, 48 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GTURTLE + 5, 160, 48, 160 + 15, 48 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GTURTLE + 6, 176, 48, 176 + 15, 48 + 15, texEnemy);
+
+
+	LPANIMATION ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GTURTLE + 1);
+	ani->Add(ID_SPRITE_GTURTLE + 2);
+	animations->Add(ID_ANI_GTURTLE_WALKING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GTURTLE + 3);
+	ani->Add(ID_SPRITE_GTURTLE + 4);
+	ani->Add(ID_SPRITE_GTURTLE + 5);
+	ani->Add(ID_SPRITE_GTURTLE + 6);
+	animations->Add(ID_ANI_GTURTLE_SHELL, ani);
+}
 
 void LoadAssetsBullet()
 {
@@ -611,6 +642,7 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsGreenEater();
 	LoadAssetsBullet();
 	LoadAssetsPiranha();
+	LoadAssetsGreenTurtle();
 	//------------------------------------
 	CMap* map = new CMap1(1, 1);
 	objects = map->objects;

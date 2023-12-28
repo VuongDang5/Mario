@@ -6,22 +6,29 @@
 
 
 #define GTURTLE_BBOX_WIDTH 16
-#define GTURTLE_BBOX_HEIGHT 27
-#define GTURTLE_BBOX_HEIGHT_DIE 16
+#define GTURTLE_BBOX_HEIGHT 26
+#define GTURTLE_BBOX_HEIGHT_SHELL 16
 
 #define GTURTLE_DIE_TIMEOUT 500
 
 #define GTURTLE_STATE_WALKING 100
-#define GTURTLE_STATE_DIE 200
+#define GTURTLE_STATE_FLYING 101
+#define GTURTLE_STATE_SHELL 200
+#define GTURTLE_STATE_DIE 201
 
 #define ID_ANI_GTURTLE_WALKING 7000
-#define ID_ANI_GTURTLE_DIE 7001
+#define ID_ANI_GTURTLE_FLYING 7001
+#define ID_ANI_GTURTLE_SHELL 7002
+#define ID_ANI_GTURTLE_DIE 7003
 
 class CGTurtle : public CGameObject
 {
 protected:
 	float ax;
 	float ay;
+	float ox;
+	float oy;
+
 	float time;
 
 	ULONGLONG die_start;

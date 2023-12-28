@@ -8,6 +8,7 @@
 #include "Coin.h"
 #include "Box.h"
 #include "Goomba.h"
+#include "GreenTurtle.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -199,6 +200,41 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CCoin*>(e->obj)) OnCollisionWithCoin(e);
 	if (dynamic_cast<CBox*>(e->obj) && e->ny > 0) OnCollisionWithBox(e);
 	if (dynamic_cast<CGoomba*>(e->obj)) OnCollisionWithGoomba(e);
+	if (dynamic_cast<CGTurtle*>(e->obj)) OnCollisionWithGTurtle(e);
+
+}
+
+void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
+{
+	CGTurtle* turtle = dynamic_cast<CGTurtle*>(e->obj);
+
+	// jump on top >> kill Goomba and deflect a bit 
+	if (e->ny < 0)
+	{
+		if (turtle->GetState() != GTURTLE_STATE_SHELL)
+		{
+			turtle->SetState(GTURTLE_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (turtle->GetState() != GTURTLE_STATE_SHELL)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
