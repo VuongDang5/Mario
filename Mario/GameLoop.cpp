@@ -80,6 +80,8 @@ void LoadAssetsGreenTurtle()
 	sprites->Add(ID_SPRITE_GTURTLE + 5, 160, 48, 160 + 15, 48 + 15, texEnemy);
 	sprites->Add(ID_SPRITE_GTURTLE + 6, 176, 48, 176 + 15, 48 + 15, texEnemy);
 
+	sprites->Add(ID_SPRITE_GTURTLE + 7, 259, 3, 259 + 18, 3 + 26, texEnemy);
+	sprites->Add(ID_SPRITE_GTURTLE + 8, 282, 3, 282 + 18, 3 + 26, texEnemy);
 
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GTURTLE + 1);
@@ -92,6 +94,11 @@ void LoadAssetsGreenTurtle()
 	ani->Add(ID_SPRITE_GTURTLE + 5);
 	ani->Add(ID_SPRITE_GTURTLE + 6);
 	animations->Add(ID_ANI_GTURTLE_SHELL, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GTURTLE + 7);
+	ani->Add(ID_SPRITE_GTURTLE + 8);
+	animations->Add(ID_ANI_GTURTLE_FLYING, ani);
 }
 
 void LoadAssetsBullet()
