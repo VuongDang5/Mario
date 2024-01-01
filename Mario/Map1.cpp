@@ -1326,7 +1326,8 @@ void CMap1::LoadMap(float x, float y)
 	/*CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 1);
 	objects.push_back(goomba)*/;
 
-	CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 1);
+	CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 4);
+	gTurtle->SetState(GTURTLE_STATE_FLYING);
 	objects.push_back(gTurtle);
 }
 

@@ -211,9 +211,14 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (turtle->GetState() != GTURTLE_STATE_SHELL)
+		if (turtle->GetState() == GTURTLE_STATE_WALKING)
 		{
 			turtle->SetState(GTURTLE_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		if (turtle->GetState() == GTURTLE_STATE_FLYING)
+		{
+			turtle->SetState(GTURTLE_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}

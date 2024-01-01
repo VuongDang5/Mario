@@ -3,12 +3,11 @@
 CGTurtle::CGTurtle(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
-	this->ay = 0.02f;
+	this->ay = 0;
 	this->ox = x;
 	this->oy = y;
-
+	this ->vx = -GTURTLE_WALKING_SPEED;
 	die_start = -1;
-	SetState(GTURTLE_STATE_WALKING);
 }
 
 void CGTurtle::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -56,6 +55,19 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
+	if (state == GTURTLE_STATE_FLYING) 
+	{
+		if (y > oy + 10.0f)
+		{
+			y = oy + 10.0f;
+			vy = -0.05f;
+		}
+		if (y < oy - 10.0f)
+		{
+			y = oy - 10.0f;
+			vy = 0.05f;
+		}
+	}
 	if ((state == GTURTLE_STATE_DIE) && (GetTickCount64() - die_start > GTURTLE_DIE_TIMEOUT))
 	{
 		isDeleted = true;
@@ -94,6 +106,9 @@ void CGTurtle::SetState(int state)
 	CGameObject::SetState(state);
 	switch (state)
 	{
+	case GTURTLE_STATE_FLYING:
+		vy = -0.05f;
+		break;
 	case GTURTLE_STATE_SHELL:
 		die_start = GetTickCount64();
 		y += (GTURTLE_BBOX_HEIGHT - GTURTLE_BBOX_HEIGHT_SHELL) / 2;
@@ -103,7 +118,8 @@ void CGTurtle::SetState(int state)
 		ax = 0;
 		break;
 	case GTURTLE_STATE_WALKING:
-		vx = -GTURTLE_WALKING_SPEED;
+		vy = 0;
+		ay = 0.02f;
 		break;
 	}
 }
