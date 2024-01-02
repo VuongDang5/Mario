@@ -140,7 +140,7 @@ public:
 	int getX() { return x; }
 	int getY() { return y; }
 
-	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable == 0); }
+	int IsBlocking() { return 0; }
 	
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
