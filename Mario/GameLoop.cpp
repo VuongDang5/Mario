@@ -209,12 +209,16 @@ void LoadAssetsGoomba()
 	CSprites* sprites = CSprites::GetInstance();
 	CAnimations* animations = CAnimations::GetInstance();
 
-	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY);
+	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
 
 	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 5, 14, 5 + 15, 14 + 15, texEnemy);
 	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 25, 14, 25 + 15, 14 + 15, texEnemy);
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 45, 21, 45 + 15, 21 + 8, texEnemy);
+
+	sprites->Add(ID_SPRITE_GOOMBA + 1, 296, 40, 296 + 18, 40 + 22, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA + 2, 319, 40, 319 + 18, 40 + 22, texEnemy);
+
 
 	LPANIMATION ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GOOMBA_WALK + 1, 200);
@@ -224,6 +228,11 @@ void LoadAssetsGoomba()
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GOOMBA_DIE + 1);
 	animations->Add(ID_ANI_GOOMBA_DIE, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GOOMBA + 1);
+	ani->Add(ID_SPRITE_GOOMBA + 2);
+	animations->Add(ID_ANI_GOOMBA_FLYING, ani);
 
 }
 

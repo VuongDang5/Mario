@@ -3,7 +3,7 @@
 CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
-	this->ay = GOOMBA_GRAVITY;
+	this->ay = 0;
 	die_start = -1;
 	SetState(GOOMBA_STATE_WALKING);
 }
@@ -70,6 +70,10 @@ void CGoomba::Render()
 	{
 		aniId = ID_ANI_GOOMBA_DIE;
 	}
+	if (state == GOOMBA_STATE_FLYING)
+	{
+		aniId = ID_ANI_GOOMBA_FLYING;
+	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
@@ -89,6 +93,10 @@ void CGoomba::SetState(int state)
 		break;
 	case GOOMBA_STATE_WALKING:
 		vx = -GOOMBA_WALKING_SPEED;
+		ay = GOOMBA_GRAVITY;
+		break;
+	case GOOMBA_STATE_FLYING:
+		vy = -0.05f;
 		break;
 	}
 }
