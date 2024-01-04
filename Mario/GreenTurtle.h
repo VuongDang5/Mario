@@ -28,6 +28,7 @@ protected:
 	float ay;
 	float ox;
 	float oy;
+	int range = 2;
 
 	float time;
 
@@ -46,4 +47,5 @@ protected:
 public:
 	CGTurtle(float x, float y);
 	virtual void SetState(int state);
+	void SetRange(int x) { range = x; }
 };

@@ -4,8 +4,10 @@ CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
 	this->ay = 0;
+	this->ox = x;
+	this->oy = y;
+	vx = -GOOMBA_WALKING_SPEED;
 	die_start = -1;
-	SetState(GOOMBA_STATE_WALKING);
 }
 
 void CGoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -17,12 +19,19 @@ void CGoomba::GetBoundingBox(float& left, float& top, float& right, float& botto
 		right = left + GOOMBA_BBOX_WIDTH;
 		bottom = top + GOOMBA_BBOX_HEIGHT_DIE;
 	}
-	else
+	if (state == GOOMBA_STATE_WALKING)
 	{
 		left = x - GOOMBA_BBOX_WIDTH / 2;
 		top = y - GOOMBA_BBOX_HEIGHT / 2;
 		right = left + GOOMBA_BBOX_WIDTH;
 		bottom = top + GOOMBA_BBOX_HEIGHT;
+	}
+	if (state == GOOMBA_STATE_FLYING)
+	{
+		left = x - GOOMBA_BBOX_WIDTH_FLY / 2;
+		top = y - GOOMBA_BBOX_HEIGHT_FLY / 2;
+		right = left + GOOMBA_BBOX_WIDTH_FLY;
+		bottom = top + GOOMBA_BBOX_HEIGHT_FLY;
 	}
 }
 
@@ -51,6 +60,34 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+
+	if (state != GOOMBA_STATE_DIE)
+	{
+		if (x > ox + 16.0f * range)
+		{
+			x = ox + 16.0f * range;
+			vx = -vx;
+		}
+		if (x < ox - 16.0f * range)
+		{
+			x = ox - 16.0f * range;
+			vx = -vx;
+		}
+	}
+
+	if (state == GOOMBA_STATE_FLYING)
+	{
+		if (y > oy + 10.0f)
+		{
+			y = oy + 10.0f;
+			vy = -0.05f;
+		}
+		if (y < oy - 10.0f)
+		{
+			y = oy - 10.0f;
+			vy = 0.05f;
+		}
+	}
 
 	if ((state == GOOMBA_STATE_DIE) && (GetTickCount64() - die_start > GOOMBA_DIE_TIMEOUT))
 	{
@@ -92,7 +129,6 @@ void CGoomba::SetState(int state)
 		ay = 0;
 		break;
 	case GOOMBA_STATE_WALKING:
-		vx = -GOOMBA_WALKING_SPEED;
 		ay = GOOMBA_GRAVITY;
 		break;
 	case GOOMBA_STATE_FLYING:

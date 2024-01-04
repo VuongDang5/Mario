@@ -90,15 +90,19 @@ void LoadAssetsGreenTurtle()
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GTURTLE + 3);
-	ani->Add(ID_SPRITE_GTURTLE + 4);
-	ani->Add(ID_SPRITE_GTURTLE + 5);
-	ani->Add(ID_SPRITE_GTURTLE + 6);
 	animations->Add(ID_ANI_GTURTLE_SHELL, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_GTURTLE + 7);
 	ani->Add(ID_SPRITE_GTURTLE + 8);
 	animations->Add(ID_ANI_GTURTLE_FLYING, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_GTURTLE + 3);
+	ani->Add(ID_SPRITE_GTURTLE + 4);
+	ani->Add(ID_SPRITE_GTURTLE + 5);
+	ani->Add(ID_SPRITE_GTURTLE + 6);
+	animations->Add(ID_ANI_GTURTLE_DIE, ani);
 }
 
 void LoadAssetsBullet()
@@ -211,10 +215,10 @@ void LoadAssetsGoomba()
 
 	LPTEXTURE texEnemy = textures->Get(ID_TEX_ENEMY_0);
 
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 5, 14, 5 + 15, 14 + 15, texEnemy);
-	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 25, 14, 25 + 15, 14 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 1, 0, 0, 0 + 15, 0 + 15, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_WALK + 2, 16, 0, 16 + 15, 0 + 15, texEnemy);
 
-	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 45, 21, 45 + 15, 21 + 8, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 32, 8, 32 + 15, 8 + 7, texEnemy);
 
 	sprites->Add(ID_SPRITE_GOOMBA + 1, 296, 40, 296 + 18, 40 + 22, texEnemy);
 	sprites->Add(ID_SPRITE_GOOMBA + 2, 319, 40, 319 + 18, 40 + 22, texEnemy);

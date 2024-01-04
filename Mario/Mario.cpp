@@ -208,7 +208,7 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 {
 	CGTurtle* turtle = dynamic_cast<CGTurtle*>(e->obj);
 
-	// jump on top >> kill Goomba and deflect a bit 
+	// jump on top >> kill Turtle and deflect a bit 
 	if (e->ny < 0)
 	{
 		if (turtle->GetState() == GTURTLE_STATE_SHELL)
@@ -227,7 +227,7 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}
-	else // hit by Goomba
+	else // hit by Turtle
 	{
 		if (untouchable == 0)
 		{
@@ -254,9 +254,14 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		if (goomba->GetState() == GOOMBA_STATE_WALKING)
 		{
 			goomba->SetState(GOOMBA_STATE_DIE);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+		if (goomba->GetState() == GOOMBA_STATE_FLYING)
+		{
+			goomba->SetState(GOOMBA_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 	}

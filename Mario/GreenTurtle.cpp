@@ -56,6 +56,22 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
+	if (state != GTURTLE_STATE_DIE)
+	{
+		if (x > ox + 16.0f * range)
+		{
+			x = ox + 16.0f * range;
+			isFlipped = -isFlipped;
+			vx = -vx;
+		}
+		if (x < ox - 16.0f * range)
+		{
+			x = ox - 16.0f * range;
+			isFlipped = -isFlipped;
+			vx = -vx;
+		}
+	}
+
 	if (state == GTURTLE_STATE_FLYING) 
 	{
 		if (y > oy + 10.0f)
@@ -94,7 +110,7 @@ void CGTurtle::Render()
 	
 	if (state == GTURTLE_STATE_DIE)
 	{
-		aniId = ID_ANI_GTURTLE_SHELL;
+		aniId = ID_ANI_GTURTLE_DIE;
 	}
 
 	CAnimations::GetInstance()->Get(aniId)->setFlip(this->isFlipped);
