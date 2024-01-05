@@ -1323,13 +1323,13 @@ void CMap1::LoadMap(float x, float y)
 	objects.push_back(box);
 
 	//Goomba
-	CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 4);
-	goomba->SetState(GOOMBA_STATE_FLYING);
-	objects.push_back(goomba);
+	/*CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 4);
+	goomba->SetState(GOOMBA_STATE_WALKING);
+	objects.push_back(goomba);*/
 
-	/*CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 4);
+	CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 4);
 	gTurtle->SetState(GTURTLE_STATE_FLYING);
-	objects.push_back(gTurtle);*/
+	objects.push_back(gTurtle);
 }
 
 

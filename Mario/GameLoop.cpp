@@ -36,8 +36,7 @@
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
 
-#define BACKGROUND_COLOR D3DXCOLOR(64.0f/255, 144.0f/255, 192.0f/255, 0.0f)
-#define BACKGROUND_COLOR1 D3DXCOLOR(0.0f/255, 0.0f/255, 0.0f/255, 0.0f)
+#define BACKGROUND_COLOR D3DXCOLOR(100.0f/255, 144.0f/255, 192.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
@@ -220,8 +219,8 @@ void LoadAssetsGoomba()
 
 	sprites->Add(ID_SPRITE_GOOMBA_DIE + 1, 32, 8, 32 + 15, 8 + 7, texEnemy);
 
-	sprites->Add(ID_SPRITE_GOOMBA + 1, 296, 40, 296 + 18, 40 + 22, texEnemy);
-	sprites->Add(ID_SPRITE_GOOMBA + 2, 319, 40, 319 + 18, 40 + 22, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA + 1, 296, 40, 296 + 17, 40 + 21, texEnemy);
+	sprites->Add(ID_SPRITE_GOOMBA + 2, 319, 40, 319 + 17, 40 + 21, texEnemy);
 
 
 	LPANIMATION ani = new CAnimation(100);

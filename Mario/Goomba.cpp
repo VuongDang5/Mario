@@ -1,4 +1,5 @@
 #include "Goomba.h"
+#include "Mario.h"
 
 CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
 {
@@ -31,7 +32,7 @@ void CGoomba::GetBoundingBox(float& left, float& top, float& right, float& botto
 		left = x - GOOMBA_BBOX_WIDTH_FLY / 2;
 		top = y - GOOMBA_BBOX_HEIGHT_FLY / 2;
 		right = left + GOOMBA_BBOX_WIDTH_FLY;
-		bottom = top + GOOMBA_BBOX_HEIGHT_FLY;
+		bottom = top + GOOMBA_BBOX_HEIGHT_FLY - 2.0f;
 	}
 }
 
@@ -45,6 +46,7 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CGoomba*>(e->obj)) return;
+	if (dynamic_cast<CMario*>(e->obj)) return;
 
 	if (e->ny != 0)
 	{
@@ -75,18 +77,10 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-	if (state == GOOMBA_STATE_FLYING)
+	if ((state == GOOMBA_STATE_FLYING) && (GetTickCount64() - jump_start > 2000))
 	{
-		if (y > oy + 10.0f)
-		{
-			y = oy + 10.0f;
-			vy = -0.05f;
-		}
-		if (y < oy - 10.0f)
-		{
-			y = oy - 10.0f;
-			vy = 0.05f;
-		}
+		jump_start = GetTickCount64();
+		vy = -0.4f;
 	}
 
 	if ((state == GOOMBA_STATE_DIE) && (GetTickCount64() - die_start > GOOMBA_DIE_TIMEOUT))
@@ -132,7 +126,8 @@ void CGoomba::SetState(int state)
 		ay = GOOMBA_GRAVITY;
 		break;
 	case GOOMBA_STATE_FLYING:
-		vy = -0.05f;
+		jump_start = GetTickCount64();
+		ay = GOOMBA_GRAVITY;
 		break;
 	}
 }

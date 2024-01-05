@@ -39,7 +39,8 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CGTurtle*>(e->obj)) return;
-	
+	if (dynamic_cast<CMario*>(e->obj)) return;
+
 	if (e->ny != 0)
 	{
 		vy = 0;
