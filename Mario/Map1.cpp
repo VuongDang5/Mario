@@ -36,20 +36,20 @@ void CMap1::LoadMap(float x, float y)
 	}
 
 	// Main floor
-	for (int i = 0; i < 45; i++)
+	for (int i = 0; i < 44; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < 33; i++)
 	{
-		CBrick* b = new CBrick((i + 45) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
+		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
 	for (int i = 0; i < 32; i++)
 	{
-		CBrick* b = new CBrick((i + 45) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
+		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
@@ -1305,30 +1305,32 @@ void CMap1::LoadMap(float x, float y)
 
 	box = new CBox(15 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
 	objects.push_back(box);
+
 	box = new CBox(16 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
+	box->setItem(2);
 	objects.push_back(box);
 
-	box = new CBox(30 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6);
+	box = new CBox(29 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
 	objects.push_back(box);
 
-	box = new CBox(48 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f);
+	box = new CBox(46 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f);
 	objects.push_back(box);
-	box = new CBox(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 3);
+	box = new CBox(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 4);
 	objects.push_back(box);
 
 	box = new CBox(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
 	objects.push_back(box);
 
-	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
+	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
 	objects.push_back(box);
 
 	//Goomba
-	/*CGoomba* goomba = new CGoomba(5.0f * 16, BRICK_Y - 16.0f * 4);
+	CGoomba* goomba = new CGoomba(16.0f * 3, BRICK_Y - 16.0f * 4);
 	goomba->SetState(GOOMBA_STATE_WALKING);
-	objects.push_back(goomba);*/
+	objects.push_back(goomba);
 
-	CGTurtle* gTurtle = new CGTurtle(5.0f * 16, BRICK_Y - 26.0f * 4);
-	gTurtle->SetState(GTURTLE_STATE_FLYING);
+	CGTurtle* gTurtle = new CGTurtle(16.0f * 38, BRICK_Y - 16.0f * 4);
+	gTurtle->SetState(GTURTLE_STATE_WALKING);
 	objects.push_back(gTurtle);
 }
 

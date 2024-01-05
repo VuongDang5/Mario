@@ -1,5 +1,9 @@
 #include "GreenTurtle.h"
 #include "Mario.h"
+#include "Box.h"
+#include "Brick.h"
+#include "Leaf.h"
+#include "GameLoop.h"
 
 CGTurtle::CGTurtle(float x, float y) :CGameObject(x, y)
 {
@@ -27,6 +31,14 @@ void CGTurtle::GetBoundingBox(float& left, float& top, float& right, float& bott
 		right = left + GTURTLE_BBOX_WIDTH;
 		bottom = top + GTURTLE_BBOX_HEIGHT;
 	}
+
+	if (state == GTURTLE_STATE_DIE_2)
+	{
+		left = x;
+		top = y;
+		right = x;
+		bottom = y;
+	}
 }
 
 void CGTurtle::OnNoCollision(DWORD dt)
@@ -40,6 +52,21 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CGTurtle*>(e->obj)) return;
 	if (dynamic_cast<CMario*>(e->obj)) return;
+	if (dynamic_cast<CBox*>(e->obj)) {
+		float bx = 0, by = 0;
+		e->obj->GetPosition(bx, by);
+
+		e->obj->Delete();
+
+		LPGAMEOBJECT brick;
+		brick = new CBrick(bx, by, ID_ANI_BRICK + 10);
+		GameLoop::UpdateObj(brick);
+
+		LPGAMEOBJECT leaf;
+		leaf = new CLeaf(bx, by);
+		leaf->SetState(1);
+		GameLoop::UpdateObj(leaf);
+	}
 
 	if (e->ny != 0)
 	{
@@ -50,6 +77,8 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 		vx = -vx;
 		isFlipped = -isFlipped;
 	}
+
+	y -= 1.0f;
 }
 
 void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -92,6 +121,12 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	}
 
+	if ((state == GTURTLE_STATE_DIE_2) && (GetTickCount64() - die_start > GTURTLE_DIE_TIMEOUT))
+	{
+		isDeleted = true;
+		return;
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -114,6 +149,11 @@ void CGTurtle::Render()
 		aniId = ID_ANI_GTURTLE_DIE;
 	}
 
+	if (state == GTURTLE_STATE_DIE_2)
+	{
+		aniId = ID_ANI_GTURTLE_SHELL;
+	}
+
 	CAnimations::GetInstance()->Get(aniId)->setFlip(this->isFlipped);
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
@@ -131,7 +171,6 @@ void CGTurtle::SetState(int state)
 		y += (GTURTLE_BBOX_HEIGHT - GTURTLE_BBOX_HEIGHT_SHELL) / 2;
 		vx = 0;
 		vy = 0;
-		ay = 0;
 		ax = 0;
 		break;
 	case GTURTLE_STATE_WALKING:
@@ -140,8 +179,15 @@ void CGTurtle::SetState(int state)
 		break;
 	case GTURTLE_STATE_DIE:
 		die_start = GetTickCount64();
-		vx = 0.3f;
 		y -= 0.1f;
+		break;
+	case GTURTLE_STATE_DIE_2:
+		die_start = GetTickCount64();
+		y += (GTURTLE_BBOX_HEIGHT - GTURTLE_BBOX_HEIGHT_SHELL) / 2;
+		vy = -0.3f;
+		ay = 0.002f;
+		vx = 0;
+		ax = 0;
 		break;
 	}
 }

@@ -374,6 +374,11 @@ GameLoop::GameLoop(HWND hWnd)
 
 	sprites->Add(ID_SPRITE_BRICK + 69, 460, 256, 460 + 15, 256 + 15, texMisc);		//Blocker
 
+	sprites->Add(ID_SPRITE_BRICK + 79, 171, 120, 171 + 15, 120 + 15, texMisc);		// Mushroom
+
+	sprites->Add(ID_SPRITE_BRICK + 80, 154, 137, 154 + 15, 137 + 13, texMisc);		// Leaf
+
+
 	texMisc = textures->Get(ID_TEX_MISC_2);
 
 	sprites->Add(ID_SPRITE_BRICK + 70, 303, 99, 303 + 10, 99 + 15, texMisc);		//Coin
@@ -386,6 +391,7 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 76, 354, 117, 354 + 15, 117 + 15, texMisc);
 
 	sprites->Add(ID_SPRITE_BRICK + 77, 372, 117, 372 + 15, 117 + 15, texMisc);
+
 
 	//-----------------------------------------------
 	LPANIMATION ani;
@@ -646,6 +652,14 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);						//Blue Brick
 	ani->Add(ID_SPRITE_BRICK + 78);
 	animations->Add(ID_ANI_BRICK + 11, ani);
+
+	ani = new CAnimation(100);						//Mushroom
+	ani->Add(ID_SPRITE_BRICK + 79);
+	animations->Add(ID_ANI_BRICK + 12, ani);
+
+	ani = new CAnimation(100);						//Leaf
+	ani->Add(ID_SPRITE_BRICK + 80);
+	animations->Add(ID_ANI_BRICK + 13, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)

@@ -111,6 +111,12 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files\GameObject\Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="Mushroom.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaf.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -205,6 +211,12 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Source Files\GameObject\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Mushroom.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaf.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

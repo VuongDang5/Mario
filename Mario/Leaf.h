@@ -4,23 +4,30 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_BOX 12000
+#define LEAF_BBOX_WIDTH 16
+#define LEAF_BBOX_HEIGHT 16
 
-#define	BOX_WIDTH 16
-#define BOX_BBOX_WIDTH 16
-#define BOX_BBOX_HEIGHT 16
-
-class CBox : public CGameObject {
+class CLeaf : public CGameObject {
 public:
-	float oy;
-	int itemType = 1;
+	float ax;
+	float ay;
 
-	CBox(float x, float y) : CGameObject(x, y) { oy = y; }
+	float oy;
+	float ox;
+
+	CLeaf(float x, float y) : CGameObject(x, y) {
+		oy = y;
+		ox = x;
+		this->SetState(1);
+	}
 	void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 
+	virtual int IsCollidable() { return 0; };
+	virtual int IsBlocking() { return 0; }
+
 	virtual void OnNoCollision(DWORD dt);
+
 	virtual void SetState(int state);
-	void setItem(int x) { itemType = x; };
 };

@@ -1,6 +1,7 @@
 #include "Box.h"
 #include "Coin.h"
 #include "Brick.h"
+#include "Mushroom.h"
 #include "GameLoop.h"
 
 void CBox::Render()
@@ -48,15 +49,22 @@ void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		y = oy;
 		vy = 0;
 		this->Delete();
+		if (itemType == 2) {
+			LPGAMEOBJECT m = new CMushroom(x, y);
+			m->SetState(1);
+			GameLoop::UpdateObj(m);
+		}
 		LPGAMEOBJECT brick;
 		brick = new CBrick(x, y, ID_ANI_BRICK + 10);
 		GameLoop::UpdateObj(brick);
 	}
 	if (oy - y > 16.0f) {
 		this->SetState(3);
-		LPGAMEOBJECT coin = new CCoin(x, y);
-		coin->SetState(2);
-		GameLoop::UpdateObj(coin);
+		if (itemType == 1) {
+			LPGAMEOBJECT coin = new CCoin(x, y);
+			coin->SetState(2);
+			GameLoop::UpdateObj(coin);
+		}
 	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);

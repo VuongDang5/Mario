@@ -9,6 +9,8 @@
 #include "Box.h"
 #include "Goomba.h"
 #include "GreenTurtle.h"
+#include "Mushroom.h"
+#include "Leaf.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -69,9 +71,9 @@ int CMario::GetAniIdSmall()
 		if (isSitting)
 		{
 			if (nx > 0)
-				aniId = ID_ANI_MARIO_SIT_RIGHT;
+				aniId = ID_ANI_MARIO_SMALL_IDLE_RIGHT;
 			else
-				aniId = ID_ANI_MARIO_SIT_LEFT;
+				aniId = ID_ANI_MARIO_SMALL_IDLE_LEFT;
 		}
 		else
 			if (vx == 0)
@@ -110,6 +112,7 @@ int CMario::GetAniIdTail()
 		ax = 0;
 		vx = 0;
 	};
+
 	if (!isOnPlatform)
 	{
 		if (abs(ax) == MARIO_ACCEL_RUN_X)
@@ -240,10 +243,14 @@ void CMario::Render()
 		if (nx >= 0)
 		{
 			aniId = ID_ANI_MARIO_TAIL_SWIPE_RIGHT;
+			ax = 0;
+			vx = 0;
 		}
 		else
 		{
 			aniId = ID_ANI_MARIO_TAIL_SWIPE_LEFT;
+			ax = 0;
+			vx = 0;
 		}
 	}
 	else if (state == MARIO_STATE_DIE)
@@ -279,7 +286,29 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBox*>(e->obj) && e->ny > 0) OnCollisionWithBox(e);
 	if (dynamic_cast<CGoomba*>(e->obj)) OnCollisionWithGoomba(e);
 	if (dynamic_cast<CGTurtle*>(e->obj)) OnCollisionWithGTurtle(e);
+	if (dynamic_cast<CMushroom*>(e->obj)) OnCollisionWithMushroom(e);
+	if (dynamic_cast<CLeaf*>(e->obj)) OnCollisionWithLeaf(e);
 
+
+}
+
+void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
+{
+	CLeaf* leaf = dynamic_cast<CLeaf*>(e->obj);
+	e->obj->Delete();
+	if (level == 2)
+		level = 3;
+	coin += 100;
+}
+
+void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
+{
+	CMushroom* m = dynamic_cast<CMushroom*>(e->obj);
+	e->obj->Delete();
+	if (level == 1)
+		level = 2;
+	y -= 10.0f;
+	coin += 100;
 }
 
 void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
@@ -292,6 +321,7 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 		if (turtle->GetState() == GTURTLE_STATE_SHELL)
 		{
 			turtle->SetState(GTURTLE_STATE_DIE);
+			e->obj->SetSpeed(0.5, 0);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
 		if (turtle->GetState() == GTURTLE_STATE_WALKING)
@@ -304,6 +334,15 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 			turtle->SetState(GTURTLE_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+	} else if (state == MARIO_STATE_SWIPE)
+	{
+		turtle->SetState(GTURTLE_STATE_DIE_2);
+	}
+	else if (e->obj->GetState() == GTURTLE_STATE_SHELL)
+	{
+		e->obj->SetState(GTURTLE_STATE_DIE);
+		if (e->nx < 0) e->obj->SetSpeed(0.5,0);
+		else e->obj->SetSpeed(-0.5, 0);
 	}
 	else // hit by Turtle
 	{
@@ -313,7 +352,7 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 			{
 				level = MARIO_LEVEL_SMALL;
 				StartUntouchable();
-			}
+			} 
 			else
 			{
 				SetState(MARIO_STATE_DIE);
@@ -339,6 +378,10 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			goomba->SetState(GOOMBA_STATE_WALKING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
 		}
+	}
+	else if (state == MARIO_STATE_SWIPE)
+	{
+		goomba->SetState(GOOMBA_STATE_DIE_2);
 	}
 	else // hit by Goomba
 	{
@@ -419,12 +462,13 @@ void CMario::SetState(int state)
 		break;
 
 	case MARIO_STATE_SIT:
-		if (isOnPlatform && level != MARIO_LEVEL_SMALL)
+		if (isOnPlatform && level != 0)
 		{
 			state = MARIO_STATE_IDLE;
 			isSitting = true;
 			vx = 0; vy = 0.0f;
-			y += MARIO_SIT_HEIGHT_ADJUST;
+			if (level != 1)
+				y += MARIO_SIT_HEIGHT_ADJUST;
 		}
 		break;
 
@@ -451,6 +495,13 @@ void CMario::SetState(int state)
 		if (isOnPlatform)
 			swipe_start = GetTickCount64();
 		break;
+	}
+
+	if (GetTickCount64() - swipe_start < 190 && isOnPlatform == true && level == 3)
+	{
+		state = MARIO_STATE_SWIPE;
+		ax = 0;
+		vx = 0;
 	}
 
 	CGameObject::SetState(state);
@@ -498,7 +549,7 @@ void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom
 				state == MARIO_STATE_RUNNING_RIGHT ||
 				(state == MARIO_STATE_IDLE and nx > 0))
 				{
-					left = x - (MARIO_TAIL_BBOX_WIDTH) / 2 + 8.0f;
+					left = x - (MARIO_TAIL_BBOX_WIDTH) / 2;
 					top = y - MARIO_TAIL_BBOX_HEIGHT / 2;
 					right = x + (MARIO_TAIL_BBOX_WIDTH) / 2;
 					bottom = top + MARIO_TAIL_BBOX_HEIGHT;
@@ -509,7 +560,7 @@ void CMario::GetBoundingBox(float& left, float& top, float& right, float& bottom
 					{
 						left = x - (MARIO_TAIL_BBOX_WIDTH) / 2;
 						top = y - MARIO_TAIL_BBOX_HEIGHT / 2;
-						right = x + (MARIO_TAIL_BBOX_WIDTH) / 2 - 8.0f;
+						right = x + (MARIO_TAIL_BBOX_WIDTH) / 2;
 						bottom = top + MARIO_TAIL_BBOX_HEIGHT;
 					}
 			else if (state == MARIO_STATE_SWIPE)
@@ -858,7 +909,7 @@ CMario::CMario(float x, float y) : CGameObject(x, y)
 	ax = 0.0f;
 	ay = MARIO_GRAVITY;
 
-	level = MARIO_LEVEL_TAIL;
+	level = MARIO_LEVEL_SMALL;
 	untouchable = 0;
 	untouchable_start = -1;
 	swipe_start = -1;

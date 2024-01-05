@@ -17,6 +17,7 @@
 
 #define GOOMBA_STATE_WALKING 100
 #define GOOMBA_STATE_DIE 200
+#define GOOMBA_STATE_DIE_2 201
 #define GOOMBA_STATE_FLYING 300
 
 #define ID_ANI_GOOMBA_WALKING 5000
@@ -40,7 +41,7 @@ protected:
 	virtual void Render();
 
 	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 1; }
+	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
 
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
@@ -48,6 +49,5 @@ protected:
 public:
 	CGoomba(float x, float y);
 	virtual void SetState(int state);
-
 	void SetRange(int x) { range = x; }
 };

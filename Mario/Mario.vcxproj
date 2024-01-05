@@ -146,10 +146,12 @@
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="GreenEater.cpp" />
     <ClCompile Include="GreenTurtle.cpp" />
+    <ClCompile Include="Leaf.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="SampleKeyHandler.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -180,10 +182,12 @@
     <ClInclude Include="GreenEater.h" />
     <ClInclude Include="GreenTurtle.h" />
     <ClInclude Include="KeyEventHandler.h" />
+    <ClInclude Include="Leaf.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Map2.h" />
     <ClInclude Include="Mario.h" />
+    <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Piranha.h" />
     <ClInclude Include="SampleKeyHandler.h" />
     <ClInclude Include="Sprite.h" />
