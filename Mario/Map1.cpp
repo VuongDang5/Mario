@@ -1322,6 +1322,7 @@ void CMap1::LoadMap(float x, float y)
 	objects.push_back(box);
 
 	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
+	box->setItem(2);
 	objects.push_back(box);
 
 	//Goomba
