@@ -3,6 +3,7 @@
 
 #include "Mario.h"
 #include "Game.h"
+#include "GameLoop.h"
 
 #include "Collision.h"
 #include "Coin.h"
@@ -11,6 +12,7 @@
 #include "GreenTurtle.h"
 #include "Mushroom.h"
 #include "Leaf.h"
+#include "Sewer.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -271,6 +273,7 @@ void CMario::Render()
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
@@ -288,8 +291,15 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CGTurtle*>(e->obj)) OnCollisionWithGTurtle(e);
 	if (dynamic_cast<CMushroom*>(e->obj)) OnCollisionWithMushroom(e);
 	if (dynamic_cast<CLeaf*>(e->obj)) OnCollisionWithLeaf(e);
+	if (dynamic_cast<CSewer*>(e->obj)) OnCollisionWithSewer(e);
 
+}
 
+void CMario::OnCollisionWithSewer(LPCOLLISIONEVENT e)
+{
+	CSewer* s = dynamic_cast<CSewer*>(e->obj);
+	if (isSitting == true && s->getType() == 1) GameLoop::GoMap(2);
+	if (s->getType() == 2) GameLoop::GoMap(1);
 }
 
 void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)

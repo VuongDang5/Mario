@@ -154,6 +154,7 @@
     <ClCompile Include="Mushroom.cpp" />
     <ClCompile Include="Piranha.cpp" />
     <ClCompile Include="SampleKeyHandler.cpp" />
+    <ClCompile Include="Sewer.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Star.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Mushroom.h" />
     <ClInclude Include="Piranha.h" />
     <ClInclude Include="SampleKeyHandler.h" />
+    <ClInclude Include="Sewer.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
     <ClInclude Include="Star.h" />

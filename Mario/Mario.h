@@ -191,4 +191,5 @@ public:
 	void OnCollisionWithGTurtle(LPCOLLISIONEVENT e);
 	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
+	void OnCollisionWithSewer(LPCOLLISIONEVENT e);
 };

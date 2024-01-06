@@ -9,6 +9,7 @@
 #include "GreenEater.h"
 #include "GreenTurtle.h"
 #include "Piranha.h"
+#include "Sewer.h"
 #include "AssetIDs.h"
 
 #define BRICK_X 0.0f
@@ -1326,13 +1327,159 @@ void CMap1::LoadMap(float x, float y)
 	objects.push_back(box);
 
 	//Goomba
-	CGoomba* goomba = new CGoomba(16.0f * 3, BRICK_Y - 16.0f * 4);
+	CGoomba* goomba = new CGoomba(16.0f * 8, BRICK_Y - 16.0f * 4);
 	goomba->SetState(GOOMBA_STATE_WALKING);
 	objects.push_back(goomba);
 
 	CGTurtle* gTurtle = new CGTurtle(16.0f * 38, BRICK_Y - 16.0f * 4);
 	gTurtle->SetState(GTURTLE_STATE_WALKING);
 	objects.push_back(gTurtle);
+
+	//Secret room
+	// Main floor
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i +209) * BRICK_WIDTH, BRICK_Y, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 15; i++)
+	{
+		CBrick* b = new CBrick(BRICK_WIDTH * 209, BRICK_Y - 16.0f * i, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 15; i++)
+	{
+		CBrick* b = new CBrick(BRICK_WIDTH * 209 - 16.0f, BRICK_Y - 16.0f * i, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 13, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 14, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 15, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 16, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 17, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 18, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+
+	for (int i = 9; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 1, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 10; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 11; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 12; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 4, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 13; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 5, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+	for (int i = 14; i < 20; i++)
+	{
+		CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * 6, ID_ANI_BRICK + 11);
+		objects.push_back(b);
+	}
+
+	for (int i = 17; i < 20; i++)
+	{
+		for (int j = 7; j < 12; j++)
+		{
+			CBrick* b = new CBrick((i + 209) * BRICK_WIDTH, BRICK_Y - 16.0f * j, ID_ANI_BRICK + 11);
+			objects.push_back(b);
+		}
+	}
+
+	//Coin
+	coin = new CCoin((6 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 9);
+	objects.push_back(coin);
+	coin = new CCoin((7 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 10);
+	objects.push_back(coin);
+	coin = new CCoin((8 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 10);
+	objects.push_back(coin);
+	coin = new CCoin((9 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 9);
+	objects.push_back(coin);
+	coin = new CCoin((9 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 8 + 2.0f);
+	objects.push_back(coin);
+	coin = new CCoin((8 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7);
+	objects.push_back(coin);
+	coin = new CCoin((9 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 6);
+	objects.push_back(coin);
+	coin = new CCoin((9 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5 + 2.0f);
+	objects.push_back(coin);
+	coin = new CCoin((8 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
+	objects.push_back(coin);
+	coin = new CCoin((7 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);
+	objects.push_back(coin);
+	coin = new CCoin((6 + 209) * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5);
+	objects.push_back(coin);
+
+	brush = new CBrick(210 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(210 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+
+	brush = new CBrick(211 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(211 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+
+	brush = new CBrick(224 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(224 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+
+	brush = new CBrick(225 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(225 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+
+	CSewer* sewer = new CSewer(159.5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 18);
+	objects.push_back(sewer);
+
+	sewer = new CSewer(224.5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11);
+	sewer->setType(2);
+	objects.push_back(sewer);
 }
 
 

@@ -24,6 +24,7 @@ public:
     ~GameLoop();
 
     static void UpdateObj(LPGAMEOBJECT& o);
+    static void GoMap(int x);
 protected:
     void InitLoop();
 

@@ -117,6 +117,9 @@
     <ClCompile Include="Leaf.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClCompile>
+    <ClCompile Include="Sewer.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -216,6 +219,9 @@
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="Leaf.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Sewer.h">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>

@@ -51,7 +51,7 @@
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 
 #define MARIO_START_X 20.0f
-#define MARIO_START_Y 10.0f
+#define MARIO_START_Y 196.0f - 16.0f * 2
 
 #define GOOMBA_X 200.0f
 
@@ -60,8 +60,12 @@ CGame* game;
 CMario* mario;
 
 list<LPGAMEOBJECT> objects;
+list<LPGAMEOBJECT> objectsTemp;
 
 CSampleKeyHandler* keyHandler;
+
+CMap* map1;
+int cameraStatus = 0;
 
 void LoadAssetsGreenTurtle()
 {
@@ -677,10 +681,12 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsPiranha();
 	LoadAssetsGreenTurtle();
 	//------------------------------------
-	CMap* map = new CMap1(1, 1);
-	objects = map->objects;
+	map1 = new CMap1(1, 1);
 
-	mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+	objects = map1->objects;
+
+	//mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+	mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
 	objects.push_back(mario);
 
 	InitLoop();
@@ -692,6 +698,22 @@ GameLoop::~GameLoop()
 
 }
 
+void GameLoop::GoMap(int x)
+{
+	if (x == 2)
+	{
+		mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+		mario->SetPosition(215 * 16.0f, MARIO_START_Y);
+		cameraStatus = 1;
+	}
+
+	if (x == 1)
+	{
+		mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+		mario->SetPosition(163.5 * 16.0f, MARIO_START_Y - 16.0f);
+		cameraStatus = 0;
+	}
+}
 /*
 	Update world status for this frame
 	dt: time period between beginning of last frame and beginning of this frame
@@ -740,6 +762,13 @@ void GameLoop::Update(DWORD dt)
 
 	if (cx < 0) cx = 0;
 	if (cy > 0) cy = 0;
+	if (cx > 178.5 * 16.0f) cx = 178.5 * 16.0f;
+
+	if (cameraStatus == 1)
+	{
+		cx = 218.5 * 16.0f - SCREEN_WIDTH / 2;
+		cy = (196.0f - 16.0f * 5) - SCREEN_HEIGHT / 2;
+	}
 	CGame::GetInstance()->SetCamPos(cx, cy);
 }
 
