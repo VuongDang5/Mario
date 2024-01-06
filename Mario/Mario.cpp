@@ -15,6 +15,11 @@
 #include "Leaf.h"
 #include "Sewer.h"
 #include "Button.h"
+#include "Eater.h"
+#include "GreenEater.h"
+#include "Bullet.h"
+#include "Piranha.h"
+#include "Star.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -295,6 +300,65 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CLeaf*>(e->obj)) OnCollisionWithLeaf(e);
 	if (dynamic_cast<CSewer*>(e->obj)) OnCollisionWithSewer(e);
 	if (dynamic_cast<CButton*>(e->obj)) OnCollisionWithButton(e);
+	if (dynamic_cast<CStar*>(e->obj)) OnCollisionWithStar(e);
+	if (dynamic_cast<CEater*>(e->obj)) {
+		if (untouchable == 0)
+		{
+			if (level > 1)
+			{
+				level -= 1;
+				StartUntouchable();
+			}
+			else
+			{
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
+	if (dynamic_cast<CGEater*>(e->obj)) {
+		if (untouchable == 0)
+		{
+			if (level > 1)
+			{
+				level -= 1;
+				StartUntouchable();
+			}
+			else
+			{
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
+	if (dynamic_cast<CPiranha*>(e->obj))
+	{
+		if (untouchable == 0)
+		{
+			if (level > 1)
+			{
+				level -= 1;
+				StartUntouchable();
+			}
+			else
+			{
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
+	if (dynamic_cast<CBullet*>(e->obj))
+	{
+		if (untouchable == 0)
+		{
+			if (level > 1)
+			{
+				level -= 1;
+				StartUntouchable();
+			}
+			else
+			{
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
 }
 
 void CMario::OnCollisionWithButton(LPCOLLISIONEVENT e)
@@ -371,9 +435,9 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 	{
 		if (untouchable == 0)
 		{
-			if (level > MARIO_LEVEL_SMALL)
+			if (level > 1)
 			{
-				level = MARIO_LEVEL_SMALL;
+				level -= 1;
 				StartUntouchable();
 			} 
 			else
@@ -412,9 +476,9 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 		{
 			if (goomba->GetState() != GOOMBA_STATE_DIE)
 			{
-				if (level > MARIO_LEVEL_SMALL)
+				if (level > 1)
 				{
-					level = MARIO_LEVEL_SMALL;
+					level -= 1;
 					StartUntouchable();
 				}
 				else
@@ -424,6 +488,12 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 			}
 		}
 	}
+}
+
+void CMario::OnCollisionWithStar(LPCOLLISIONEVENT e)
+{
+	e->obj->Delete();
+	coin += 1000;
 }
 
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
@@ -719,7 +789,12 @@ void LoadResource()
 	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_WALK_RIGHT + 1, 331, 443, 331 + 22, 443 + 26, texMario);
 
 	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 1, 11, 603, 11 + 23, 603 + 26, texMario);
+	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 2, 51, 603, 51 + 23, 603 + 26, texMario);
+	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 3, 91, 603, 91 + 23, 603 + 26, texMario);
+
 	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 1, 371, 603, 371 + 23, 603 + 26, texMario);
+	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 2, 331, 603, 331 + 23, 603 + 26, texMario);
+	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 3, 291, 603, 291 + 23, 603 + 26, texMario);
 
 	sprites->Add(ID_SPRITE_MARIO_TAIL_SIT_RIGHT + 1, 372, 448, 372 + 21, 448 + 17, texMario);
 	sprites->Add(ID_SPRITE_MARIO_TAIL_SIT_LEFT + 1, 12, 448, 12 + 21, 448 + 17, texMario);
@@ -903,10 +978,14 @@ void LoadResource()
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 1);
+	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 2);
+	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 3);
 	animations->Add(ID_ANI_MARIO_TAIL_JUMP_RUN_LEFT, ani);
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 1);
+	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 2);
+	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 3);
 	animations->Add(ID_ANI_MARIO_TAIL_JUMP_RUN_RIGHT, ani);
 
 	ani = new CAnimation(100);

@@ -20,7 +20,7 @@ void CPiranha::GetBoundingBox(float& left, float& top, float& right, float& bott
 
 void CPiranha::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if ((state == PIRANHA_STATE_WALKING) && (y < oy - 16.0f * 3.4)) {
+	if ((state == PIRANHA_STATE_WALKING) && (y < oy - 16.0f * 2.4)) {
 		this->SetState(PIRANHA_STATE_DOWN);
 	}
 

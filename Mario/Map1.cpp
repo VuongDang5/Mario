@@ -11,6 +11,7 @@
 #include "Piranha.h"
 #include "Sewer.h"
 #include "Rock.h"
+#include "Star.h"
 #include "AssetIDs.h"
 
 #define BRICK_X 0.0f
@@ -18,11 +19,14 @@
 
 void CMap1::LoadMap(float x, float y)
 {
-	/*CPiranha* pi = new CPiranha(25.5f * 16, BRICK_Y - 16.0f * 1);
-	objects.push_back(pi);*/
+	CPiranha* pi = new CPiranha(129.5 * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(pi);
 
-	/*CGEater* eater = new CGEater(25.5f * 16, BRICK_Y - 16.0f * 1);
-	objects.push_back(eater);*/
+	CEater* eater = new CEater(25.5f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(eater);
+
+	CGEater* geater = new CGEater(135.5f * 16, BRICK_Y - 16.0f * 1);
+	objects.push_back(geater);
 
 	//Blocker
 	for (int i = 0; i < 25; i++)
@@ -49,7 +53,7 @@ void CMap1::LoadMap(float x, float y)
 		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
-	for (int i = 0; i < 32; i++)
+	for (int i = 0; i < 33; i++)
 	{
 		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
@@ -1180,6 +1184,8 @@ void CMap1::LoadMap(float x, float y)
 	brush = new CBrick(189 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5, ID_ANI_BG + 47);
 	objects.push_back(brush);
 
+	CStar* star = new CStar(188.5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 5.5);
+	objects.push_back(star);
 	//Black Tree
 
 	brush = new CBrick(193 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BG + 40);
@@ -1291,10 +1297,17 @@ void CMap1::LoadMap(float x, float y)
 	goomba->SetState(GOOMBA_STATE_WALKING);
 	objects.push_back(goomba);
 
+	goomba = new CGoomba(105.0f * 8, BRICK_Y - 16.0f * 4);
+	goomba->SetState(GOOMBA_STATE_FLYING);
+	objects.push_back(goomba);
+
 	CGTurtle* gTurtle = new CGTurtle(16.0f * 38, BRICK_Y - 16.0f * 4);
 	gTurtle->SetState(GTURTLE_STATE_WALKING);
 	objects.push_back(gTurtle);
 
+	gTurtle = new CGTurtle(16.0f * 95, BRICK_Y - 16.0f * 4);
+	gTurtle->SetState(GTURTLE_STATE_FLYING);
+	objects.push_back(gTurtle);
 	//Secret room
 	// Main floor
 	for (int i = 0; i < 20; i++)

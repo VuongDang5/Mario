@@ -24,6 +24,7 @@
 #include "Piranha.h"
 #include "Bullet.h"
 #include "Button.h"
+#include "Star.h"
 
 #include "SampleKeyHandler.h"
 
@@ -387,6 +388,7 @@ GameLoop::GameLoop(HWND hWnd)
 
 	sprites->Add(ID_SPRITE_BRICK + 82, 307, 256, 307 + 15, 256 + 15, texMisc);		// Button
 
+	sprites->Add(ID_SPRITE_BRICK + 83, 137, 120, 137 + 15, 120 + 15, texMisc);		// Star
 
 	texMisc = textures->Get(ID_TEX_MISC_2);
 
@@ -678,6 +680,9 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 82);
 	animations->Add(ID_ANI_BRICK + 14, ani);
 
+	ani = new CAnimation(100);						//Star
+	ani->Add(ID_SPRITE_BRICK + 83);
+	animations->Add(ID_ANI_STAR, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -699,8 +704,8 @@ GameLoop::GameLoop(HWND hWnd)
 
 	objects = map1->objects;
 
-	//mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
-	mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
+	mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+	//mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
 	objects.push_back(mario);
 
 	InitLoop();
@@ -717,14 +722,14 @@ void GameLoop::GoMap(int x)
 	if (x == 2)
 	{
 		mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
-		mario->SetPosition(215 * 16.0f, MARIO_START_Y);
+		mario->SetPosition(212 * 16.0f, MARIO_START_Y - 16.0f * 8);
 		cameraStatus = 1;
 	}
 
 	if (x == 1)
 	{
 		mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
-		mario->SetPosition(163.5 * 16.0f, MARIO_START_Y - 16.0f);
+		mario->SetPosition(163.5 * 16.0f, MARIO_START_Y - 16.0f * 3);
 		cameraStatus = 0;
 	}
 }

@@ -4,10 +4,10 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_STAR 12000
+#define ID_ANI_STAR 12001
 
 #define	STAR_WIDTH 10
-#define STAR_BBOX_WIDTH 10
+#define STAR_BBOX_WIDTH 16
 #define STAR_BBOX_HEIGHT 16
 
 class CStar : public CGameObject {

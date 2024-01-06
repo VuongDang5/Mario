@@ -111,7 +111,10 @@ void CGoomba::Render()
 	{
 		aniId = ID_ANI_GOOMBA_FLYING;
 	}
-
+	if (state == GOOMBA_STATE_DIE_2)
+	{
+		aniId = ID_ANI_GOOMBA_WALKING;
+	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }

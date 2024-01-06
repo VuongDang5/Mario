@@ -38,9 +38,6 @@ void CStar::OnNoCollision(DWORD dt)
 
 void CStar::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (oy - y > 16.0f) {
-		this->Delete();
-	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

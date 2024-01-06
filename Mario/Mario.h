@@ -26,8 +26,8 @@
 
 #define MARIO_JUMP_DEFLECT_SPEED  0.4f
 
-#define MARIO_STATE_DIE				-10
-#define MARIO_STATE_IDLE			0
+#define MARIO_STATE_DIE				0
+#define MARIO_STATE_IDLE			-10
 #define MARIO_STATE_WALKING_RIGHT	100
 #define MARIO_STATE_WALKING_LEFT	200
 
@@ -193,6 +193,7 @@ public:
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithSewer(LPCOLLISIONEVENT e);
 	void OnCollisionWithButton(LPCOLLISIONEVENT e);
+	void OnCollisionWithStar(LPCOLLISIONEVENT e);
 
 	int gold;
 	void setGold(int x) { gold = x; }

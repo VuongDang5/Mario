@@ -1,6 +1,8 @@
 #include "Tail.h"
 #include "Rock.h"
 #include "Button.h"
+#include "GreenTurtle.h"
+#include "Goomba.h"
 #include "GameLoop.h"
 
 Ctail::Ctail(float x, float y) :CGameObject(x, y)
@@ -32,6 +34,16 @@ void Ctail::OnCollisionWith(LPCOLLISIONEVENT e)
 			LPGAMEOBJECT b = new CButton(rx, ry);
 			GameLoop::UpdateObj(b);
 		}
+	}
+
+	if (dynamic_cast<CGTurtle*>(e->obj)) {
+		CGTurtle* t = dynamic_cast<CGTurtle*>(e->obj);
+		t->SetState(GTURTLE_STATE_DIE_2);
+	}
+
+	if (dynamic_cast<CGoomba*>(e->obj)) {
+		CGoomba* t = dynamic_cast<CGoomba*>(e->obj);
+		t->SetState(GOOMBA_STATE_DIE_2);
 	}
 }
 
