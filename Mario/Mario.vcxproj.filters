@@ -120,6 +120,15 @@
     <ClCompile Include="Sewer.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClCompile>
+    <ClCompile Include="Rock.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Tail.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -222,6 +231,15 @@
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="Sewer.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Rock.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Tail.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
   </ItemGroup>

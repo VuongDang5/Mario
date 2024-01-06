@@ -2,6 +2,7 @@
 #include "debug.h"
 
 #include "Mario.h"
+#include "Tail.h"
 #include "Game.h"
 #include "GameLoop.h"
 
@@ -13,6 +14,7 @@
 #include "Mushroom.h"
 #include "Leaf.h"
 #include "Sewer.h"
+#include "Button.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -251,7 +253,7 @@ void CMario::Render()
 		else
 		{
 			aniId = ID_ANI_MARIO_TAIL_SWIPE_LEFT;
-			ax = 0;
+			ax = -0.1;
 			vx = 0;
 		}
 	}
@@ -289,11 +291,22 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CBox*>(e->obj) && e->ny > 0) OnCollisionWithBox(e);
 	if (dynamic_cast<CGoomba*>(e->obj)) OnCollisionWithGoomba(e);
 	if (dynamic_cast<CGTurtle*>(e->obj)) OnCollisionWithGTurtle(e);
-	if (dynamic_cast<CMushroom*>(e->obj)) OnCollisionWithMushroom(e);
+	if (dynamic_cast<CMushroom*>(e->obj)) OnCollisionWithMushroom(e);	
 	if (dynamic_cast<CLeaf*>(e->obj)) OnCollisionWithLeaf(e);
 	if (dynamic_cast<CSewer*>(e->obj)) OnCollisionWithSewer(e);
-
+	if (dynamic_cast<CButton*>(e->obj)) OnCollisionWithButton(e);
 }
+
+void CMario::OnCollisionWithButton(LPCOLLISIONEVENT e)
+{
+	CButton* s = dynamic_cast<CButton*>(e->obj);
+	if (e->ny < 0)
+	{
+		this->gold = 1;
+		s->Delete();
+	}
+}
+
 
 void CMario::OnCollisionWithSewer(LPCOLLISIONEVENT e)
 {
@@ -458,7 +471,7 @@ void CMario::SetState(int state)
 		break;
 	case MARIO_STATE_JUMP:
 		if (isSitting) break;
-		if (isOnPlatform || level == 3)
+		if (isOnPlatform || (level == 3 && abs(this->vx) == MARIO_RUNNING_SPEED))
 		{
 			if (abs(this->vx) == MARIO_RUNNING_SPEED)
 				vy = -MARIO_JUMP_RUN_SPEED_Y;
@@ -512,6 +525,11 @@ void CMario::SetState(int state)
 		state = MARIO_STATE_SWIPE;
 		ax = 0;
 		vx = 0;
+
+		LPGAMEOBJECT b = new Ctail(x, y + 8.0f);
+		if (nx >= 0) b->SetSpeed(0.05, 0);
+		else b->SetSpeed(-0.05, 0);
+		GameLoop::UpdateObj(b);
 	}
 
 	CGameObject::SetState(state);
@@ -914,12 +932,13 @@ void LoadResource()
 
 CMario::CMario(float x, float y) : CGameObject(x, y)
 {
+	gold = 0;
 	isSitting = false;
 	maxVx = 0.0f;
 	ax = 0.0f;
 	ay = MARIO_GRAVITY;
 
-	level = MARIO_LEVEL_SMALL;
+	level = MARIO_LEVEL_TAIL;
 	untouchable = 0;
 	untouchable_start = -1;
 	swipe_start = -1;

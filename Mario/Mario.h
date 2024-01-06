@@ -192,4 +192,9 @@ public:
 	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithSewer(LPCOLLISIONEVENT e);
+	void OnCollisionWithButton(LPCOLLISIONEVENT e);
+
+	int gold;
+	void setGold(int x) { gold = x; }
+	int getGold() { return gold; }
 };

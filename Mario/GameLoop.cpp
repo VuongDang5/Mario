@@ -23,6 +23,7 @@
 #include "GreenTurtle.h"
 #include "Piranha.h"
 #include "Bullet.h"
+#include "Button.h"
 
 #include "SampleKeyHandler.h"
 
@@ -382,6 +383,10 @@ GameLoop::GameLoop(HWND hWnd)
 
 	sprites->Add(ID_SPRITE_BRICK + 80, 154, 137, 154 + 15, 137 + 13, texMisc);		// Leaf
 
+	sprites->Add(ID_SPRITE_BRICK + 81, 460, 256, 460 + 8, 256 + 8, texMisc);		//Tail
+
+	sprites->Add(ID_SPRITE_BRICK + 82, 307, 256, 307 + 15, 256 + 15, texMisc);		// Button
+
 
 	texMisc = textures->Get(ID_TEX_MISC_2);
 
@@ -402,6 +407,10 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 69);
 	animations->Add(ID_ANI_BRICK + 100, ani);		//Blocker
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 81);
+	animations->Add(ID_ANI_BRICK + 200, ani);		//Blocker
 
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 1);
@@ -664,6 +673,11 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);						//Leaf
 	ani->Add(ID_SPRITE_BRICK + 80);
 	animations->Add(ID_ANI_BRICK + 13, ani);
+
+	ani = new CAnimation(100);						//Button
+	ani->Add(ID_SPRITE_BRICK + 82);
+	animations->Add(ID_ANI_BRICK + 14, ani);
+
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)

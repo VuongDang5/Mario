@@ -25,7 +25,7 @@ public:
 
     static void UpdateObj(LPGAMEOBJECT& o);
     static void GoMap(int x);
-protected:
+
     void InitLoop();
 
     //ham dung de ve sau khi update

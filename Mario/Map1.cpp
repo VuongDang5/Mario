@@ -10,6 +10,7 @@
 #include "GreenTurtle.h"
 #include "Piranha.h"
 #include "Sewer.h"
+#include "Rock.h"
 #include "AssetIDs.h"
 
 #define BRICK_X 0.0f
@@ -813,47 +814,6 @@ void CMap1::LoadMap(float x, float y)
 	brush = new CBrick(140 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BG + 7);
 	objects.push_back(brush);
 
-	//Brick 2
-	brush = new CBrick(141 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(142 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(142 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(146 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(149 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-	brush = new CBrick(149 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
-	brush = new CBrick(150 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 8);
-	objects.push_back(brush);
-
 	//Pink block
 
 	brush = new CBrick(152 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_TOP_BRICK + 1);
@@ -1480,6 +1440,48 @@ void CMap1::LoadMap(float x, float y)
 	sewer = new CSewer(224.5 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11);
 	sewer->setType(2);
 	objects.push_back(sewer);
+
+	//Rock
+	CRock* rock = new CRock(141 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(142 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(rock);
+	rock = new CRock(142 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
+	objects.push_back(rock);
+	rock = new CRock(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(rock);
+	rock = new CRock(143 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
+	objects.push_back(rock);
+	rock = new CRock(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(rock);
+	rock = new CRock(144 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3);
+	rock->setType(2);
+	objects.push_back(rock);
+	rock = new CRock(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(rock);
+	rock = new CRock(145 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(146 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(149 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2);
+	objects.push_back(rock);
+	rock = new CRock(149 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
+
+	rock = new CRock(150 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f);
+	objects.push_back(rock);
 }
 
 
