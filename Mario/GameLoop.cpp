@@ -288,6 +288,11 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
 	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);	//Ground
 
+	sprites->Add(ID_SPRITE_BRICK + 84, 222, 222, 222 + 15, 222 + 15, texMisc);	//Rear
+	sprites->Add(ID_SPRITE_BRICK + 85, 273, 171, 273 + 15, 171 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 86, 256, 222, 256 + 15, 222 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 87, 307, 171, 307 + 15, 171 + 15, texMisc);
+
 	sprites->Add(ID_SPRITE_BRICK + 11, 1, 52, 1 + 15, 52 + 15, texMisc);	//PinkBlock
 	sprites->Add(ID_SPRITE_BRICK + 12, 1, 69, 1 + 15, 69 + 15, texMisc);	
 	sprites->Add(ID_SPRITE_BRICK + 13, 1, 86, 1 + 15, 86 + 15, texMisc);	
@@ -683,6 +688,22 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);						//Star
 	ani->Add(ID_SPRITE_BRICK + 83);
 	animations->Add(ID_ANI_STAR, ani);
+
+	ani = new CAnimation(100);						//Rear
+	ani->Add(ID_SPRITE_BRICK + 84);
+	animations->Add(ID_ANI_BRICK + 15, ani);
+
+	ani = new CAnimation(100);						
+	ani->Add(ID_SPRITE_BRICK + 85);
+	animations->Add(ID_ANI_BRICK + 16, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 86);
+	animations->Add(ID_ANI_BRICK + 17, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_BRICK + 87);
+	animations->Add(ID_ANI_BRICK + 18, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)

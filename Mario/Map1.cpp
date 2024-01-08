@@ -29,7 +29,7 @@ void CMap1::LoadMap(float x, float y)
 	objects.push_back(geater);
 
 	//Blocker
-	for (int i = 0; i < 25; i++)
+	for (int i = 1; i < 25; i++)
 	{
 		CBrick* b = new CBrick(0 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * i, ID_ANI_BRICK + 100);
 		objects.push_back(b);
@@ -42,42 +42,70 @@ void CMap1::LoadMap(float x, float y)
 	}
 
 	// Main floor
-	for (int i = 0; i < 44; i++)
+	CBrick* r = new CBrick(0 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	r = new CBrick(43 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 17);
+	objects.push_back(r);
+
+	for (int i = 1; i < 43; i++)
 	{
 		CBrick* b = new CBrick(i * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 33; i++)
+	r = new CBrick(44 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 16);
+	objects.push_back(r);
+	r = new CBrick(76 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 18);
+	objects.push_back(r);
+	for (int i = 1; i < 32; i++)
 	{
 		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 2);
 		objects.push_back(b);
 	}
-	for (int i = 0; i < 33; i++)
+
+	r = new CBrick(44 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	r = new CBrick(76 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 17);
+	objects.push_back(r);
+	for (int i = 1; i < 32; i++)
 	{
 		CBrick* b = new CBrick((i + 44) * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 27; i++)
+	r = new CBrick(81 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	r = new CBrick(107 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 17);
+	objects.push_back(r);
+	for (int i = 1; i < 26; i++)
 	{
 		CBrick* b = new CBrick((i + 81) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 6; i++)
+	r = new CBrick(110 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	r = new CBrick(115 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 17);
+	objects.push_back(r);
+	for (int i = 1; i < 5; i++)
 	{
 		CBrick* b = new CBrick((i + 110) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 39; i++)
+	r = new CBrick(119 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	r = new CBrick(157 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 17);
+	objects.push_back(r);
+	for (int i = 1; i < 38; i++)
 	{
 		CBrick* b = new CBrick((i + 119) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
 	}
 
-	for (int i = 0; i < 100; i++)
+	r = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 15);
+	objects.push_back(r);
+	for (int i = 1; i < 100; i++)
 	{
 		CBrick* b = new CBrick((i + 159) * BRICK_WIDTH * 1.0f, BRICK_Y, ID_ANI_BRICK + 1);
 		objects.push_back(b);
