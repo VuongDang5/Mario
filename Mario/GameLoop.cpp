@@ -51,6 +51,7 @@
 #define TEXTURE_PATH_ENEMY_1 TEXTURES_DIR "\\enemies_1.png"
 #define TEXTURE_PATH_2_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
+#define TEXTURE_PATH_HUD TEXTURES_DIR "\\HUD.png"
 
 #define MARIO_START_X 20.0f
 #define MARIO_START_Y 196.0f - 16.0f * 2
@@ -283,8 +284,12 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_MISC_1, TEXTURE_PATH_1_MISC);
 	textures->Add(ID_TEX_MISC_2, TEXTURE_PATH_2_MISC);
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
+	textures->Add(ID_TEX_HUD, TEXTURE_PATH_HUD);
 
-	LPTEXTURE texMisc = textures->Get(ID_TEX_MISC);
+	LPTEXTURE texMisc = textures->Get(ID_TEX_HUD);
+	sprites->Add(ID_SPRITE_BRICK + 2000, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, texMisc);
+
+	texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
 	sprites->Add(ID_SPRITE_BRICK + 2, 290, 171, 290 + 15, 171 + 15, texMisc);	//Ground
 
@@ -704,6 +709,10 @@ GameLoop::GameLoop(HWND hWnd)
 	ani = new CAnimation(100);
 	ani->Add(ID_SPRITE_BRICK + 87);
 	animations->Add(ID_ANI_BRICK + 18, ani);
+
+	ani = new CAnimation(100);						//HUD
+	ani->Add(ID_SPRITE_BRICK + 2000);
+	animations->Add(ID_ANI_BG + 48, ani);		
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)

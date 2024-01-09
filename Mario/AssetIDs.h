@@ -11,6 +11,7 @@
 #define ID_TEX_MISC 20
 #define ID_TEX_MISC_1 21
 #define ID_TEX_MISC_2 22
+#define ID_TEX_HUD 23
 
 #pragma region MARIO 
 
