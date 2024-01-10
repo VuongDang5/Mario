@@ -30,6 +30,7 @@
 
 #include "AssetIDs.h"
 
+#include "HUD.h"
 #include "Map.h"
 #include "Map1.h"
 #include "Map2.h"
@@ -738,6 +739,8 @@ GameLoop::GameLoop(HWND hWnd)
 	//mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
 	objects.push_back(mario);
 
+	HUD* b = new HUD(MARIO_START_X, MARIO_START_Y);
+	objects.push_back(b);
 	InitLoop();
 
 }

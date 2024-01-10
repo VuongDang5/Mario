@@ -129,6 +129,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Source Files\GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
