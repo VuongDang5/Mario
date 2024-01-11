@@ -62,6 +62,7 @@
 
 CGame* game;
 CMario* mario;
+HUD* hud;
 
 list<LPGAMEOBJECT> objects;
 list<LPGAMEOBJECT> objectsTemp;
@@ -732,15 +733,14 @@ GameLoop::GameLoop(HWND hWnd)
 	LoadAssetsGreenTurtle();
 	//------------------------------------
 	map1 = new CMap1(1, 1);
-
 	objects = map1->objects;
 
 	mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
 	//mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
 	objects.push_back(mario);
 
-	HUD* b = new HUD(MARIO_START_X, MARIO_START_Y);
-	objects.push_back(b);
+	hud = new HUD(0,0);
+	objects.push_back(hud);
 	InitLoop();
 
 }
@@ -810,17 +810,20 @@ void GameLoop::Update(DWORD dt)
 	mario->GetPosition(cx, cy);
 
 	cx -= SCREEN_WIDTH / 2;
-	cy -= SCREEN_HEIGHT / 2;
+	cy -= SCREEN_HEIGHT / 2 + 40.0f;
 
 	if (cx < 0) cx = 0;
-	if (cy > 0) cy = 0;
+	if (cy > 0) cy = 40.0f;
 	if (cx > 178.5 * 16.0f) cx = 178.5 * 16.0f;
 
 	if (cameraStatus == 1)
 	{
 		cx = 218.5 * 16.0f - SCREEN_WIDTH / 2;
-		cy = (196.0f - 16.0f * 5) - SCREEN_HEIGHT / 2;
+		cy = (196.0f - 16.0f * 5) - SCREEN_HEIGHT / 2 + 40.0f;
 	}
+
+	hud->SetPosition(cx + 158.0f, cy + 285.0f);
+
 	CGame::GetInstance()->SetCamPos(cx, cy);
 }
 

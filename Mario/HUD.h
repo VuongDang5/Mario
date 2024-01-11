@@ -4,7 +4,6 @@
 
 class HUD : public CGameObject
 {
-	float x, y;
 public:
 	HUD(float x, float y) : CGameObject(x, y)
 	{
