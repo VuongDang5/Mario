@@ -152,6 +152,7 @@ class CMario : public CGameObject
 	ULONGLONG untouchable_start;
 	BOOLEAN isOnPlatform;
 	int coin;
+	int gold;
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
@@ -195,7 +196,7 @@ public:
 	void OnCollisionWithButton(LPCOLLISIONEVENT e);
 	void OnCollisionWithStar(LPCOLLISIONEVENT e);
 
-	int gold;
 	void setGold(int x) { gold = x; }
 	int getGold() { return gold; }
+	int getCoin() { return coin; }
 };

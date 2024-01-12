@@ -149,6 +149,7 @@
     <ClCompile Include="GreenTurtle.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Leaf.cpp" />
+    <ClCompile Include="Letter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="Map2.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Leaf.h" />
+    <ClInclude Include="Letter.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Map1.h" />
     <ClInclude Include="Map2.h" />

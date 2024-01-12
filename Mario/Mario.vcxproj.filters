@@ -132,6 +132,9 @@
     <ClCompile Include="HUD.cpp">
       <Filter>Source Files\GameObject\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Letter.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -246,6 +249,9 @@
       <Filter>Source Files\GameObject\Brick</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Letter.h">
       <Filter>Source Files\GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>

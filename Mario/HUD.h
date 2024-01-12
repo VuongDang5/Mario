@@ -1,5 +1,5 @@
 #pragma once
-#include "Mario.h"
+#include "Letter.h"
 #include "GameObject.h"
 
 class HUD : public CGameObject
@@ -11,6 +11,7 @@ public:
 		this->y = y;
 	};
 	void Render();
+	string FillString(string s, int max);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 };
 

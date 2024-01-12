@@ -42,7 +42,7 @@
 #define BACKGROUND_COLOR D3DXCOLOR(100.0f/255, 144.0f/255, 192.0f/255, 0.0f)
 
 #define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_HEIGHT 320
 
 #define TEXTURES_DIR L"C:\\Code\\Mario\\Mario\\Resource"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\tiles.png"
@@ -53,6 +53,7 @@
 #define TEXTURE_PATH_2_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 #define TEXTURE_PATH_HUD TEXTURES_DIR "\\HUD.png"
+#define TEXTURE_PATH_LETTER TEXTURES_DIR "\\letter.png"
 
 #define MARIO_START_X 20.0f
 #define MARIO_START_Y 196.0f - 16.0f * 2
@@ -287,9 +288,10 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_MISC_2, TEXTURE_PATH_2_MISC);
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 	textures->Add(ID_TEX_HUD, TEXTURE_PATH_HUD);
+	textures->Add(ID_TEX_LETTER, TEXTURE_PATH_LETTER);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_HUD);
-	sprites->Add(ID_SPRITE_BRICK + 2000, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 2000, 0, 0, 320, 40, texMisc);
 
 	texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
@@ -714,7 +716,8 @@ GameLoop::GameLoop(HWND hWnd)
 
 	ani = new CAnimation(100);						//HUD
 	ani->Add(ID_SPRITE_BRICK + 2000);
-	animations->Add(ID_ANI_BG + 48, ani);		
+	animations->Add(ID_ANI_BG + 48, ani);
+
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -740,7 +743,6 @@ GameLoop::GameLoop(HWND hWnd)
 	objects.push_back(mario);
 
 	hud = new HUD(0,0);
-	objects.push_back(hud);
 	InitLoop();
 
 }
@@ -813,16 +815,17 @@ void GameLoop::Update(DWORD dt)
 	cy -= SCREEN_HEIGHT / 2 + 40.0f;
 
 	if (cx < 0) cx = 0;
-	if (cy > 0) cy = 40.0f;
+	if (cy > -100) cy = 40.0f;
+	else cy = cy + 140;
+
 	if (cx > 178.5 * 16.0f) cx = 178.5 * 16.0f;
 
 	if (cameraStatus == 1)
 	{
 		cx = 218.5 * 16.0f - SCREEN_WIDTH / 2;
-		cy = (196.0f - 16.0f * 5) - SCREEN_HEIGHT / 2 + 40.0f;
 	}
 
-	hud->SetPosition(cx + 158.0f, cy + 285.0f);
+	hud->SetPosition(cx + 158.0f, cy + 185.0f);
 
 	CGame::GetInstance()->SetCamPos(cx, cy);
 }
@@ -851,6 +854,7 @@ void GameLoop::Render()
 	{
 		(*i)->Render();
 	}
+	hud->Render();
 
 	spriteHandler->End();
 	pSwapChain->Present(0, 0);
