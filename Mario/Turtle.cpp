@@ -1,5 +1,6 @@
 #include "Turtle.h"
-#include "Math.h"
+#include "Impact.h"
+#include "GameLoop.h"
 
 CTurtle::CTurtle(float x, float y) :CGameObject(x, y)
 {
@@ -79,6 +80,7 @@ void CTurtle::Render()
 void CTurtle::SetState(int state)
 {
 	CGameObject::SetState(state);
+
 	switch (state)
 	{
 	case TURTLE_STATE_DIE:

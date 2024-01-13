@@ -42,6 +42,9 @@
 
 #define MARIO_STATE_SWIPE			700
 
+#define MARIO_STATE_DOWN			800
+#define MARIO_STATE_UP				801
+
 #pragma region ANIMATION_ID
 
 #define ID_ANI_MARIO_IDLE_RIGHT 400
@@ -111,6 +114,8 @@
 #define ID_ANI_MARIO_TAIL_SWIPE_RIGHT 911
 #define ID_ANI_MARIO_TAIL_SWIPE_LEFT 912
 
+#define ID_ANI_MARIO_TAIL_TUNEL 950
+
 #pragma endregion
 
 #define GROUND_Y 160.0f
@@ -149,10 +154,16 @@ class CMario : public CGameObject
 
 	int level;
 	int untouchable;
+	int go = 0;
+
 	ULONGLONG untouchable_start;
+	ULONGLONG tunel_time = -1;
+
 	BOOLEAN isOnPlatform;
 	int coin;
 	int gold;
+	int life;
+	int star;
 
 	int GetAniIdBig();
 	int GetAniIdSmall();
@@ -170,6 +181,7 @@ public:
 	void SetState(int state);
 	int IsCollidable()
 	{
+		if (go > 0) return 0;
 		return (state != MARIO_STATE_DIE);
 	}
 
@@ -191,6 +203,7 @@ public:
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithGTurtle(LPCOLLISIONEVENT e);
 	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
+	void OnCollisionWithGMushroom(LPCOLLISIONEVENT e);
 	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithSewer(LPCOLLISIONEVENT e);
 	void OnCollisionWithButton(LPCOLLISIONEVENT e);
@@ -199,4 +212,8 @@ public:
 	void setGold(int x) { gold = x; }
 	int getGold() { return gold; }
 	int getCoin() { return coin; }
+	int getLife() { return life; }
+	int getGo() { return go; }
+	int getStar() { return star; }
+
 };

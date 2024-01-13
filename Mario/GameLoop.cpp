@@ -35,6 +35,8 @@
 #include "Map1.h"
 #include "Map2.h"
 
+#define BRICK_Y 160.0f + 36.0f
+
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
 #define WINDOW_ICON_PATH L"mario.ico"
@@ -54,6 +56,7 @@
 #define TEXTURE_PATH_BBOX TEXTURES_DIR "\\bbox.png"
 #define TEXTURE_PATH_HUD TEXTURES_DIR "\\HUD.png"
 #define TEXTURE_PATH_LETTER TEXTURES_DIR "\\letter.png"
+#define TEXTURE_PATH_EFFECT TEXTURES_DIR "\\effect.png"
 
 #define MARIO_START_X 20.0f
 #define MARIO_START_Y 196.0f - 16.0f * 2
@@ -289,9 +292,17 @@ GameLoop::GameLoop(HWND hWnd)
 	textures->Add(ID_TEX_BBOX, TEXTURE_PATH_BBOX);
 	textures->Add(ID_TEX_HUD, TEXTURE_PATH_HUD);
 	textures->Add(ID_TEX_LETTER, TEXTURE_PATH_LETTER);
+	textures->Add(ID_TEX_EFFECT, TEXTURE_PATH_EFFECT);
 
 	LPTEXTURE texMisc = textures->Get(ID_TEX_HUD);
 	sprites->Add(ID_SPRITE_BRICK + 2000, 0, 0, 320, 40, texMisc);
+
+	texMisc = textures->Get(ID_TEX_EFFECT);
+	sprites->Add(ID_SPRITE_BRICK + 3001, 9, 42, 9 + 15, 42 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 3002, 25, 42, 25 + 15, 42 + 15, texMisc);
+	sprites->Add(ID_SPRITE_BRICK + 3003, 41, 42, 41 + 15, 42 + 15, texMisc);	//Impact
+
+	sprites->Add(ID_SPRITE_BRICK + 3004, 10, 222, 22, 230, texMisc);			//Point
 
 	texMisc = textures->Get(ID_TEX_MISC);
 	sprites->Add(ID_SPRITE_BRICK + 1, 239, 222, 239 + 15, 222 + 15, texMisc);	//Floor
@@ -403,6 +414,9 @@ GameLoop::GameLoop(HWND hWnd)
 	sprites->Add(ID_SPRITE_BRICK + 82, 307, 256, 307 + 15, 256 + 15, texMisc);		// Button
 
 	sprites->Add(ID_SPRITE_BRICK + 83, 137, 120, 137 + 15, 120 + 15, texMisc);		// Star
+
+	sprites->Add(ID_SPRITE_BRICK + 100, 137, 137, 137 + 15, 137 + 15, texMisc);		// Green Mushroom
+
 
 	texMisc = textures->Get(ID_TEX_MISC_2);
 
@@ -686,6 +700,10 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 79);
 	animations->Add(ID_ANI_BRICK + 12, ani);
 
+	ani = new CAnimation(100);						//Green Mushroom
+	ani->Add(ID_SPRITE_BRICK + 100);
+	animations->Add(ID_ANI_BRICK + 19, ani);
+
 	ani = new CAnimation(100);						//Leaf
 	ani->Add(ID_SPRITE_BRICK + 80);
 	animations->Add(ID_ANI_BRICK + 13, ani);
@@ -718,6 +736,19 @@ GameLoop::GameLoop(HWND hWnd)
 	ani->Add(ID_SPRITE_BRICK + 2000);
 	animations->Add(ID_ANI_BG + 48, ani);
 
+	ani = new CAnimation(100);						//Impact 1
+	ani->Add(ID_SPRITE_BRICK + 3001);
+	animations->Add(ID_ANI_BG + 49, ani);
+
+	ani = new CAnimation(100);						//Impact 2
+	ani->Add(ID_SPRITE_BRICK + 3001);
+	ani->Add(ID_SPRITE_BRICK + 3002);
+	ani->Add(ID_SPRITE_BRICK + 3003);
+	animations->Add(ID_ANI_BG + 50, ani);
+
+	ani = new CAnimation(100);						//Point
+	ani->Add(ID_SPRITE_BRICK + 3004);
+	animations->Add(ID_ANI_BG + 51, ani);
 	//------------------------------------
 	list<LPGAMEOBJECT>::iterator it;
 	for (it = objects.begin(); it != objects.end(); it++)
@@ -738,9 +769,83 @@ GameLoop::GameLoop(HWND hWnd)
 	map1 = new CMap1(1, 1);
 	objects = map1->objects;
 
-	mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
-	//mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
+	//mario = mario->GetInstance(MARIO_START_X, MARIO_START_Y);
+	mario = mario->GetInstance(159.5 * 16.0f, 196.0f - 16.0f * 22);
 	objects.push_back(mario);
+
+	//Sewer
+	CBrick* brush;
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 18, ID_ANI_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 14, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 13, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 10, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 9, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 8, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+	brush = new CBrick(159 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 18, ID_ANI_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 17, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 16, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 15, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 14, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 13, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 10, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 9, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 8, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 7, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 3, ID_ANI_BRICK + 7);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 2, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+	brush = new CBrick(160 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
+
+	brush = new CBrick(224 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 3);
+	objects.push_back(brush);
+	brush = new CBrick(224 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 5);
+	objects.push_back(brush);
+
+	brush = new CBrick(225 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 11, ID_ANI_BRICK + 4);
+	objects.push_back(brush);
+	brush = new CBrick(225 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 12, ID_ANI_BRICK + 6);
+	objects.push_back(brush);
 
 	hud = new HUD(0,0);
 	InitLoop();
@@ -823,6 +928,7 @@ void GameLoop::Update(DWORD dt)
 	if (cameraStatus == 1)
 	{
 		cx = 218.5 * 16.0f - SCREEN_WIDTH / 2;
+		if (cy < -5) cy = -5.0f;
 	}
 
 	hud->SetPosition(cx + 158.0f, cy + 185.0f);
@@ -886,8 +992,8 @@ void GameLoop::InitLoop()
 		if (dt >= tickPerFrame)
 		{
 			frameStart = now;
-
-			game->ProcessKeyboard();
+			
+			if (mario->getGo() == 0) game->ProcessKeyboard();
 			Update(dt);
 			Render();
 		}

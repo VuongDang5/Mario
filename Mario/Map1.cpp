@@ -1313,7 +1313,8 @@ void CMap1::LoadMap(float x, float y)
 	box = new CBox(51 * BRICK_WIDTH * 1.0f, BRICK_Y - 12.0f - 16.0f * 4);
 	objects.push_back(box);
 
-	box = new CBox(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 19);
+	box = new CBox(98 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 18);
+	box->setItem(3);
 	objects.push_back(box);
 
 	box = new CBox(105 * BRICK_WIDTH * 1.0f, BRICK_Y - 16.0f * 4);

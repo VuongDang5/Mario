@@ -12,6 +12,7 @@
 #include "Goomba.h"
 #include "GreenTurtle.h"
 #include "Mushroom.h"
+#include "GMushroom.h"
 #include "Leaf.h"
 #include "Sewer.h"
 #include "Button.h"
@@ -20,6 +21,7 @@
 #include "Bullet.h"
 #include "Piranha.h"
 #include "Star.h"
+#include "Point.h"
 
 CMario* CMario::__instance = NULL;
 CMario* CMario::GetInstance(float x, float y)
@@ -43,7 +45,22 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	isOnPlatform = false;
+	
+	if (GetTickCount64() - tunel_time > 3000 && go == 1)
+	{
+		go = 0;
+		this->SetState(MARIO_STATE_IDLE);
+		ay = MARIO_GRAVITY;
+		GameLoop::GoMap(2);
+	}
 
+	if (GetTickCount64() - tunel_time > 3000 && go == 2)
+	{
+		go = 0;
+		this->SetState(MARIO_STATE_IDLE);
+		ay = MARIO_GRAVITY;
+		GameLoop::GoMap(1);
+	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -262,6 +279,12 @@ void CMario::Render()
 			vx = 0;
 		}
 	}
+
+	if (GetTickCount64() - tunel_time < 3000)
+	{
+		aniId = ID_ANI_MARIO_TAIL_TUNEL;
+	}
+
 	else if (state == MARIO_STATE_DIE)
 		aniId = ID_ANI_MARIO_DIE;
 	else if (level == MARIO_LEVEL_BIG)
@@ -297,6 +320,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CGoomba*>(e->obj)) OnCollisionWithGoomba(e);
 	if (dynamic_cast<CGTurtle*>(e->obj)) OnCollisionWithGTurtle(e);
 	if (dynamic_cast<CMushroom*>(e->obj)) OnCollisionWithMushroom(e);	
+	if (dynamic_cast<CGMushroom*>(e->obj)) OnCollisionWithGMushroom(e);
 	if (dynamic_cast<CLeaf*>(e->obj)) OnCollisionWithLeaf(e);
 	if (dynamic_cast<CSewer*>(e->obj)) OnCollisionWithSewer(e);
 	if (dynamic_cast<CButton*>(e->obj)) OnCollisionWithButton(e);
@@ -375,8 +399,20 @@ void CMario::OnCollisionWithButton(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithSewer(LPCOLLISIONEVENT e)
 {
 	CSewer* s = dynamic_cast<CSewer*>(e->obj);
-	if (isSitting == true && s->getType() == 1) GameLoop::GoMap(2);
-	if (s->getType() == 2) GameLoop::GoMap(1);
+	if (isSitting == true && s->getType() == 1) {
+		tunel_time = GetTickCount64();
+		this->SetState(MARIO_STATE_DOWN);
+		float sx, sy;
+		s->GetPosition(sx, sy);
+		this->x = sx;
+	}
+	if (s->getType() == 2 && go == 0) {
+		tunel_time = GetTickCount64();
+		this->SetState(MARIO_STATE_UP);
+		float sx, sy;
+		s->GetPosition(sx, sy);
+		this->x = sx;
+	}
 }
 
 void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
@@ -386,6 +422,13 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 	if (level == 2)
 		level = 3;
 	coin += 100;
+}
+
+void CMario::OnCollisionWithGMushroom(LPCOLLISIONEVENT e)
+{
+	CGMushroom* m = dynamic_cast<CGMushroom*>(e->obj);
+	e->obj->Delete();
+	life += 1;
 }
 
 void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
@@ -423,7 +466,8 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 		}
 	} else if (state == MARIO_STATE_SWIPE)
 	{
-		turtle->SetState(GTURTLE_STATE_DIE_2);
+		return;
+		//turtle->SetState(GTURTLE_STATE_DIE_2);
 	}
 	else if (e->obj->GetState() == GTURTLE_STATE_SHELL)
 	{
@@ -468,7 +512,8 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 	}
 	else if (state == MARIO_STATE_SWIPE)
 	{
-		goomba->SetState(GOOMBA_STATE_DIE_2);
+		return;
+		//goomba->SetState(GOOMBA_STATE_DIE_2);
 	}
 	else // hit by Goomba
 	{
@@ -493,12 +538,18 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithStar(LPCOLLISIONEVENT e)
 {
 	e->obj->Delete();
+	star += 1;
 	coin += 1000;
 }
 
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
+	float  cx, cy;
+	e->obj->GetPosition(cx, cy);
 	e->obj->Delete();
+	LPGAMEOBJECT b = new CPoint(cx, cy);
+	b->SetState(1);
+	GameLoop::UpdateObj(b);
 	coin += 100;
 }
 
@@ -588,6 +639,14 @@ void CMario::SetState(int state)
 		if (isOnPlatform)
 			swipe_start = GetTickCount64();
 		break;
+	case MARIO_STATE_UP:
+		go = 2;
+		vy = -0.4f;
+		break;
+	case MARIO_STATE_DOWN:
+		go = 1;
+		vy = 0.02f;
+		break;
 	}
 
 	if (GetTickCount64() - swipe_start < 190 && isOnPlatform == true && level == 3)
@@ -602,6 +661,7 @@ void CMario::SetState(int state)
 		GameLoop::UpdateObj(b);
 	}
 
+	if (go != 0) ay = 0;
 	CGameObject::SetState(state);
 }
 
@@ -701,6 +761,9 @@ void LoadResource()
 	CAnimations* animations = CAnimations::GetInstance();
 
 	LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
+
+	//TUNEL
+	sprites->Add(ID_SPRITE_MARIO_TAIL_TUNEL, 355, 483, 355 + 15, 483 + 27, texMario);
 
 	// IDLE
 	sprites->Add(ID_SPRITE_MARIO_BIG_IDLE_RIGHT + 1, 216, 243, 216 + 13, 243 + 27, texMario);
@@ -1007,10 +1070,15 @@ void LoadResource()
 	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 2);
 	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 1);
 	animations->Add(ID_ANI_MARIO_TAIL_SWIPE_LEFT, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(ID_SPRITE_MARIO_TAIL_TUNEL);
+	animations->Add(ID_ANI_MARIO_TAIL_TUNEL, ani);
 }
 
 CMario::CMario(float x, float y) : CGameObject(x, y)
 {
+	star = 0;
 	gold = 0;
 	isSitting = false;
 	maxVx = 0.0f;
@@ -1019,9 +1087,12 @@ CMario::CMario(float x, float y) : CGameObject(x, y)
 
 	level = MARIO_LEVEL_TAIL;
 	untouchable = 0;
+	tunel_time = -1;
+
 	untouchable_start = -1;
 	swipe_start = -1;
 	isOnPlatform = false;
 	coin = 0;
+	life = 0;
 	LoadResource();
 }

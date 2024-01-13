@@ -4,6 +4,7 @@
 #include "Brick.h"
 #include "Leaf.h"
 #include "GameLoop.h"
+#include "Impact.h"
 
 CGTurtle::CGTurtle(float x, float y) :CGameObject(x, y)
 {
@@ -51,6 +52,7 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return;
 	if (dynamic_cast<CGTurtle*>(e->obj)) return;
+	if (dynamic_cast<CBrick*>(e->obj) && state == GTURTLE_STATE_FLYING) return;
 	if (dynamic_cast<CMario*>(e->obj)) return;
 	if (dynamic_cast<CBox*>(e->obj)) {
 		float bx = 0, by = 0;
@@ -162,6 +164,13 @@ void CGTurtle::Render()
 void CGTurtle::SetState(int state)
 {
 	CGameObject::SetState(state);
+
+	if (state == GTURTLE_STATE_DIE_2)
+	{
+		LPGAMEOBJECT m = new CImpact(x, y);
+		GameLoop::UpdateObj(m);
+	}
+
 	switch (state)
 	{
 	case GTURTLE_STATE_FLYING:

@@ -2,7 +2,9 @@
 #include "Coin.h"
 #include "Brick.h"
 #include "Mushroom.h"
+#include "GMushroom.h"
 #include "GameLoop.h"
+#include "Point.h"
 
 void CBox::Render()
 {
@@ -54,6 +56,13 @@ void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			m->SetState(1);
 			GameLoop::UpdateObj(m);
 		}
+
+		if (itemType == 3) {
+			LPGAMEOBJECT m = new CGMushroom(x, y);
+			m->SetState(1);
+			GameLoop::UpdateObj(m);
+		}
+
 		LPGAMEOBJECT brick;
 		brick = new CBrick(x, y, ID_ANI_BRICK + 10);
 		GameLoop::UpdateObj(brick);
@@ -64,6 +73,10 @@ void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			LPGAMEOBJECT coin = new CCoin(x, y);
 			coin->SetState(2);
 			GameLoop::UpdateObj(coin);
+
+			LPGAMEOBJECT b = new CPoint(x, y);
+			b->SetState(1);
+			GameLoop::UpdateObj(b);
 		}
 	}
 	CGameObject::Update(dt, coObjects);

@@ -4,6 +4,7 @@
 #include "GreenTurtle.h"
 #include "Goomba.h"
 #include "GameLoop.h"
+#include "Impact.h"
 
 Ctail::Ctail(float x, float y) :CGameObject(x, y)
 {
@@ -28,7 +29,8 @@ void Ctail::OnCollisionWith(LPCOLLISIONEVENT e)
 		CRock* r = dynamic_cast<CRock*>(e->obj);
 		float rx = 0, ry = 0;
 		r->GetPosition(rx, ry);
-		r->Delete();
+		r->SetState(3);
+
 		if (r->getType() == 2)
 		{
 			LPGAMEOBJECT b = new CButton(rx, ry);
@@ -52,8 +54,8 @@ void Ctail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	x += vx * dt;
 	y += vy * dt;
 	
-	if (x > ox + 10.0f) this->Delete();
-	if (x < ox - 10.0f) this->Delete();
+	if (x > ox + 15.0f) this->Delete();
+	if (x < ox - 15.0f) this->Delete();
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

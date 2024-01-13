@@ -4,25 +4,30 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_COIN 11000
+#define IMPACT_BBOX_WIDTH 16
+#define IMPACT_BBOX_HEIGHT 16
 
-#define	COIN_WIDTH 10
-#define COIN_BBOX_WIDTH 10
-#define COIN_BBOX_HEIGHT 16
-
-class CCoin : public CGameObject {
+class CImpact : public CGameObject {
 public:
 	float oy;
-	CCoin(float x, float y) : CGameObject(x, y) { 
+	int impactAniId;
+	ULONGLONG start_time;
+
+	CImpact(float x, float y) : CGameObject(x, y) {
 		oy = y;
-		this->SetState(1); 
+		this->SetState(1);
+		impactAniId = 20050;
 	}
 
 	void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
+
 	int IsBlocking() { return 0; }
+	int IsCollidable() { return 0; }
 
 	virtual void OnNoCollision(DWORD dt);
 	virtual void SetState(int state);
+
+	void setImpactAniId(int aniId) { impactAniId = aniId; }
 };

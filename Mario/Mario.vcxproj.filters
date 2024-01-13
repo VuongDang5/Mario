@@ -135,6 +135,15 @@
     <ClCompile Include="Letter.cpp">
       <Filter>Source Files\GameObject\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Impact.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="GMushroom.cpp">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClCompile>
+    <ClCompile Include="Point.cpp">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -253,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="Letter.h">
       <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Impact.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="GMushroom.h">
+      <Filter>Source Files\GameObject\Brick</Filter>
+    </ClInclude>
+    <ClInclude Include="Point.h">
+      <Filter>Source Files\GameObject\Mario</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

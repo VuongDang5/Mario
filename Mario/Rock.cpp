@@ -2,6 +2,7 @@
 #include "Coin.h"
 #include "Mario.h"
 #include "GameLoop.h"
+#include "Impact.h"
 
 void CRock::Render()
 {
@@ -31,6 +32,10 @@ void CRock::SetState(int state)
 	case 2:
 		vy = -0.05f;
 		break;
+	case 3:
+		vx = 0;
+		vy = 0;
+		break;
 	}
 }
 
@@ -41,9 +46,18 @@ void CRock::OnNoCollision(DWORD dt)
 
 void CRock::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	if (state == 3)
+	{
+		LPGAMEOBJECT m = new CImpact(x, y);
+		GameLoop::UpdateObj(m);
+		this->Delete();
+	}
 	CMario* gold = CMario::GetInstance(1, 1);
 	if (gold->getGold() == 1)
 	{
+		LPGAMEOBJECT m = new CImpact(x, y);
+		GameLoop::UpdateObj(m);
+
 		LPGAMEOBJECT b = new CCoin(x, y);
 		GameLoop::UpdateObj(b);
 		this->Delete();
