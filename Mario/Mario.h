@@ -45,6 +45,8 @@
 #define MARIO_STATE_DOWN			800
 #define MARIO_STATE_UP				801
 
+#define MARIO_STATE_THROW			802
+
 #pragma region ANIMATION_ID
 
 #define ID_ANI_MARIO_IDLE_RIGHT 400
@@ -176,6 +178,7 @@ public:
 
 	BOOLEAN isOnPlatform;
 	int air_lock;
+	int hold;
 
 	CMario(float x, float y);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

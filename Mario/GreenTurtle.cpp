@@ -201,6 +201,7 @@ void CGTurtle::SetState(int state)
 		break;
 	case GTURTLE_STATE_DIE:
 		die_start = GetTickCount64();
+		ay = 0.002f;
 		y -= 0.1f;
 		break;
 	case GTURTLE_STATE_DIE_2:

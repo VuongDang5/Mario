@@ -286,6 +286,12 @@ void CMario::Render()
 	}
 
 	animations->Get(aniId)->Render(x, y);
+	if (hold == 1)
+	{
+		if (nx > 0) animations->Get(27002)->Render(x + 8.0f, y);
+		else animations->Get(27002)->Render(x - 8.0f, y);
+	}
+		
 
 	RenderBoundingBox();
 
@@ -467,9 +473,17 @@ void CMario::OnCollisionWithGTurtle(LPCOLLISIONEVENT e)
 	}
 	else if (e->obj->GetState() == GTURTLE_STATE_SHELL)
 	{
-		e->obj->SetState(GTURTLE_STATE_DIE);
-		if (e->nx < 0) e->obj->SetSpeed(0.5,0);
-		else e->obj->SetSpeed(-0.5, 0);
+		if (this->state == MARIO_STATE_RUNNING_LEFT || this->state == MARIO_STATE_RUNNING_RIGHT)
+		{
+			e->obj->Delete();
+			hold = 1;
+		}
+		else
+		{
+			e->obj->SetState(GTURTLE_STATE_DIE);
+			if (e->nx < 0) e->obj->SetSpeed(0.5,0);
+			else e->obj->SetSpeed(-0.5, 0);
+		}
 	}
 	else // hit by Turtle
 	{
@@ -650,6 +664,16 @@ void CMario::SetState(int state)
 		go = 1;
 		vy = 0.02f;
 		break;
+	case MARIO_STATE_THROW:
+		hold = 0;
+		LPGAMEOBJECT b = new CGTurtle(x, y);
+
+		b->SetState(GTURTLE_STATE_DIE);
+		if (this->nx > 0) b->SetSpeed(0.5, 0);
+		else b->SetSpeed(-0.5, 0);
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		scene->objects.push_back(b);
+		break;
 	}
 
 	if (GetTickCount64() - swipe_start < 290 && level == 3)
@@ -776,4 +800,6 @@ CMario::CMario(float x, float y) : CGameObject(x, y)
 	isOnPlatform = false;
 	coin = 0;
 	life = 0;
+
+	hold = 0;
 }
