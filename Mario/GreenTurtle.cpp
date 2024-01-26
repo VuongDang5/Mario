@@ -131,6 +131,13 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	}
 
+	if ((state == GTURTLE_STATE_SHELL) && (GetTickCount64() - shell_start > 5000))
+	{
+		y -= 5.0f;
+		this->SetState(GTURTLE_STATE_WALKING);
+		return;
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -184,8 +191,11 @@ void CGTurtle::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ax = 0;
+		shell_start = GetTickCount64();
 		break;
 	case GTURTLE_STATE_WALKING:
+		if (nx > 0 )vx = -GTURTLE_WALKING_SPEED;
+		else vx = GTURTLE_WALKING_SPEED;
 		vy = 0;
 		ay = 0.02f;
 		break;

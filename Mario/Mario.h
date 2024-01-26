@@ -159,7 +159,6 @@ class CMario : public CGameObject
 	ULONGLONG untouchable_start;
 	ULONGLONG tunel_time = -1;
 
-	BOOLEAN isOnPlatform;
 	int coin;
 	int gold;
 	int life;
@@ -174,6 +173,9 @@ class CMario : public CGameObject
 	static CMario* __instance;
 public:
 	static CMario* GetInstance(float x, float y);
+
+	BOOLEAN isOnPlatform;
+	int air_lock;
 
 	CMario(float x, float y);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

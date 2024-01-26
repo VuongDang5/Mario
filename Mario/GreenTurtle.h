@@ -34,6 +34,7 @@ protected:
 	float time;
 
 	ULONGLONG die_start;
+	ULONGLONG shell_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

@@ -26,7 +26,10 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		mario->SetLevel(MARIO_LEVEL_TAIL);
 		break;
 	case DIK_A:
+		if (mario->air_lock == 1) return;
 		mario->SetState(MARIO_STATE_SWIPE);
+		if (!mario->isOnPlatform) mario->air_lock = 1;
+		else mario->air_lock = 0;
 		break;
 	}
 }

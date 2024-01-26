@@ -298,7 +298,10 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
-		if (e->ny < 0) isOnPlatform = true;
+		if (e->ny < 0) {
+			isOnPlatform = true;
+			air_lock = 0;
+		}
 	}
 	else
 		if (e->nx != 0 && e->obj->IsBlocking())
@@ -595,6 +598,11 @@ void CMario::SetState(int state)
 			else
 				vy = -MARIO_JUMP_SPEED_Y;
 		}
+
+		if (!isOnPlatform && level == 3 && abs(this->vx) < MARIO_RUNNING_SPEED)
+		{
+			vy = 0;
+		}
 		break;
 
 	case MARIO_STATE_RELEASE_JUMP:
@@ -651,6 +659,7 @@ void CMario::SetState(int state)
 		ay = 0;
 		vx = 0;
 		vy = 0;
+
 		LPGAMEOBJECT b = new Ctail(x, y + 8.0f);
 		if (nx >= 0) b->SetSpeed(0.05, 0);
 		else b->SetSpeed(-0.05, 0);
@@ -659,6 +668,7 @@ void CMario::SetState(int state)
 		scene->objects.push_back(b);
 	}
 	else ay = MARIO_GRAVITY;
+
 
 	if (go != 0) ay = 0;
 	CGameObject::SetState(state);
