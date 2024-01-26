@@ -9,6 +9,7 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex
 	this->right = right;
 	this->bottom = bottom;
 	this->texture = tex;
+	this->flip = 1;
 
 	float texWidth = (float)tex->getWidth();
 	float texHeight = (float)tex->getHeight();

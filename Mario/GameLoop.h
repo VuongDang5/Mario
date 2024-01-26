@@ -23,9 +23,6 @@ public:
     GameLoop(HWND hWnd);
     ~GameLoop();
 
-    static void UpdateObj(LPGAMEOBJECT& o);
-    static void GoMap(int x);
-
     void InitLoop();
 
     //ham dung de ve sau khi update

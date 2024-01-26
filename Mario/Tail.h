@@ -4,7 +4,7 @@
 #define TAIL_BBOX_WIDTH 8
 #define TAIL_BBOX_HEIGHT 8
 
-#define ID_ANI_TAIL 10200
+#define ID_ANI_TAIL 40006
 
 class Ctail : public CGameObject
 {

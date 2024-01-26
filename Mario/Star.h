@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_STAR 12001
+#define ID_ANI_STAR 40004
 
 #define	STAR_WIDTH 10
 #define STAR_BBOX_WIDTH 16

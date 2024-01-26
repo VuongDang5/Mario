@@ -144,6 +144,18 @@
     <ClCompile Include="Point.cpp">
       <Filter>Source Files\GameObject\Mario</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldScene.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -271,6 +283,18 @@
     </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>Source Files\GameObject\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldScene.h">
+      <Filter>Source Files\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Source Files\GameComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Source Files\GameObject\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

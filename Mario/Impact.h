@@ -16,7 +16,7 @@ public:
 	CImpact(float x, float y) : CGameObject(x, y) {
 		oy = y;
 		this->SetState(1);
-		impactAniId = 20050;
+		impactAniId = 50001;
 	}
 
 	void Render();

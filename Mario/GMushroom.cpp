@@ -3,7 +3,7 @@
 void CGMushroom::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(10000 + 19)->Render(x, y);
+	animations->Get(40005)->Render(x, y);
 
 	RenderBoundingBox();
 }

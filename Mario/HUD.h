@@ -5,11 +5,7 @@
 class HUD : public CGameObject
 {
 public:
-	HUD(float x, float y) : CGameObject(x, y)
-	{
-		this->x = x;
-		this->y = y;
-	};
+	HUD(float x, float y, int obj_ID) : CGameObject(x, y, obj_ID) {}
 	void Render();
 	string FillString(string s, int max);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);

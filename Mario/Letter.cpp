@@ -47,5 +47,5 @@ Letter* Letter::GetInstance()
 Letter::Letter()
 {
 	CTextures* textures = CTextures::GetInstance();
-	texMisc = textures->Get(ID_TEX_LETTER);
+	texMisc = textures->Get(ID_TEXT_CHAR);
 }

@@ -16,7 +16,7 @@ class CSprite
 	D3DX10_SPRITE sprite;
 	D3DXMATRIX matScaling;
 
-	int flip = 1;
+	int flip;
 public:
 	CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex);
 

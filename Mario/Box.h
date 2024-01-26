@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_BOX 12000
+#define ID_ANI_BOX 25001
 
 #define	BOX_WIDTH 16
 #define BOX_BBOX_WIDTH 16

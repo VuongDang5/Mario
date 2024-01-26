@@ -2,11 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff78b5e2-2bc1-45a9-a596-68be846ebb06" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Mario/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Mario/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Animation.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Animation.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Animations.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Animations.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Animations.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Animations.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario/AssetIDs.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/AssetIDs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Box.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Box.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Brick.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Brick.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Brick.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Brick.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Button.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Coin.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Coin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Eater.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Eater.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/GMushroom.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/GMushroom.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Game.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Game.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Game.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario/GameLoop.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/GameLoop.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mario/GreenTurtle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/GreenTurtle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Goomba.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Goomba.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/GreenEater.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/GreenEater.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario/GreenTurtle.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/GreenTurtle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/HUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/HUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/HUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/HUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Leaf.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Leaf.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Letter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Letter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mario/Map1.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Map1.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Mario.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Mario.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Mario.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Mario.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Mario.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Mario.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Mario.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Mario.vcxproj.filters" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Mushroom.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Mushroom.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Piranha.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Piranha.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Rock.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Rock.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/SampleKeyHandler.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/SampleKeyHandler.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/SampleKeyHandler.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/SampleKeyHandler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Sprite.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Sprite.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Sprite.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Sprite.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Sprites.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Sprites.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Sprites.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Sprites.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/Star.h" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/Star.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/debug.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/debug.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mario/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Mario/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,19 +59,27 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="ff78b5e2-2bc1-45a9-a596-68be846ebb06" name="Changes" comment="" />
       <created>1703780207786</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703780207786</updated>
       <workItem from="1703780232540" duration="12000" />
+      <workItem from="1705714282300" duration="1251000" />
+      <workItem from="1706262918952" duration="41000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -49,6 +91,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

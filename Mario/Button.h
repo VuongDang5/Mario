@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_BUTTON 10014
+#define ID_ANI_BUTTON 40003
 
 #define	BUTTON_WIDTH 10
 #define BUTTON_BBOX_WIDTH 16

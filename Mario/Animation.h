@@ -18,7 +18,7 @@ class CAnimation
 	int isFlipped = 1;
 
 public:
-	CAnimation(int defaultTime, int isOnce = 0) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
+	CAnimation(int defaultTime = 100) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y);
 	void setFlip(int flip) { isFlipped = flip; }

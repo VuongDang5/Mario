@@ -1,7 +1,7 @@
 #include "Goomba.h"
 #include "Mario.h"
 #include "Impact.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 
 CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
 {
@@ -124,12 +124,13 @@ void CGoomba::Render()
 void CGoomba::SetState(int state)
 {
 	CGameObject::SetState(state);
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 
 	if (state == GOOMBA_STATE_DIE_2)
 	{
 		LPGAMEOBJECT m = new CImpact(x, y);
 		m->SetState(1);
-		GameLoop::UpdateObj(m);
+		scene->objects.push_back(m);
 	}
 
 	switch (state)

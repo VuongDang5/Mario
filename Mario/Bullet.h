@@ -4,7 +4,7 @@
 #define BULLET_BBOX_WIDTH 8
 #define BULLET_BBOX_HEIGHT 8
 
-#define ID_ANI_BULLET 11001
+#define ID_ANI_BULLET 33001
 
 class CBullet : public CGameObject
 {
@@ -19,7 +19,7 @@ protected:
 	virtual void Render();
 
 	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 1; }
+	virtual int IsBlocking() { return 0; }
 
 public:
 	CBullet(float x, float y);

@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_ROCK 10008
+#define ID_ANI_ROCK 100052
 
 #define ROCK_BBOX_WIDTH 16
 #define ROCK_BBOX_HEIGHT 16

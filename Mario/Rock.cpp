@@ -1,7 +1,7 @@
 #include "Rock.h"
 #include "Coin.h"
 #include "Mario.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 #include "Impact.h"
 
 void CRock::Render()
@@ -49,20 +49,22 @@ void CRock::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (state == 3)
 	{
 		LPGAMEOBJECT m = new CImpact(x, y);
-		GameLoop::UpdateObj(m);
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		scene->objects.push_back(m);
 		this->Delete();
 	}
 	CMario* gold = CMario::GetInstance(1, 1);
 	if (gold->getGold() == 1)
 	{
 		LPGAMEOBJECT m = new CImpact(x, y);
-		GameLoop::UpdateObj(m);
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		scene->objects.push_back(m);
 
 		LPGAMEOBJECT b = new CCoin(x, y);
-		GameLoop::UpdateObj(b);
+		b->SetState(3);
+		scene->objects.push_back(b);
 		this->Delete();
 
 	}
 	CGameObject::Update(dt, coObjects);
-	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

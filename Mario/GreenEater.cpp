@@ -1,7 +1,7 @@
 #include "GreenEater.h"
 #include "Mario.h"
 #include "Bullet.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 
 CGEater::CGEater(float x, float y) :CGameObject(x, y)
 {
@@ -24,6 +24,7 @@ void CGEater::GetBoundingBox(float& left, float& top, float& right, float& botto
 void CGEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if ((state == GEATER_STATE_WALKING) && (y < oy - 16.0f * 3.4)) {
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 		y = oy - 16.0f * 3.4;
 		CMario* mario = mario->GetInstance(0, 0);
 		if (mario->getY() < this->y) {
@@ -34,7 +35,7 @@ void CGEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			this->SetState(GEATER_STATE_SHOOT_UP);
 			LPGAMEOBJECT b = new CBullet(x, y - 8.0f);
 			b->SetSpeed(-0.03 * isFlipped, -0.03);
-			GameLoop::UpdateObj(b);
+			scene->objects.push_back(b);
 		}
 		else
 		{
@@ -45,7 +46,7 @@ void CGEater::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			this->SetState(GEATER_STATE_SHOOT_DOWN);
 			LPGAMEOBJECT b = new CBullet(x, y - 8.0f);
 			b->SetSpeed(-0.03 * isFlipped, 0.03);
-			GameLoop::UpdateObj(b);
+			scene->objects.push_back(b);
 		}
 	}
 	if ((state == GEATER_STATE_DOWN) && (y > oy)) {

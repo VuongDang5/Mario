@@ -7,7 +7,7 @@
 #define PIRANHA_STATE_WALKING 100
 #define PIRANHA_STATE_DOWN 200
 
-#define ID_ANI_PIRANHA_WALKING 10000
+#define ID_ANI_PIRANHA_WALKING 32001
 
 class CPiranha : public CGameObject
 {

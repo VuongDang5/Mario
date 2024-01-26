@@ -40,5 +40,4 @@ void CImpact::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		this->Delete();
 	}
 	CGameObject::Update(dt, coObjects);
-	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

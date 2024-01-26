@@ -3,7 +3,7 @@
 #include "Button.h"
 #include "GreenTurtle.h"
 #include "Goomba.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 #include "Impact.h"
 
 Ctail::Ctail(float x, float y) :CGameObject(x, y)
@@ -34,7 +34,8 @@ void Ctail::OnCollisionWith(LPCOLLISIONEVENT e)
 		if (r->getType() == 2)
 		{
 			LPGAMEOBJECT b = new CButton(rx, ry);
-			GameLoop::UpdateObj(b);
+			CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+			scene->objects.push_back(b);
 		}
 	}
 

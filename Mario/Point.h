@@ -16,7 +16,7 @@ public:
 	CPoint(float x, float y) : CGameObject(x, y) {
 		oy = y;
 		this->SetState(1);
-		AniId = 20051;
+		AniId = 50002;
 	}
 
 	void Render();

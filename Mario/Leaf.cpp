@@ -4,8 +4,8 @@ void CLeaf::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 
-	animations->Get(10000 + 13)->setFlip(this->isFlipped);
-	animations->Get(10000 + 13)->Render(x, y);
+	animations->Get(40002)->setFlip(this->isFlipped);
+	animations->Get(40002)->Render(x, y);
 
 	RenderBoundingBox();
 }

@@ -3,8 +3,9 @@
 #include "Brick.h"
 #include "Mushroom.h"
 #include "GMushroom.h"
-#include "GameLoop.h"
 #include "Point.h"
+#include "Game.h"
+#include "PlayScene.h"
 
 void CBox::Render()
 {
@@ -47,6 +48,7 @@ void CBox::SetState(int state)
 
 void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 	if (oy < y) {
 		y = oy;
 		vy = 0;
@@ -54,29 +56,29 @@ void CBox::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (itemType == 2) {
 			LPGAMEOBJECT m = new CMushroom(x, y);
 			m->SetState(1);
-			GameLoop::UpdateObj(m);
+			scene->objects.push_back(m);
 		}
 
 		if (itemType == 3) {
 			LPGAMEOBJECT m = new CGMushroom(x, y);
 			m->SetState(1);
-			GameLoop::UpdateObj(m);
+			scene->objects.push_back(m);
 		}
 
 		LPGAMEOBJECT brick;
-		brick = new CBrick(x, y, ID_ANI_BRICK + 10);
-		GameLoop::UpdateObj(brick);
+		brick = new CBrick(x, y, 25002);
+		scene->objects.push_back(brick);
 	}
 	if (oy - y > 16.0f) {
 		this->SetState(3);
-		if (itemType == 1) {
+		if (itemType == 0) {
 			LPGAMEOBJECT coin = new CCoin(x, y);
 			coin->SetState(2);
-			GameLoop::UpdateObj(coin);
+			scene->objects.push_back(coin);
 
 			LPGAMEOBJECT b = new CPoint(x, y);
 			b->SetState(1);
-			GameLoop::UpdateObj(b);
+			scene->objects.push_back(b);
 		}
 	}
 	CGameObject::Update(dt, coObjects);

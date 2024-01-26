@@ -12,9 +12,9 @@ void DebugOut(const wchar_t* fmt, ...)
 
 void DebugOutTitle(const wchar_t* fmt, ...)
 {
-	//wchar_t s[1024];
-	//VA_PRINTS(s);
-	//SetWindowText(_hwnd, s);
+	/*wchar_t s[1024];
+	VA_PRINTS(s);
+	SetWindowText(_hwnd, s);*/
 }
 
 void SetDebugWindow(HWND hwnd)

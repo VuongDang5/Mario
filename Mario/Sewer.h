@@ -4,7 +4,7 @@
 #include "Animation.h"
 #include "Animations.h"
 
-#define ID_ANI_SEWER 10100
+#define ID_ANI_SEWER 100141
 
 #define SEWER_BBOX_WIDTH 16
 #define SEWER_BBOX_HEIGHT 16
@@ -18,10 +18,10 @@ public:
 	int getType() { return type; }
 	void setType(int x) { type = x; }
 
-	CSewer(float x, float y) : CGameObject(x, y) {
+	CSewer(float x, float y, int att) : CGameObject(x, y, obj_ID) {
 		oy = y;
 		ox = x;
-		this->SetState(1);
+		this->type = att;
 	}
 	void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

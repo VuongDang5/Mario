@@ -8,14 +8,14 @@ void HUD::Render()
 	CMario* mario = CMario::GetInstance(1, 1);
 
 	CAnimations* animations = CAnimations::GetInstance();
-	animations->Get(20048)->Render(x, y);
+	animations->Get(obj_ID)->Render(x, y);
 
 	Letter* pen = Letter::GetInstance();
 	pen->Draw(x - 86, y + 1, FillString(to_string(mario->getCoin()), 5));
 	pen->Draw(x - 110, y + 1, FillString(to_string(mario->getLife()), 2));
 
-	if (mario->getStar() == 1)
-		animations->Get(12001)->Render(x + 30, y - 5);
+	/*if (mario->getStar() == 1)
+		animations->Get(20001)->Render(x + 30, y - 5);*/
 }
 
 void HUD::GetBoundingBox(float& l, float& t, float& r, float& b)

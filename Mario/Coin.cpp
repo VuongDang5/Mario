@@ -1,4 +1,7 @@
 #include "Coin.h"
+#include "Rock.h"
+#include "Mario.h"
+#include "PlayScene.h"
 
 void CCoin::Render()
 {
@@ -28,6 +31,10 @@ void CCoin::SetState(int state)
 	case 2:
 		vy = -0.05f;
 		break;
+	case 3:
+		vx = 0;
+		vy = 0;
+		break;;
 	}
 }
 
@@ -41,6 +48,19 @@ void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (oy - y > 16.0f) {
 		this->Delete();
 	}
+
+	if (state == 3 && GetTickCount64() - start_time > 2000)
+	{
+		this->Delete();
+
+		CMario* m = CMario::GetInstance(1, 1);
+		m->setGold(0);
+
+		LPGAMEOBJECT r = new CRock(ox, oy);
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		scene->objects.push_back(r);
+	}
+
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }

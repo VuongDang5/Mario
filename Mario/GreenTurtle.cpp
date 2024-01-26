@@ -3,7 +3,7 @@
 #include "Box.h"
 #include "Brick.h"
 #include "Leaf.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 #include "Impact.h"
 
 CGTurtle::CGTurtle(float x, float y) :CGameObject(x, y)
@@ -60,14 +60,16 @@ void CGTurtle::OnCollisionWith(LPCOLLISIONEVENT e)
 
 		e->obj->Delete();
 
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+
 		LPGAMEOBJECT brick;
-		brick = new CBrick(bx, by, ID_ANI_BRICK + 10);
-		GameLoop::UpdateObj(brick);
+		brick = new CBrick(bx, by, 25002);
+		scene->objects.push_back(brick);
 
 		LPGAMEOBJECT leaf;
 		leaf = new CLeaf(bx, by);
 		leaf->SetState(1);
-		GameLoop::UpdateObj(leaf);
+		scene->objects.push_back(leaf);
 	}
 
 	if (e->ny != 0)
@@ -167,8 +169,9 @@ void CGTurtle::SetState(int state)
 
 	if (state == GTURTLE_STATE_DIE_2)
 	{
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 		LPGAMEOBJECT m = new CImpact(x, y);
-		GameLoop::UpdateObj(m);
+		scene->objects.push_back(m);
 	}
 
 	switch (state)

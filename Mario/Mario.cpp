@@ -4,7 +4,7 @@
 #include "Mario.h"
 #include "Tail.h"
 #include "Game.h"
-#include "GameLoop.h"
+#include "PlayScene.h"
 
 #include "Collision.h"
 #include "Coin.h"
@@ -48,18 +48,20 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if (GetTickCount64() - tunel_time > 3000 && go == 1)
 	{
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 		go = 0;
 		this->SetState(MARIO_STATE_IDLE);
 		ay = MARIO_GRAVITY;
-		GameLoop::GoMap(2);
+		scene->GoMap(2);
 	}
 
 	if (GetTickCount64() - tunel_time > 3000 && go == 2)
 	{
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
 		go = 0;
 		this->SetState(MARIO_STATE_IDLE);
 		ay = MARIO_GRAVITY;
-		GameLoop::GoMap(1);
+		scene->GoMap(1);
 	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -127,12 +129,12 @@ int CMario::GetAniIdSmall()
 			}
 
 	if (aniId == -1) aniId = ID_ANI_MARIO_SMALL_IDLE_RIGHT;
-
 	return aniId;
 }
 
 int CMario::GetAniIdTail()
 {
+	if (state == MARIO_STATE_SWIPE) return 0;
 	int aniId = -1;
 	if (isSitting) {
 		ax = 0;
@@ -264,27 +266,10 @@ void CMario::Render()
 	CAnimations* animations = CAnimations::GetInstance();
 	int aniId = -1;
 
-	if (GetTickCount64() - swipe_start < 190 && isOnPlatform == true && level == 3)
-	{
-		if (nx >= 0)
-		{
-			aniId = ID_ANI_MARIO_TAIL_SWIPE_RIGHT;
-			ax = 0;
-			vx = 0;
-		}
-		else
-		{
-			aniId = ID_ANI_MARIO_TAIL_SWIPE_LEFT;
-			ax = -0.1;
-			vx = 0;
-		}
-	}
-
 	if (GetTickCount64() - tunel_time < 3000)
 	{
 		aniId = ID_ANI_MARIO_TAIL_TUNEL;
 	}
-
 	else if (state == MARIO_STATE_DIE)
 		aniId = ID_ANI_MARIO_DIE;
 	else if (level == MARIO_LEVEL_BIG)
@@ -293,6 +278,12 @@ void CMario::Render()
 		aniId = GetAniIdSmall();
 	else if (level == MARIO_LEVEL_TAIL)
 		aniId = GetAniIdTail();
+
+	if (state == MARIO_STATE_SWIPE)
+	{
+		if (nx > 0)	aniId = ID_ANI_MARIO_TAIL_SWIPE_RIGHT;
+		if (nx < 0)	aniId = ID_ANI_MARIO_TAIL_SWIPE_LEFT;
+	}
 
 	animations->Get(aniId)->Render(x, y);
 
@@ -325,6 +316,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CSewer*>(e->obj)) OnCollisionWithSewer(e);
 	if (dynamic_cast<CButton*>(e->obj)) OnCollisionWithButton(e);
 	if (dynamic_cast<CStar*>(e->obj)) OnCollisionWithStar(e);
+
 	if (dynamic_cast<CEater*>(e->obj)) {
 		if (untouchable == 0)
 		{
@@ -353,8 +345,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 			}
 		}
 	}
-	if (dynamic_cast<CPiranha*>(e->obj))
-	{
+	
+	if (dynamic_cast<CPiranha*>(e->obj)) {
 		if (untouchable == 0)
 		{
 			if (level > 1)
@@ -368,6 +360,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 			}
 		}
 	}
+
 	if (dynamic_cast<CBullet*>(e->obj))
 	{
 		if (untouchable == 0)
@@ -549,7 +542,10 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 	e->obj->Delete();
 	LPGAMEOBJECT b = new CPoint(cx, cy);
 	b->SetState(1);
-	GameLoop::UpdateObj(b);
+	
+	CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+	scene->objects.push_back(b);
+
 	coin += 100;
 }
 
@@ -636,8 +632,7 @@ void CMario::SetState(int state)
 		ax = 0;
 		break;
 	case MARIO_STATE_SWIPE:
-		if (isOnPlatform)
-			swipe_start = GetTickCount64();
+		swipe_start = GetTickCount64();
 		break;
 	case MARIO_STATE_UP:
 		go = 2;
@@ -649,17 +644,21 @@ void CMario::SetState(int state)
 		break;
 	}
 
-	if (GetTickCount64() - swipe_start < 190 && isOnPlatform == true && level == 3)
+	if (GetTickCount64() - swipe_start < 290 && level == 3)
 	{
 		state = MARIO_STATE_SWIPE;
 		ax = 0;
+		ay = 0;
 		vx = 0;
-
+		vy = 0;
 		LPGAMEOBJECT b = new Ctail(x, y + 8.0f);
 		if (nx >= 0) b->SetSpeed(0.05, 0);
 		else b->SetSpeed(-0.05, 0);
-		GameLoop::UpdateObj(b);
+
+		CPlayScene* scene = (CPlayScene*)CGame::GetInstance()->GetCurrentScene();
+		scene->objects.push_back(b);
 	}
+	else ay = MARIO_GRAVITY;
 
 	if (go != 0) ay = 0;
 	CGameObject::SetState(state);
@@ -749,333 +748,6 @@ void CMario::SetLevel(int l)
 	level = l;
 }
 
-void LoadResource()
-{
-	CGame* game;
-	game = CGame::GetInstance();
-	CTextures* textures = CTextures::GetInstance();
-
-	textures->Add(ID_TEX_MARIO, TEXTURE_PATH_MARIO);
-
-	CSprites* sprites = CSprites::GetInstance();
-	CAnimations* animations = CAnimations::GetInstance();
-
-	LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
-
-	//TUNEL
-	sprites->Add(ID_SPRITE_MARIO_TAIL_TUNEL, 355, 483, 355 + 15, 483 + 27, texMario);
-
-	// IDLE
-	sprites->Add(ID_SPRITE_MARIO_BIG_IDLE_RIGHT + 1, 216, 243, 216 + 13, 243 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_IDLE_LEFT + 1, 176, 243, 176 + 13, 243 + 27, texMario);
-
-	// WALKING LEFT
-	sprites->Add(ID_SPRITE_MARIO_BIG_WALKING_LEFT + 2, 135, 243, 135 + 15, 243 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_WALKING_LEFT + 3, 95, 243, 95 + 15, 243 + 27, texMario);
-
-	// WALKING RIGHT
-	sprites->Add(ID_SPRITE_MARIO_BIG_WALKING_RIGHT + 2, 255, 243, 255 + 13, 243 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_WALKING_RIGHT + 3, 295, 243, 295 + 13, 243 + 27, texMario);
-
-	// RUNNING RIGHT 
-	sprites->Add(ID_SPRITE_MARIO_BIG_RUNNING_RIGHT + 1, 255, 243, 255 + 13, 243 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_RUNNING_RIGHT + 2, 295, 243, 295 + 13, 243 + 27, texMario);
-
-	// RUNNING LEFT
-	sprites->Add(ID_SPRITE_MARIO_BIG_RUNNING_LEFT + 1, 135, 243, 135 + 15, 243 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_RUNNING_LEFT + 2, 95, 243, 95 + 15, 243 + 27, texMario);
-
-	// JUMP WALK RIGHT & LEFT 
-	sprites->Add(ID_SPRITE_MARIO_BIG_JUMP_WALK_RIGHT + 1, 335, 244, 335 + 15, 244 + 25, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_JUMP_WALK_LEFT + 1, 55, 244, 55 + 15, 244 + 25, texMario);
-
-	// JUMP RUN RIGHT & LEFT 
-	sprites->Add(ID_SPRITE_MARIO_BIG_JUMP_RUN_RIGHT + 1, 333, 364, 333 + 18, 364 + 25, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_JUMP_RUN_LEFT + 1, 54, 364, 54 + 18, 364 + 25, texMario);
-
-	// SIT RIGHT/LEFT
-	sprites->Add(ID_SPRITE_MARIO_BIG_SIT_RIGHT + 1, 376, 248, 376 + 13, 248 + 17, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_SIT_LEFT + 1, 16, 248, 16 + 13, 248 + 17, texMario);
-
-	// BRACING RIGHT/LEFT
-	sprites->Add(ID_SPRITE_MARIO_BIG_BRACE_RIGHT + 1, 175, 283, 175 + 15, 283 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_BIG_BRACE_LEFT + 1, 215, 283, 215 + 15, 283 + 27, texMario);
-
-	// MARIO DIE
-	sprites->Add(ID_SPRITE_MARIO_DIE + 1, 375, 209, 375 + 15, 209 + 15, texMario);
-
-	// SMALL MARIO 
-	sprites->Add(ID_SPRITE_MARIO_SMALL_IDLE_RIGHT + 1, 217, 89, 217 + 11, 89 + 14, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_IDLE_LEFT + 1, 177, 89, 177 + 11, 89 + 14, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_WALKING_RIGHT + 2, 215, 169, 215 + 15, 169 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_WALKING_RIGHT + 3, 255, 169, 255 + 15, 169 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_WALKING_LEFT + 2, 175, 169, 175 + 15, 169 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_WALKING_LEFT + 3, 135, 169, 135 + 15, 169 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_RUNNING_RIGHT + 1, 215, 169, 215 + 15, 169 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_RUNNING_RIGHT + 2, 255, 169, 255 + 15, 169 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_RUNNING_LEFT + 1, 175, 169, 175 + 15, 169 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_RUNNING_LEFT + 2, 135, 169, 135 + 15, 169 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_BRACE_LEFT + 1, 176, 129, 176 + 13, 129 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_BRACE_RIGHT + 1, 216, 129, 216 + 13, 129 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_JUMP_WALK_LEFT + 1, 55, 89, 55 + 15, 89 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_JUMP_WALK_RIGHT + 1, 335, 89, 335 + 15, 89 + 15, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_SMALL_JUMP_RUN_LEFT + 1, 175, 209, 175 + 15, 209 + 15, texMario);
-	sprites->Add(ID_SPRITE_MARIO_SMALL_JUMP_RUN_RIGHT + 1, 215, 209, 215 + 15, 209 + 15, texMario);
-
-	// TAIL MARIO 
-	sprites->Add(ID_SPRITE_MARIO_TAIL_IDLE_RIGHT + 1, 212, 443, 212 + 20, 443 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_IDLE_LEFT + 1, 173, 443, 173 + 20, 443 + 27, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_WALKING_RIGHT + 2, 262, 443, 212 + 21, 443 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_WALKING_RIGHT + 3, 291, 443, 291 + 22, 443 + 27, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_WALKING_LEFT + 2, 122, 443, 122 + 21, 443 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_WALKING_LEFT + 3, 92, 443, 92 + 22, 443 + 27, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_RUNNING_RIGHT + 1, 262, 443, 212 + 21, 443 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_RUNNING_RIGHT + 2, 291, 443, 291 + 22, 443 + 27, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_RUNNING_LEFT + 1, 122, 443, 122 + 21, 443 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_RUNNING_LEFT + 2, 92, 443, 92 + 22, 443 + 27, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_BRACE_LEFT + 1, 175, 482, 175 + 15, 482 + 29, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_BRACE_RIGHT + 1, 215, 482, 215 + 15, 482 + 29, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_WALK_LEFT + 1, 52, 443, 52 + 22, 443 + 26, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_WALK_RIGHT + 1, 331, 443, 331 + 22, 443 + 26, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 1, 11, 603, 11 + 23, 603 + 26, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 2, 51, 603, 51 + 23, 603 + 26, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 3, 91, 603, 91 + 23, 603 + 26, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 1, 371, 603, 371 + 23, 603 + 26, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 2, 331, 603, 331 + 23, 603 + 26, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 3, 291, 603, 291 + 23, 603 + 26, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_SIT_RIGHT + 1, 372, 448, 372 + 21, 448 + 17, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_SIT_LEFT + 1, 12, 448, 12 + 21, 448 + 17, texMario);
-
-	sprites->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 1, 211, 523, 211 + 23 + 8, 523 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 2, 355, 483, 355 + 15, 483 + 27, texMario);
-	sprites->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 3, 171 - 8, 523, 171 + 23, 523 + 27, texMario);
-	LPANIMATION ani;
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_IDLE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_IDLE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_IDLE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_IDLE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_IDLE_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_BIG_WALKING_RIGHT + 2);
-	ani->Add(ID_SPRITE_MARIO_BIG_WALKING_RIGHT + 3);
-	animations->Add(ID_ANI_MARIO_WALKING_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_IDLE_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_BIG_WALKING_LEFT + 2);
-	ani->Add(ID_SPRITE_MARIO_BIG_WALKING_LEFT + 3);
-	animations->Add(ID_ANI_MARIO_WALKING_LEFT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_BIG_RUNNING_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_BIG_RUNNING_RIGHT + 2);
-	animations->Add(ID_ANI_MARIO_RUNNING_RIGHT, ani);
-
-	// Mario runs faster hence animation speed should be faster
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_BIG_RUNNING_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_BIG_RUNNING_LEFT + 2);
-	animations->Add(ID_ANI_MARIO_RUNNING_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_JUMP_WALK_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_JUMP_WALK_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_JUMP_WALK_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_JUMP_WALK_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_JUMP_RUN_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_JUMP_RUN_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_JUMP_RUN_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_JUMP_RUN_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_SIT_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_SIT_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_SIT_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_SIT_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_BRACE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_BRACE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_BIG_BRACE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_BRACE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_DIE + 1);
-	animations->Add(ID_ANI_MARIO_DIE, ani);
-
-	//
-	// SMALL MARIO 
-	//
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_IDLE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_IDLE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_IDLE_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_SMALL_WALKING_RIGHT + 2);
-	ani->Add(ID_SPRITE_MARIO_SMALL_WALKING_RIGHT + 3);
-	animations->Add(ID_ANI_MARIO_SMALL_WALKING_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_IDLE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_IDLE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_IDLE_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_SMALL_WALKING_LEFT + 2);
-	ani->Add(ID_SPRITE_MARIO_SMALL_WALKING_LEFT + 3);
-	animations->Add(ID_ANI_MARIO_SMALL_WALKING_LEFT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_SMALL_RUNNING_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_SMALL_RUNNING_RIGHT + 2);
-	animations->Add(ID_ANI_MARIO_SMALL_RUNNING_RIGHT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_SMALL_RUNNING_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_SMALL_RUNNING_LEFT + 2);
-	animations->Add(ID_ANI_MARIO_SMALL_RUNNING_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_BRACE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_BRACE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_BRACE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_BRACE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_JUMP_WALK_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_JUMP_WALK_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_JUMP_WALK_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_JUMP_WALK_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_JUMP_RUN_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_JUMP_RUN_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_SMALL_JUMP_RUN_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_SMALL_JUMP_RUN_RIGHT, ani);
-
-	// TAIL MARIO 
-	//
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_IDLE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_IDLE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_IDLE_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_WALKING_RIGHT + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_WALKING_RIGHT + 3);
-	animations->Add(ID_ANI_MARIO_TAIL_WALKING_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_IDLE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_IDLE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_IDLE_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_WALKING_LEFT + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_WALKING_LEFT + 3);
-	animations->Add(ID_ANI_MARIO_TAIL_WALKING_LEFT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_TAIL_RUNNING_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_RUNNING_RIGHT + 2);
-	animations->Add(ID_ANI_MARIO_TAIL_RUNNING_RIGHT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_TAIL_RUNNING_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_RUNNING_LEFT + 2);
-	animations->Add(ID_ANI_MARIO_TAIL_RUNNING_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_BRACE_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_BRACE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_BRACE_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_BRACE_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_WALK_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_JUMP_WALK_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_WALK_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_JUMP_WALK_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_LEFT + 3);
-	animations->Add(ID_ANI_MARIO_TAIL_JUMP_RUN_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_JUMP_RUN_RIGHT + 3);
-	animations->Add(ID_ANI_MARIO_TAIL_JUMP_RUN_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SIT_RIGHT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_SIT_RIGHT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SIT_LEFT + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_SIT_LEFT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 1);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 3);
-	animations->Add(ID_ANI_MARIO_TAIL_SWIPE_RIGHT, ani);
-
-	ani = new CAnimation(50);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 3);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 2);
-	ani->Add(ID_SPRITE_MARIO_TAIL_SWIPE + 1);
-	animations->Add(ID_ANI_MARIO_TAIL_SWIPE_LEFT, ani);
-
-	ani = new CAnimation(100);
-	ani->Add(ID_SPRITE_MARIO_TAIL_TUNEL);
-	animations->Add(ID_ANI_MARIO_TAIL_TUNEL, ani);
-}
-
 CMario::CMario(float x, float y) : CGameObject(x, y)
 {
 	star = 0;
@@ -1085,7 +757,7 @@ CMario::CMario(float x, float y) : CGameObject(x, y)
 	ax = 0.0f;
 	ay = MARIO_GRAVITY;
 
-	level = MARIO_LEVEL_TAIL;
+	level = 3;
 	untouchable = 0;
 	tunel_time = -1;
 
@@ -1094,5 +766,4 @@ CMario::CMario(float x, float y) : CGameObject(x, y)
 	isOnPlatform = false;
 	coin = 0;
 	life = 0;
-	LoadResource();
 }
