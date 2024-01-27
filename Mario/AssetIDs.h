@@ -26,7 +26,7 @@
 #define OBJECT_TYPE_BG 18
 #define OBJECT_TYPE_HUD 19
 #define OBJECT_TYPE_BLOCKER 20
-
+#define OBJECT_TYPE_STAR 21
 
 #pragma region MARIO 
 

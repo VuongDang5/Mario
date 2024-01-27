@@ -16,6 +16,7 @@
 #include "Eater.h"
 #include "GreenEater.h"
 #include "Piranha.h"
+#include "Star.h"
 
 #include "HUD.h"
 
@@ -257,6 +258,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GEATER: obj = new CGEater(x, y); break;
 	case OBJECT_TYPE_PIRANHA: obj = new CPiranha(x, y); break;
 	case OBJECT_TYPE_SEWER: obj = new CSewer(x, y, att); break;
+	case OBJECT_TYPE_STAR: obj = new CStar(x, y); break;
 	case OBJECT_TYPE_BOX: 
 		box = new CBox(x, y);
 		box->setItem(att);

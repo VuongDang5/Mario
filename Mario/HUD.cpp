@@ -14,8 +14,8 @@ void HUD::Render()
 	pen->Draw(x - 86, y + 1, FillString(to_string(mario->getCoin()), 5));
 	pen->Draw(x - 110, y + 1, FillString(to_string(mario->getLife()), 2));
 
-	/*if (mario->getStar() == 1)
-		animations->Get(20001)->Render(x + 30, y - 5);*/
+	if (mario->getStar() == 1)
+		animations->Get(40004)->Render(x + 30, y - 5);
 }
 
 void HUD::GetBoundingBox(float& l, float& t, float& r, float& b)

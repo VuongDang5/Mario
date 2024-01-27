@@ -135,6 +135,7 @@ void CGTurtle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		y -= 5.0f;
 		this->SetState(GTURTLE_STATE_WALKING);
+		this->isFlipped = 1;
 		return;
 	}
 
@@ -194,8 +195,7 @@ void CGTurtle::SetState(int state)
 		shell_start = GetTickCount64();
 		break;
 	case GTURTLE_STATE_WALKING:
-		if (nx > 0 )vx = -GTURTLE_WALKING_SPEED;
-		else vx = GTURTLE_WALKING_SPEED;
+		vx = -GTURTLE_WALKING_SPEED;
 		vy = 0;
 		ay = 0.02f;
 		break;
